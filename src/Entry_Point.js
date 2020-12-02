@@ -2,19 +2,19 @@ import React from "react";
 import { useState, useRef, useEffect } from "react";
 import Main from "./three_app/main";
 
-let three_app = null;
+let app_main = null;
 
-function App() {
+function Entry_Point() {
   const [width, setWidth] = useState(500);
   const [height, setHeight] = useState(500);
-  const d3_el = useRef(null);
+  const elem = useRef(null);
 
   const init_three = () => {
     const d3_props = {
       width,
       height,
     };
-    three_app = new Main(d3_el.current, d3_props);
+    app_main = new Main(elem.current, d3_props);
   };
 
   useEffect(init_three, [width, height]);
@@ -22,9 +22,9 @@ function App() {
   return (
     <>
       <div>hello from three</div>
-      <div ref={d3_el} />
+      <div ref={elem} />
     </>
   );
 }
 
-export default App;
+export default Entry_Point;
