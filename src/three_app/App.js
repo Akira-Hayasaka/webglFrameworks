@@ -38,28 +38,22 @@ class App {
       }
     );
 
-    this.mat_screen_quad_to_draw = new THREE.ShaderMaterial({
+    const geom_for_quad_mesh = new THREE.PlaneBufferGeometry(
+      AA.Globals.APP_W,
+      AA.Globals.APP_H
+    );
+    const mat_for_quad_mesh = new THREE.ShaderMaterial({
       uniforms: { tDiffuse: { value: this.offscreen_tex.texture } },
       vertexShader: vert,
       fragmentShader: frag,
       depthWrite: false,
       side: THREE.DoubleSide,
     });
-    const geom_quad = new THREE.PlaneBufferGeometry(
-      AA.Globals.APP_W,
-      AA.Globals.APP_H
-    );
-    this.screen_quad_to_draw = new THREE.Mesh(
-      geom_quad,
-      this.mat_screen_quad_to_draw
-    );
-    this.screen_quad_to_draw.position.set(
-      AA.Globals.APP_W / 2,
-      AA.Globals.APP_H / 2,
-      0
-    );
+    this.quad_mesh = new THREE.Mesh(geom_for_quad_mesh, mat_for_quad_mesh);
+    this.quad_mesh.position.set(AA.Globals.APP_W / 2, AA.Globals.APP_H / 2, 0);
+
     this.scene_to_hold_screen_quad = new THREE.Scene();
-    this.scene_to_hold_screen_quad.add(this.screen_quad_to_draw);
+    this.scene_to_hold_screen_quad.add(this.quad_mesh);
 
     this.camera_2d = new AA.Camera2d();
     this.camera_3d = new AA.Camera3d();
@@ -68,7 +62,7 @@ class App {
   update = () => {
     this.cube.rotation.x += 0.01;
     this.cube.rotation.y += 0.01;
-    this.screen_quad_to_draw.rotation.z += 0.04;
+    this.quad_mesh.rotation.z += 0.04;
   };
 
   draw = () => {
@@ -87,8 +81,7 @@ class App {
   cube;
 
   offscreen_tex;
-  mat_screen_quad_to_draw;
-  screen_quad_to_draw;
+  quad_mesh;
   scene_to_hold_screen_quad;
 
   scene;
