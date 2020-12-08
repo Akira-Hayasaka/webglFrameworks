@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import * as AA from "./lib/Includer";
 import App from "./App";
-import Constants from "./lib/Constants";
 
 class Main {
   constructor(container_elm, props) {
@@ -20,8 +19,8 @@ class Main {
     AA.Globals.APP_Y = AA.Globals.CANVAS.getBoundingClientRect().y;
 
     this.app = new App();
-    AA.ev.add_listener(Constants.KEY_PRESSED, this.app.keypressed);
-    AA.ev.add_listener(Constants.KEY_RELEASED, this.app.keyreleased);
+    AA.ev.add_listener(AA.Constants.KEY_PRESSED, this.app.keypressed);
+    AA.ev.add_listener(AA.Constants.KEY_RELEASED, this.app.keyreleased);
 
     this.update();
   }

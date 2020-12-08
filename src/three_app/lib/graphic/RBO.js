@@ -20,9 +20,9 @@ void main() {
 }
 `;
 
-class RTT {
-  constructor(width, height) {
-    this.renderer = Globals.RENDERER;
+class RBO {
+  constructor(width, height, _renderer = Globals.RENDERER) {
+    this.renderer = _renderer;
   }
 
   feed = (scene, camera) => {};
@@ -39,4 +39,4 @@ class RTT {
 
 // allocate, begin(), end(), draw(0, 0), get_quad(for further translation)
 
-export default RTT;
+export default RBO;
