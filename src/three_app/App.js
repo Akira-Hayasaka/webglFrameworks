@@ -1,13 +1,12 @@
 import * as THREE from "three";
-import s_log from "./lib/util/Screen_Logger";
-import Globals from "./lib/Globals";
+import * as AA from "./lib/Includer";
 
 class App {
   constructor() {
     var geometry = new THREE.BoxGeometry(1, 1, 1);
     var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     this.cube = new THREE.Mesh(geometry, material);
-    Globals.SCENE.add(this.cube);
+    AA.Globals.SCENE.add(this.cube);
 
     const linematerial = new THREE.LineBasicMaterial({ color: 0x00ff00 });
     const points = [];
@@ -17,7 +16,7 @@ class App {
 
     const linegeometry = new THREE.BufferGeometry().setFromPoints(points);
     const line = new THREE.Line(linegeometry, linematerial);
-    Globals.SCENE.add(line);
+    AA.Globals.SCENE.add(line);
   }
 
   update = () => {
@@ -26,8 +25,8 @@ class App {
   };
 
   draw = () => {
-    Globals.RENDERER.render(Globals.SCENE, Globals.CAMERA);
-    s_log.draw_string("this is from app", 50, 200);
+    AA.Globals.RENDERER.render(AA.Globals.SCENE, AA.Globals.CAMERA);
+    AA.s_log.draw_string("this is from app", 50, 200);
   };
 
   cube;

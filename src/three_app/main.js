@@ -1,30 +1,31 @@
 import * as THREE from "three";
+import * as AA from "./lib/Includer";
 import App from "./App";
-import Globals from "./lib/Globals";
-import s_log from "./lib/util/Screen_Logger";
 
 class Main {
   constructor(container_elm, props) {
     this.props = props;
 
-    Globals.CONTAINER = container_elm;
-    Globals.APP_W = props.width;
-    Globals.APP_H = props.height;
+    AA.Globals.CONTAINER = container_elm;
+    AA.Globals.APP_W = props.width;
+    AA.Globals.APP_H = props.height;
 
-    Globals.SCENE = new THREE.Scene();
-    Globals.SCENE.background = new THREE.Color("rgb(150, 150, 150)");
-    Globals.CAMERA = new THREE.PerspectiveCamera(
+    AA.Globals.SCENE = new THREE.Scene();
+    AA.Globals.SCENE.background = new THREE.Color("rgb(150, 150, 150)");
+    AA.Globals.CAMERA = new THREE.PerspectiveCamera(
       75,
-      Globals.APP_W / Globals.APP_H,
+      AA.Globals.APP_W / AA.Globals.APP_H,
       0.1,
       1000
     );
-    Globals.CAMERA.position.z = 5;
-    Globals.RENDERER = new THREE.WebGLRenderer();
-    Globals.RENDERER.setSize(Globals.APP_W, Globals.APP_H);
-    Globals.CANVAS = Globals.CONTAINER.appendChild(Globals.RENDERER.domElement);
-    Globals.APP_X = Globals.CANVAS.getBoundingClientRect().x;
-    Globals.APP_Y = Globals.CANVAS.getBoundingClientRect().y;
+    AA.Globals.CAMERA.position.z = 5;
+    AA.Globals.RENDERER = new THREE.WebGLRenderer();
+    AA.Globals.RENDERER.setSize(AA.Globals.APP_W, AA.Globals.APP_H);
+    AA.Globals.CANVAS = AA.Globals.CONTAINER.appendChild(
+      AA.Globals.RENDERER.domElement
+    );
+    AA.Globals.APP_X = AA.Globals.CANVAS.getBoundingClientRect().x;
+    AA.Globals.APP_Y = AA.Globals.CANVAS.getBoundingClientRect().y;
 
     this.app = new App();
     this.update();
@@ -32,7 +33,7 @@ class Main {
 
   update = () => {
     requestAnimationFrame(this.update);
-    s_log.flush_scrn();
+    AA.s_log.flush_scrn();
     this.app.update();
     this.app.draw();
   };
