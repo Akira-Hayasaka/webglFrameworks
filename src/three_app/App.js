@@ -1,6 +1,8 @@
 import * as THREE from "three";
 import * as AA from "./lib/Includer";
 
+import Test from "./src/Test";
+
 class App {
   constructor() {
     var geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -17,11 +19,14 @@ class App {
     const linegeometry = new THREE.BufferGeometry().setFromPoints(points);
     const line = new THREE.Line(linegeometry, linematerial);
     AA.Globals.SCENE.add(line);
+
+    this.test = new Test();
   }
 
   update = () => {
     this.cube.rotation.x += 0.01;
     this.cube.rotation.y += 0.01;
+    this.test.update();
   };
 
   draw = () => {
@@ -29,6 +34,15 @@ class App {
     AA.s_log.draw_string("this is from app", 50, 200);
   };
 
+  keypressed = (key) => {
+    console.log("keypressed", key.val);
+  };
+
+  keyreleased = (key) => {
+    console.log("keyreleased", key.val);
+  };
+
+  test;
   cube;
 }
 
