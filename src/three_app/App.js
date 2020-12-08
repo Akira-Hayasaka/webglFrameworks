@@ -63,21 +63,7 @@ class App {
     // );
     this.scene_to_hold_screen_quad.add(this.screen_quad_to_draw);
 
-    const left = 0;
-    const right = AA.Globals.APP_W; // default canvas size
-    const top = 0;
-    const bottom = AA.Globals.APP_H; // defautl canvas size
-    const near = -1;
-    const far = 1;
-    this.camera_2d = new THREE.OrthographicCamera(
-      left,
-      right,
-      top,
-      bottom,
-      near,
-      far
-    );
-    // this.camera_2d.updateProjectionMatrix();
+    this.camera_2d = new AA.Camera2d();
   }
 
   update = () => {

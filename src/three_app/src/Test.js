@@ -1,8 +1,6 @@
 import { ev } from "../lib/Includer";
 
 class Test {
-  constructor() {}
-
   update = () => {};
 
   put_log = () => {
