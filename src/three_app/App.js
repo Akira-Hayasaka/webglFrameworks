@@ -21,6 +21,9 @@ class App {
     AA.Globals.SCENE.add(line);
 
     this.test = new Test();
+    AA.ev.add_listener("test", (arg) => {
+      console.log("got", arg.val);
+    });
   }
 
   update = () => {
@@ -40,6 +43,13 @@ class App {
 
   keyreleased = (key) => {
     console.log("keyreleased", key.val);
+
+    if (key.val === " ") {
+      this.test.put_log();
+    }
+    if (key.val === "e") {
+      this.test.emit_event();
+    }
   };
 
   test;
