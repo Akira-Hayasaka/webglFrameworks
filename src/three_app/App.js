@@ -58,12 +58,10 @@ class App {
       0
     );
     this.scene_to_hold_screen_quad = new THREE.Scene();
-    // this.scene_to_hold_screen_quad.background = new THREE.Color(
-    //   "rgb(200, 150, 150)"
-    // );
     this.scene_to_hold_screen_quad.add(this.screen_quad_to_draw);
 
     this.camera_2d = new AA.Camera2d();
+    this.camera_3d = new AA.Camera3d();
   }
 
   update = () => {
@@ -73,18 +71,13 @@ class App {
   };
 
   draw = () => {
-    // AA.Globals.RENDERER.render(AA.Globals.SCENE, AA.Globals.CAMERA);
     AA.Globals.RENDERER.setRenderTarget(this.offscreen_tex);
     AA.Globals.RENDERER.clear();
-    AA.Globals.RENDERER.render(AA.Globals.SCENE, AA.Globals.CAMERA);
+    AA.Globals.RENDERER.render(AA.Globals.SCENE, this.camera_3d);
     AA.Globals.RENDERER.setRenderTarget(null);
     AA.Globals.RENDERER.clear();
 
     AA.Globals.RENDERER.render(this.scene_to_hold_screen_quad, this.camera_2d);
-    // AA.Globals.RENDERER.render(
-    //   this.scene_to_hold_screen_quad,
-    //   AA.Globals.CAMERA
-    // );
   };
 
   keypressed = (key) => {};
@@ -98,6 +91,7 @@ class App {
   scene_to_hold_screen_quad;
 
   camera_2d;
+  camera_3d;
 }
 
 export default App;

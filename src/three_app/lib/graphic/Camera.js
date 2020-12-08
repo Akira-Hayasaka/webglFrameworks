@@ -22,6 +22,7 @@ class Camera3d extends PerspectiveCamera {
     far = 1000
   ) {
     super(fov, aspect, near, far);
+    this.position.z = 5;
   }
 }
 
