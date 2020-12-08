@@ -1,30 +1,32 @@
 import * as THREE from "three";
-import App from "./app/App";
-import Globals from "./app/Globals";
-import s_log from "./app/util/Screen_Logger";
+import App from "./App";
+import Globals from "./lib/Globals";
+import s_log from "./lib/util/Screen_Logger";
 
 class Main {
   constructor(container_elm, props) {
-    Globals.CONTAINER = container_elm;
     this.props = props;
-    const { width, height } = props;
 
-    this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color("rgb(150, 150, 150)");
-    this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    this.camera.position.z = 5;
-    this.renderer = new THREE.WebGLRenderer();
-    this.renderer.setSize(width, height);
-    const webgl_elm = Globals.CONTAINER.appendChild(this.renderer.domElement);
-    this.app = new App(this.scene);
+    Globals.CONTAINER = container_elm;
+    Globals.APP_W = props.width;
+    Globals.APP_H = props.height;
 
-    const rect = webgl_elm.getBoundingClientRect();
+    Globals.SCENE = new THREE.Scene();
+    Globals.SCENE.background = new THREE.Color("rgb(150, 150, 150)");
+    Globals.CAMERA = new THREE.PerspectiveCamera(
+      75,
+      Globals.APP_W / Globals.APP_H,
+      0.1,
+      1000
+    );
+    Globals.CAMERA.position.z = 5;
+    Globals.RENDERER = new THREE.WebGLRenderer();
+    Globals.RENDERER.setSize(Globals.APP_W, Globals.APP_H);
+    Globals.CANVAS = Globals.CONTAINER.appendChild(Globals.RENDERER.domElement);
+    Globals.APP_X = Globals.CANVAS.getBoundingClientRect().x;
+    Globals.APP_Y = Globals.CANVAS.getBoundingClientRect().y;
 
-    Globals.APP_W = width;
-    Globals.APP_H = height;
-    Globals.APP_X = rect.x;
-    Globals.APP_Y = rect.y;
-
+    this.app = new App();
     this.update();
   }
 
@@ -32,17 +34,10 @@ class Main {
     requestAnimationFrame(this.update);
     s_log.flush_scrn();
     this.app.update();
-    this.renderer.render(this.scene, this.camera);
-    s_log.draw_string("1234556", 0, 10);
-    s_log.draw_string("9876543", 0, 50);
+    this.app.draw();
   };
 
   props;
-
-  scene;
-  camera;
-  renderer;
-
   app;
 }
 
