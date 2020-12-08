@@ -12,7 +12,7 @@ class Main {
     AA.Globals.APP_H = props.height;
 
     AA.Globals.SCENE = new THREE.Scene();
-    AA.Globals.SCENE.background = new THREE.Color("rgb(150, 150, 150)");
+    // AA.Globals.SCENE.background = new THREE.Color("rgb(200, 150, 150)");
     AA.Globals.CAMERA = new THREE.PerspectiveCamera(
       75,
       AA.Globals.APP_W / AA.Globals.APP_H,
@@ -20,7 +20,7 @@ class Main {
       1000
     );
     AA.Globals.CAMERA.position.z = 5;
-    AA.Globals.RENDERER = new THREE.WebGLRenderer();
+    AA.Globals.RENDERER = new THREE.WebGLRenderer({ alpha: true });
     AA.Globals.RENDERER.setSize(AA.Globals.APP_W, AA.Globals.APP_H);
     AA.Globals.CANVAS = AA.Globals.CONTAINER.appendChild(
       AA.Globals.RENDERER.domElement
