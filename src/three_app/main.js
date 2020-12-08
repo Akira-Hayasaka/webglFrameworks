@@ -11,7 +11,6 @@ class Main {
     AA.Globals.APP_W = props.width;
     AA.Globals.APP_H = props.height;
 
-    AA.Globals.SCENE = new THREE.Scene();
     AA.Globals.RENDERER = new THREE.WebGLRenderer({ alpha: true });
     AA.Globals.RENDERER.setSize(AA.Globals.APP_W, AA.Globals.APP_H);
     AA.Globals.CANVAS = AA.Globals.CONTAINER.appendChild(

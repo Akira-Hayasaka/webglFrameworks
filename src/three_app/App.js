@@ -25,7 +25,8 @@ class App {
     var geometry = new THREE.BoxGeometry(1, 1, 1);
     var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     this.cube = new THREE.Mesh(geometry, material);
-    AA.Globals.SCENE.add(this.cube);
+    this.scene = new THREE.Scene();
+    this.scene.add(this.cube);
 
     this.offscreen_tex = new THREE.WebGLRenderTarget(
       AA.Globals.APP_W,
@@ -73,7 +74,7 @@ class App {
   draw = () => {
     AA.Globals.RENDERER.setRenderTarget(this.offscreen_tex);
     AA.Globals.RENDERER.clear();
-    AA.Globals.RENDERER.render(AA.Globals.SCENE, this.camera_3d);
+    AA.Globals.RENDERER.render(this.scene, this.camera_3d);
     AA.Globals.RENDERER.setRenderTarget(null);
     AA.Globals.RENDERER.clear();
 
@@ -90,6 +91,7 @@ class App {
   screen_quad_to_draw;
   scene_to_hold_screen_quad;
 
+  scene;
   camera_2d;
   camera_3d;
 }

@@ -6,6 +6,5 @@ const Globals = {
   APP_H: 0,
   APP_X: 0,
   APP_Y: 0,
-  SCENE: null,
 };
 export default Globals;
