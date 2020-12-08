@@ -2,6 +2,7 @@
 // https://stackoverflow.com/questions/21533757/three-js-use-framebuffer-as-texture
 
 import * as THREE from "three";
+import Globals from "../Globals";
 
 const vert = `			
 varying vec2 vUv;
@@ -20,7 +21,22 @@ void main() {
 `;
 
 class RTT {
-  constructor() {}
+  constructor(width, height) {
+    this.renderer = Globals.RENDERER;
+  }
+
+  feed = (scene, camera) => {};
+
+  draw = (x, y, w, h) => {};
+
+  get_tex = () => {};
+
+  swap_renderer = (_renderer) => {
+    this.renderer = _renderer;
+  };
+  renderer;
 }
+
+// allocate, begin(), end(), draw(0, 0), get_quad(for further translation)
 
 export default RTT;

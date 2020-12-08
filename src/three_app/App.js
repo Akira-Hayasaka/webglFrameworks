@@ -83,6 +83,7 @@ class App {
   update = () => {
     this.cube.rotation.x += 0.01;
     this.cube.rotation.y += 0.01;
+    this.screen_quad_to_draw.rotation.z += 0.04;
   };
 
   draw = () => {
