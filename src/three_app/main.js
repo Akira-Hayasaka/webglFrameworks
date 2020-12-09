@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import Stats from "three/examples/jsm/libs/stats.module.js";
 import * as AA from "./lib/Includer";
 import App from "./App";
 
@@ -22,18 +23,26 @@ class Main {
     AA.ev.add_listener(AA.Constants.KEY_PRESSED, this.app.keypressed);
     AA.ev.add_listener(AA.Constants.KEY_RELEASED, this.app.keyreleased);
 
+    this.stats = new Stats();
+    this.stats.showPanel(0);
+    AA.Globals.CONTAINER.appendChild(this.stats.dom);
+
     this.update();
   }
 
   update = () => {
-    requestAnimationFrame(this.update);
+    this.stats.begin();
     AA.s_log.flush_scrn();
     this.app.update();
     this.app.draw();
+    this.stats.end();
+    requestAnimationFrame(this.update);
   };
 
   props;
   app;
+
+  stats;
 }
 
 export default Main;
