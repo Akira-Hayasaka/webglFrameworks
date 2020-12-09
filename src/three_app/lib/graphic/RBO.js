@@ -3,6 +3,7 @@
 
 import * as THREE from "three";
 import Globals from "../Globals";
+import { Camera2d } from "./Camera";
 
 const vert = `			
 varying vec2 vUv;
@@ -21,22 +22,63 @@ void main() {
 `;
 
 class RBO {
-  constructor(width, height, _renderer = Globals.RENDERER) {
+  constructor(_width, _height, _renderer = Globals.RENDERER) {
+    this.width = _width;
+    this.height = _height;
     this.renderer = _renderer;
+
+    this.offscreen_tex = new THREE.WebGLRenderTarget(this.width, this.height, {
+      minFilter: THREE.LinearFilter,
+      magFilter: THREE.NearestFilter,
+      format: THREE.RGBAFormat,
+    });
+
+    const geom_for_quad_mesh = new THREE.PlaneBufferGeometry(
+      this.width,
+      this.height
+    );
+    const mat_for_quad_mesh = new THREE.ShaderMaterial({
+      uniforms: { tDiffuse: { value: this.offscreen_tex.texture } },
+      vertexShader: vert,
+      fragmentShader: frag,
+      depthWrite: false,
+      side: THREE.DoubleSide,
+    });
+    this.quad_mesh = new THREE.Mesh(geom_for_quad_mesh, mat_for_quad_mesh);
+    this.quad_mesh.position.set(this.width / 2, this.height / 2, 0);
+
+    this.screen_quad_scene = new THREE.Scene();
+    this.screen_quad_scene.add(this.quad_mesh);
+    this.camera_2d = new Camera2d();
   }
 
-  feed = (scene, camera) => {};
+  feed = (scene, camera) => {
+    this.renderer.setRenderTarget(this.offscreen_tex);
+    this.renderer.clear();
+    this.renderer.render(scene, camera);
+    this.renderer.setRenderTarget(null);
+  };
 
-  draw = (x, y, w, h) => {};
+  draw = (x, y, w, h, to_canvas = true) => {
+    if (to_canvas) {
+      this.renderer.setRenderTarget(null);
+    }
+    this.renderer.render(this.screen_quad_scene, this.camera_2d);
+  };
 
   get_tex = () => {};
 
   swap_renderer = (_renderer) => {
     this.renderer = _renderer;
   };
-  renderer;
-}
 
-// allocate, begin(), end(), draw(0, 0), get_quad(for further translation)
+  width;
+  height;
+  renderer;
+  offscreen_tex;
+  quad_mesh;
+  screen_quad_scene;
+  camera_2d;
+}
 
 export default RBO;

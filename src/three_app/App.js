@@ -3,23 +3,6 @@ import * as AA from "./lib/Includer";
 
 import Test from "./src/Test";
 
-const vert = `			
-varying vec2 vUv;
-void main() {
-  vUv = uv;
-  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-}
-`;
-
-const frag = `
-varying vec2 vUv;
-uniform sampler2D tDiffuse;
-void main() {
-   gl_FragColor = texture2D( tDiffuse, vUv );
-   //gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-}
-`;
-
 class App {
   constructor() {
     var geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -27,65 +10,28 @@ class App {
     this.cube = new THREE.Mesh(geometry, material);
     this.scene = new THREE.Scene();
     this.scene.add(this.cube);
-
-    this.offscreen_tex = new THREE.WebGLRenderTarget(
-      AA.Globals.APP_W,
-      AA.Globals.APP_H,
-      {
-        minFilter: THREE.LinearFilter,
-        magFilter: THREE.NearestFilter,
-        format: THREE.RGBAFormat,
-      }
-    );
-
-    const geom_for_quad_mesh = new THREE.PlaneBufferGeometry(
-      AA.Globals.APP_W,
-      AA.Globals.APP_H
-    );
-    const mat_for_quad_mesh = new THREE.ShaderMaterial({
-      uniforms: { tDiffuse: { value: this.offscreen_tex.texture } },
-      vertexShader: vert,
-      fragmentShader: frag,
-      depthWrite: false,
-      side: THREE.DoubleSide,
-    });
-    this.quad_mesh = new THREE.Mesh(geom_for_quad_mesh, mat_for_quad_mesh);
-    this.quad_mesh.position.set(AA.Globals.APP_W / 2, AA.Globals.APP_H / 2, 0);
-
-    this.scene_to_hold_screen_quad = new THREE.Scene();
-    this.scene_to_hold_screen_quad.add(this.quad_mesh);
-
-    this.camera_2d = new AA.Camera2d();
     this.camera_3d = new AA.Camera3d();
+
+    this.rbo = new AA.RBO(AA.Globals.APP_W, AA.Globals.APP_H);
   }
 
   update = () => {
     this.cube.rotation.x += 0.01;
     this.cube.rotation.y += 0.01;
-    this.quad_mesh.rotation.z += 0.04;
   };
 
   draw = () => {
-    AA.Globals.RENDERER.setRenderTarget(this.offscreen_tex);
-    AA.Globals.RENDERER.clear();
-    AA.Globals.RENDERER.render(this.scene, this.camera_3d);
-    AA.Globals.RENDERER.setRenderTarget(null);
-    AA.Globals.RENDERER.clear();
-
-    AA.Globals.RENDERER.render(this.scene_to_hold_screen_quad, this.camera_2d);
+    this.rbo.feed(this.scene, this.camera_3d);
+    this.rbo.draw(0, 0, 0, 0);
   };
 
   keypressed = (key) => {};
   keyreleased = (key) => {};
 
+  rbo;
+
   cube;
-
-  offscreen_tex;
-  quad_mesh;
-  scene_to_hold_screen_quad;
-
   scene;
-  camera_2d;
   camera_3d;
 }
 
