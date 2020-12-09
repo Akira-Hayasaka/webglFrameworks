@@ -9,6 +9,7 @@ class App {
     var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     this.cube = new THREE.Mesh(geometry, material);
     this.scene = new THREE.Scene();
+    this.scene.background = new THREE.Color("rgb(255, 0, 0)");
     this.scene.add(this.cube);
     this.camera_3d = new AA.Camera3d();
 
@@ -22,7 +23,7 @@ class App {
 
   draw = () => {
     this.rbo.feed(this.scene, this.camera_3d);
-    this.rbo.draw(0, 0, 0, 0);
+    this.rbo.draw();
   };
 
   keypressed = (key) => {};
