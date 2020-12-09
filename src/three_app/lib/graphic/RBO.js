@@ -6,18 +6,18 @@ import Globals from "../Globals";
 import { Camera2d } from "./Camera";
 
 const vert = `			
-varying vec2 vUv;
+varying vec2 v_uv;
 void main() {
-  vUv = uv;
-  gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+  v_uv = uv;
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }
 `;
 
 const frag = `
-varying vec2 vUv;
-uniform sampler2D tDiffuse;
+varying vec2 v_uv;
+uniform sampler2D tex;
 void main() {
-   gl_FragColor = texture2D( tDiffuse, vUv );
+   gl_FragColor = texture2D(tex, v_uv);
 }
 `;
 
@@ -47,7 +47,7 @@ class RBO {
       this.height
     );
     const mat_for_quad_mesh = new THREE.ShaderMaterial({
-      uniforms: { tDiffuse: { value: this.offscreen_tex.texture } },
+      uniforms: { tex: { value: this.offscreen_tex.texture } },
       vertexShader: vert,
       fragmentShader: frag,
       depthWrite: false,
