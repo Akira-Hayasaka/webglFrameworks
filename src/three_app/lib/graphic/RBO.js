@@ -2,24 +2,9 @@
 // https://stackoverflow.com/questions/21533757/three-js-use-framebuffer-as-texture
 
 import * as THREE from "three";
+import Constants from "../Constants";
 import Globals from "../Globals";
 import { Camera2d } from "./Camera";
-
-const vert = `			
-varying vec2 v_uv;
-void main() {
-  v_uv = uv;
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-}
-`;
-
-const frag = `
-varying vec2 v_uv;
-uniform sampler2D tex;
-void main() {
-   gl_FragColor = texture2D(tex, v_uv);
-}
-`;
 
 const RT_Settings = {
   minFilter: THREE.LinearFilter,
@@ -27,11 +12,19 @@ const RT_Settings = {
   format: THREE.RGBAFormat,
 };
 
+const Shader_Mat_Settings = {
+  vertexShader: Constants.MINIMUM_VERT,
+  fragmentShader: Constants.MINIMUM_FRAG_VFLIP,
+  depthWrite: false,
+  side: THREE.DoubleSide,
+};
+
 class RBO {
   constructor(
     _width,
     _height,
     rt_settings = RT_Settings,
+    sm_settings = Shader_Mat_Settings,
     _renderer = Globals.RENDERER
   ) {
     this.width = _width;
@@ -48,10 +41,7 @@ class RBO {
     );
     const mat_for_quad_mesh = new THREE.ShaderMaterial({
       uniforms: { tex: { value: this.offscreen_tex.texture } },
-      vertexShader: vert,
-      fragmentShader: frag,
-      depthWrite: false,
-      side: THREE.DoubleSide,
+      ...sm_settings,
     });
     const mesh = new THREE.Mesh(geom_for_quad_mesh, mat_for_quad_mesh);
     mesh.position.set(this.width / 2, this.height / 2, 0);
@@ -68,6 +58,7 @@ class RBO {
     this.renderer.clear();
     this.renderer.render(scene, camera);
     this.renderer.setRenderTarget(null);
+    this.renderer.clear();
   };
 
   draw = (
@@ -103,4 +94,4 @@ class RBO {
   camera_2d;
 }
 
-export { RBO, RT_Settings };
+export { RBO, RT_Settings, Shader_Mat_Settings };

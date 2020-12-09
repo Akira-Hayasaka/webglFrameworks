@@ -8,7 +8,7 @@ class Camera2d extends OrthographicCamera {
     top = 0,
     bottom = Globals.APP_H,
     near = -1,
-    far = 1
+    far = 1000
   ) {
     super(left, right, top, bottom, near, far);
   }
