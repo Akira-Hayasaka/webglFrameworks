@@ -20,17 +20,24 @@ void main() {
    gl_FragColor = texture2D( tDiffuse, vUv );
 }
 `;
-
+const RT_Settings = {
+  minFilter: THREE.LinearFilter,
+  magFilter: THREE.NearestFilter,
+  format: THREE.RGBAFormat,
+};
 class RBO {
-  constructor(_width, _height, _renderer = Globals.RENDERER) {
+  constructor(
+    _width,
+    _height,
+    rt_settings = RT_Settings,
+    _renderer = Globals.RENDERER
+  ) {
     this.width = _width;
     this.height = _height;
     this.renderer = _renderer;
 
     this.offscreen_tex = new THREE.WebGLRenderTarget(this.width, this.height, {
-      minFilter: THREE.LinearFilter,
-      magFilter: THREE.NearestFilter,
-      format: THREE.RGBAFormat,
+      ...rt_settings,
     });
 
     const geom_for_quad_mesh = new THREE.PlaneBufferGeometry(
@@ -81,4 +88,4 @@ class RBO {
   camera_2d;
 }
 
-export default RBO;
+export { RBO, RT_Settings };
