@@ -13,6 +13,7 @@ class Main {
 
     AA.Globals.RENDERER = new THREE.WebGLRenderer({ alpha: true });
     AA.Globals.RENDERER.setSize(AA.Globals.APP_W, AA.Globals.APP_H);
+    AA.Globals.RENDERER.autoClear = false;
     AA.Globals.CANVAS = AA.Globals.CONTAINER.appendChild(
       AA.Globals.RENDERER.domElement
     );

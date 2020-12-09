@@ -4,7 +4,7 @@ import test_img from "./data/img/test.png";
 
 class App {
   constructor() {
-    var geometry = new THREE.BoxGeometry(10, 10, 1);
+    var geometry = new THREE.BoxGeometry(1, 1, 1);
     var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     this.cube = new THREE.Mesh(geometry, material);
 
@@ -13,8 +13,8 @@ class App {
     const circle = new THREE.Mesh(geometry, material);
 
     this.scene3d = new THREE.Scene();
-    this.scene3d.background = new THREE.Color("rgb(255, 0, 0)");
-    this.scene3d.add(circle);
+    // this.scene3d.background = new THREE.Color("rgba(255, 0, 0, 0)");
+    this.scene3d.add(this.cube);
     this.camera_3d = new AA.Camera3d();
 
     this.img = new AA.Image(
@@ -23,7 +23,7 @@ class App {
     );
     this.img.position.set(20, 20, 0);
     this.scene2d = new THREE.Scene();
-    this.scene2d.background = new THREE.Color("rgb(255, 0, 0)");
+    // this.scene2d.background = new THREE.Color("rgb(255, 0, 0)");
     this.scene2d.add(this.img);
 
     this.camera_2d = new AA.Camera2d();
@@ -33,18 +33,20 @@ class App {
   }
 
   update = () => {
-    // this.cube.rotation.x += 0.01;
-    // this.cube.rotation.y += 0.01;
+    this.cube.rotation.x += 0.01;
+    this.cube.rotation.y += 0.01;
   };
 
   draw = () => {
-    // this.rbo0.feed(this.scene3d, this.camera_3d);
-    // this.rbo0.draw();
+    this.rbo0.feed(this.scene3d, this.camera_3d);
+    this.rbo0.draw();
 
-    this.rbo1.feed(this.scene2d, this.camera_2d);
-    this.rbo1.draw();
+    // this.rbo1.feed(this.scene2d, this.camera_2d);
+    // this.rbo1.draw();
 
-    // AA.Globals.RENDERER.render(this.scene2d, this.camera_2d);
+    AA.Globals.RENDERER.render(this.scene2d, this.camera_2d);
+
+    // AA.Globals.RENDERER.clear();
   };
 
   keypressed = (key) => {};

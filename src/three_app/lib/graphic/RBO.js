@@ -58,7 +58,7 @@ class RBO {
     this.renderer.clear();
     this.renderer.render(scene, camera);
     this.renderer.setRenderTarget(null);
-    this.renderer.clear();
+    // this.renderer.clear();
   };
 
   draw = (
