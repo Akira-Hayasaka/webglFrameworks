@@ -16,6 +16,7 @@ const Shader_Mat_Settings = {
   vertexShader: Constants.MINIMUM_VERT,
   fragmentShader: Constants.MINIMUM_FRAG_VFLIP,
   depthWrite: false,
+  transparent: true,
   side: THREE.DoubleSide,
 };
 
@@ -43,6 +44,7 @@ class RBO {
       uniforms: { tex: { value: this.offscreen_tex.texture } },
       ...sm_settings,
     });
+    console.log(mat_for_quad_mesh.toJSON());
     const mesh = new THREE.Mesh(geom_for_quad_mesh, mat_for_quad_mesh);
     mesh.position.set(this.width / 2, this.height / 2, 0);
     this.quad_mesh = new THREE.Object3D();
@@ -58,7 +60,6 @@ class RBO {
     this.renderer.clear();
     this.renderer.render(scene, camera);
     this.renderer.setRenderTarget(null);
-    // this.renderer.clear();
   };
 
   draw = (
