@@ -10,6 +10,7 @@ const Shader_Mat_Settings = {
   vertexShader: Constants.MINIMUM_VERT,
   fragmentShader: Constants.MINIMUM_FRAG,
   depthWrite: false,
+  transparent: true,
   side: THREE.DoubleSide,
 };
 
@@ -27,8 +28,8 @@ class Image extends Object3D {
       path,
       (img) => {
         const texture = new THREE.CanvasTexture(img);
-        const w = texture.image.width;
-        const h = texture.image.height;
+        const w = texture.image.width * 1.5;
+        const h = texture.image.height * 1.5;
         const geom_for_quad_mesh = new THREE.PlaneBufferGeometry(w, h);
         const mat_for_quad_mesh = new THREE.ShaderMaterial({
           uniforms: { tex: { value: texture } },
