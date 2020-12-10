@@ -1,49 +1,49 @@
 import * as THREE from "three";
-import App from "./app/App";
-import Globals from "./app/Globals";
-import s_log from "./app/util/Screen_Logger";
+import Stats from "three/examples/jsm/libs/stats.module.js";
+import * as AA from "./lib/Includer";
+import App from "./App";
 
 class Main {
   constructor(container_elm, props) {
-    Globals.CONTAINER = container_elm;
     this.props = props;
-    const { width, height } = props;
 
-    this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color("rgb(150, 150, 150)");
-    this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    this.camera.position.z = 5;
-    this.renderer = new THREE.WebGLRenderer();
-    this.renderer.setSize(width, height);
-    const webgl_elm = Globals.CONTAINER.appendChild(this.renderer.domElement);
-    this.app = new App(this.scene);
+    AA.Globals.CONTAINER = container_elm;
+    AA.Globals.APP_W = props.width;
+    AA.Globals.APP_H = props.height;
 
-    const rect = webgl_elm.getBoundingClientRect();
+    AA.Globals.RENDERER = new THREE.WebGLRenderer({ alpha: true });
+    AA.Globals.RENDERER.setSize(AA.Globals.APP_W, AA.Globals.APP_H);
+    AA.Globals.RENDERER.autoClear = false;
+    AA.Globals.CANVAS = AA.Globals.CONTAINER.appendChild(
+      AA.Globals.RENDERER.domElement
+    );
+    AA.Globals.APP_X = AA.Globals.CANVAS.getBoundingClientRect().x;
+    AA.Globals.APP_Y = AA.Globals.CANVAS.getBoundingClientRect().y;
 
-    Globals.APP_W = width;
-    Globals.APP_H = height;
-    Globals.APP_X = rect.x;
-    Globals.APP_Y = rect.y;
+    this.app = new App();
+    AA.ev.add_listener(AA.Constants.KEY_PRESSED, this.app.keypressed);
+    AA.ev.add_listener(AA.Constants.KEY_RELEASED, this.app.keyreleased);
+
+    this.stats = new Stats();
+    this.stats.showPanel(0);
+    AA.Globals.CONTAINER.appendChild(this.stats.dom);
 
     this.update();
   }
 
   update = () => {
-    requestAnimationFrame(this.update);
-    s_log.flush_scrn();
+    this.stats.begin();
+    AA.s_log.flush_scrn();
     this.app.update();
-    this.renderer.render(this.scene, this.camera);
-    s_log.draw_string("1234556", 0, 10);
-    s_log.draw_string("9876543", 0, 50);
+    this.app.draw();
+    this.stats.end();
+    requestAnimationFrame(this.update);
   };
 
   props;
-
-  scene;
-  camera;
-  renderer;
-
   app;
+
+  stats;
 }
 
 export default Main;
