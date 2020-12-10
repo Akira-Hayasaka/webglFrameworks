@@ -15,9 +15,13 @@ class Line_Tweak {
 
     this.polyline.add_vertex(new THREE.Vector3(0, 0, 0));
     this.polyline.add_vertex(new THREE.Vector3(20, 20, 0));
+    // this.polyline.curve_to(new THREE.Vector3(20, 200, 0));
+    this.polyline.curve_to(new THREE.Vector3(50, 400, 0));
+    this.polyline.curve_to(new THREE.Vector3(200, 450, 0));
+    this.polyline.curve_to(new THREE.Vector3(300, 350, 0));
+    this.polyline.curve_to(new THREE.Vector3(400, 350, 0));
 
     const vs = this.polyline.get_vertices();
-    console.log("vs", vs);
 
     const c = new THREE.Color();
     const cs = [];
@@ -27,8 +31,6 @@ class Line_Tweak {
       acc.push(v.x, v.y, v.z);
       return acc;
     }, []);
-    console.log("positions", ps);
-    console.log("colors", cs);
 
     const geom = new LineGeometry();
     geom.setPositions(ps);
@@ -53,6 +55,7 @@ class Line_Tweak {
   draw = () => {
     this.rbo.feed(this.scene, this.camera_2d);
     this.rbo.draw();
+    // AA.Globals.RENDERER.render(this.scene, this.camera_2d);
   };
 
   rbo;
