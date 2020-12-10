@@ -14,6 +14,7 @@ import {
   Loader_Settings,
   Shader_Mat_Settings as Img_Shader_Mat_Settings,
 } from "./graphic/Image";
+import Polyline from "./util/Polyline";
 
 export {
   Constants,
@@ -29,4 +30,5 @@ export {
   Image,
   Loader_Settings,
   Img_Shader_Mat_Settings,
+  Polyline,
 };
