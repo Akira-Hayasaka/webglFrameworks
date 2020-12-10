@@ -1,10 +1,23 @@
 // https://threejs.org/docs/#api/en/math/Line3
 
 class Polyline {
-  constructor() {}
+  constructor() {
+    this.points = [];
+  }
 
-  #hasChanged = () => {};
-  rightVector;
+  add_vertex(v) {
+    this.points.push(v);
+  }
+
+  add_vertices(vs) {
+    this.points.push(...vs);
+  }
+
+  get_vertices() {
+    return this.points;
+  }
+
+  points = null;
 }
 
 export default Polyline;
