@@ -17,7 +17,6 @@ class Main {
     });
     AA.Globals.RENDERER.setSize(AA.Globals.APP_W, AA.Globals.APP_H);
     AA.Globals.RENDERER.autoClear = false;
-    console.log("is web gl 2?", AA.Globals.RENDERER.isWebGL2);
     AA.Globals.CANVAS = AA.Globals.CONTAINER.appendChild(
       AA.Globals.RENDERER.domElement
     );

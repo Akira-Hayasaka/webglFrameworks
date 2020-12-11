@@ -4,6 +4,11 @@ import test_img from "./data/img/test.png";
 
 import Line_Tweak from "./src/Line_Tweak";
 
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
+import { FXAAShader } from "three/examples/jsm/shaders/FXAAShader.js";
+
 class App {
   constructor() {
     var geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -25,10 +30,26 @@ class App {
 
     this.camera_2d = new AA.Camera2d();
 
-    this.rbo0 = new AA.RBO(AA.Globals.APP_W, AA.Globals.APP_H);
-    this.rbo1 = new AA.RBO(AA.Globals.APP_W, AA.Globals.APP_H);
+    this.rbo = new AA.RBO(AA.Globals.APP_W, AA.Globals.APP_H);
 
     this.line_tweak = new Line_Tweak();
+
+    const {
+      scene,
+      camera,
+      renderer,
+      width,
+      height,
+    } = this.rbo.get_postprocess_params();
+    const render_path = new RenderPass(scene, camera);
+    const fxaa = new ShaderPass(FXAAShader);
+    const px_ratio = renderer.getPixelRatio();
+    fxaa.material.uniforms["resolution"].value.x = 1 / (width * px_ratio);
+    fxaa.material.uniforms["resolution"].value.y = 1 / (height * px_ratio);
+    this.composer = new EffectComposer(renderer);
+    this.composer.addPass(render_path);
+    this.composer.addPass(fxaa);
+    this.composer.setSize(width, height);
   }
 
   update = () => {
@@ -38,18 +59,21 @@ class App {
   };
 
   draw = () => {
-    this.rbo1.feed(this.scene2d, this.camera_2d);
-    this.rbo1.draw();
-    this.rbo0.feed(this.scene3d, this.camera_3d);
-    this.rbo0.draw();
-    this.line_tweak.draw();
+    this.rbo.feed(this.scene2d, this.camera_2d, false);
+    this.rbo.feed(this.scene3d, this.camera_3d, false);
+
+    const { scene, camera } = this.line_tweak.get_scene_and_cam();
+    this.rbo.feed(scene, camera, false);
+
+    // this.rbo0.draw();
+    this.composer.render();
+    // this.line_tweak.draw();
   };
 
   keypressed = (key) => {};
   keyreleased = (key) => {};
 
-  rbo0;
-  rbo1;
+  rbo;
 
   cube;
   scene3d;
@@ -60,6 +84,8 @@ class App {
   camera_2d;
 
   line_tweak;
+
+  composer;
 }
 
 export default App;

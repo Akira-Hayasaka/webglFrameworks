@@ -58,6 +58,14 @@ class Line_Tweak {
     // AA.Globals.RENDERER.render(this.scene, this.camera_2d);
   };
 
+  get_scene_and_cam = () => {
+    const sc = {
+      scene: this.scene,
+      camera: this.camera_2d,
+    };
+    return sc;
+  };
+
   rbo;
   camera_2d;
   scene;

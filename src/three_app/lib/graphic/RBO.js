@@ -55,9 +55,9 @@ class RBO {
     this.camera_2d = new Camera2d();
   }
 
-  feed = (scene, camera) => {
+  feed = (scene, camera, b_clear = true) => {
     this.renderer.setRenderTarget(this.offscreen_tex);
-    this.renderer.clear();
+    b_clear && this.renderer.clear();
     this.renderer.render(scene, camera);
     this.renderer.setRenderTarget(null);
   };
@@ -86,6 +86,17 @@ class RBO {
     this.renderer = _renderer;
   };
 
+  get_postprocess_params = () => {
+    const params = {
+      scene: this.screen_quad_scene,
+      camera: this.camera_2d,
+      renderer: this.renderer,
+      width: this.width,
+      height: this.height,
+    };
+    return params;
+  };
+
   width;
   height;
   renderer;
@@ -93,6 +104,8 @@ class RBO {
   quad_mesh;
   screen_quad_scene;
   camera_2d;
+
+  composer;
 }
 
 export { RBO, RT_Settings, Shader_Mat_Settings };
