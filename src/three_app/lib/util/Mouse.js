@@ -42,7 +42,7 @@ const notify_mouse_event = () => {
   };
   const notify_mouseup = () => {
     document.addEventListener("mouseup", (e) => {
-      ev.notify(Constants.MOUSE_UP, e.key);
+      ev.notify(Constants.MOUSE_UP, get_arg(e));
     });
   };
   notify_click();
