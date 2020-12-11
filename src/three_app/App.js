@@ -4,11 +4,6 @@ import test_img from "./data/img/test.png";
 
 import Line_Tweak from "./src/Line_Tweak";
 
-import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
-import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
-import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
-import { FXAAShader } from "three/examples/jsm/shaders/FXAAShader.js";
-
 class App {
   constructor() {
     var geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -34,22 +29,8 @@ class App {
 
     this.line_tweak = new Line_Tweak();
 
-    const {
-      scene,
-      camera,
-      renderer,
-      width,
-      height,
-    } = this.rbo.get_postprocess_params();
-    const render_path = new RenderPass(scene, camera);
-    const fxaa = new ShaderPass(FXAAShader);
-    const px_ratio = renderer.getPixelRatio();
-    fxaa.material.uniforms["resolution"].value.x = 1 / (width * px_ratio);
-    fxaa.material.uniforms["resolution"].value.y = 1 / (height * px_ratio);
-    this.composer = new EffectComposer(renderer);
-    this.composer.addPass(render_path);
-    this.composer.addPass(fxaa);
-    this.composer.setSize(width, height);
+    this.post_process = new AA.Post_Process(this.rbo.get_postprocess_params());
+    this.post_process.add_fxaa();
   }
 
   update = () => {
@@ -65,9 +46,8 @@ class App {
     const { scene, camera } = this.line_tweak.get_scene_and_cam();
     this.rbo.feed(scene, camera, false);
 
-    // this.rbo0.draw();
-    this.composer.render();
-    // this.line_tweak.draw();
+    // this.rbo.draw();
+    this.post_process.render();
   };
 
   keypressed = (key) => {};
@@ -85,7 +65,7 @@ class App {
 
   line_tweak;
 
-  composer;
+  post_process;
 }
 
 export default App;
