@@ -24,10 +24,24 @@ const make_new_if_necessary = () => {
   }
 };
 
+const margin = 2;
+
 const s_log = {
   draw_string: (str, x, y) => {
     make_new_if_necessary();
+    const met = s_logger.ctx.measureText(str);
+    const width = met.actualBoundingBoxRight - met.actualBoundingBoxLeft;
+    const height = met.actualBoundingBoxAscent + met.actualBoundingBoxDescent;
+    s_logger.ctx.fillStyle = "#000000";
+    s_logger.ctx.fillRect(
+      x - margin,
+      y - margin - height,
+      width + margin * 2,
+      height + margin * 2
+    );
+    s_logger.ctx.fillStyle = "#ffffff";
     s_logger.ctx.fillText(str, x, y);
+    s_logger.ctx.fillStyle = "#000000";
   },
   flush_scrn: () => {
     make_new_if_necessary();
