@@ -17,6 +17,7 @@ import {
   Shader_Mat_Settings as Img_Shader_Mat_Settings,
 } from "./graphic/Image";
 import Polyline from "./util/Polyline";
+import Rectangle from "./util/Rectangle";
 import Post_Process from "./graphic/Post_Process";
 import {
   Video_Player,
@@ -41,6 +42,7 @@ export {
   Loader_Settings,
   Img_Shader_Mat_Settings,
   Polyline,
+  Rectangle,
   Post_Process,
   Video_Player,
   Video_Settings,
