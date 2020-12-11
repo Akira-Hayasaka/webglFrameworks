@@ -22,6 +22,12 @@ class Main {
     );
     AA.Globals.APP_X = AA.Globals.CANVAS.getBoundingClientRect().x;
     AA.Globals.APP_Y = AA.Globals.CANVAS.getBoundingClientRect().y;
+    AA.Globals.APP_RECT = new AA.Rectangle(
+      AA.Globals.APP_X,
+      AA.Globals.APP_Y,
+      AA.Globals.APP_W,
+      AA.Globals.APP_H
+    );
 
     this.app = new App();
     AA.ev.add_listener(AA.Constants.KEY_PRESSED, this.app.keypressed);
