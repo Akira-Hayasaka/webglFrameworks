@@ -2,6 +2,12 @@ const Constants = {
   // event names
   KEY_PRESSED: "keypressed",
   KEY_RELEASED: "keyreleased",
+  MOUSE_CLICK: "mouseclick",
+  MOUSE_DBLCLICK: "mousedblclick",
+  MOUSE_DOWN: "mousedown",
+  MOUSE_MOVE: "mousemove",
+  MOUSE_UP: "mouseup",
+  // shader string
   MINIMUM_VERT: `			
   varying vec2 v_uv;
   void main() {

@@ -1,8 +1,10 @@
 import Constants from "./Constants";
 import Globals from "./Globals";
 import s_log from "./util/Screen_Logger";
+import { map } from "./util/Util";
 import ev from "./util/Event";
 import key from "./util/Key";
+import mouse from "./util/Mouse";
 import { Camera2d, Camera3d } from "./graphic/Camera";
 import {
   RBO,
@@ -26,8 +28,10 @@ export {
   Constants,
   Globals,
   s_log,
+  map,
   ev,
   key,
+  mouse,
   Camera2d,
   Camera3d,
   RBO,

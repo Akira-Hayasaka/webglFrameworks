@@ -53,10 +53,15 @@ class App {
 
     // this.rbo.draw();
     this.post_process.render();
+
+    this.vid.debug_draw();
   };
 
   keypressed = (key) => {};
-  keyreleased = (key) => {};
+  keyreleased = (key) => {
+    if (key.val === " ") this.vid.play();
+    if (key.val === "p") this.vid.pause();
+  };
 
   rbo;
 

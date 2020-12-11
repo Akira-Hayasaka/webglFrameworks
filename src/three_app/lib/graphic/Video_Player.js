@@ -1,6 +1,15 @@
 import * as THREE from "three";
 import Globals from "../Globals";
 import Constants from "../Constants";
+import s_logger from "../util/Screen_Logger";
+
+const Ready_State = {
+  0: "HAVE_NOTHING",
+  1: "HAVE_METADATA",
+  2: "HAVE_CURRENT_DATA",
+  3: "HAVE_FUTURE_DATA",
+  4: "HAVE_ENOUGH_DATA",
+};
 
 const Video_Settings = {
   autoplay: false,
@@ -28,33 +37,64 @@ class Video_Player extends THREE.Object3D {
   ) {
     super();
 
-    const video_elm = document.createElement("VIDEO");
-    console.log("video_elm", video_elm);
-    video_elm.autoplay = video_settings.autoplay;
-    video_elm.crossOrigin = video_settings.crossOrigin;
-    video_elm.loop = video_settings.loop;
-    video_elm.muted = video_settings.muted;
-    video_elm.preload = video_settings.preload;
-    video_elm.style.display = "none";
+    this.video_elm = document.createElement("VIDEO");
+    this.video_elm.autoplay = video_settings.autoplay;
+    this.video_elm.crossOrigin = video_settings.crossOrigin;
+    this.video_elm.loop = video_settings.loop;
+    this.video_elm.muted = video_settings.muted;
+    this.video_elm.preload = video_settings.preload;
+    this.video_elm.style.display = "none";
     const source_elm = document.createElement("SOURCE");
     source_elm.src = path;
     source_elm.type = `video/mp4; codecs="avc1.42E01E, mp4a.40.2"`;
-    video_elm.appendChild(source_elm);
-    Globals.CONTAINER.appendChild(video_elm);
+    this.video_elm.appendChild(source_elm);
+    Globals.CONTAINER.appendChild(this.video_elm);
 
-    video_elm.load();
-    video_elm.play();
+    this.video_elm.load();
 
-    const texture = new THREE.VideoTexture(video_elm);
+    this.texture = new THREE.VideoTexture(this.video_elm);
     const geom_for_quad_mesh = new THREE.PlaneBufferGeometry(width, height);
     const mat_for_quad_mesh = new THREE.ShaderMaterial({
-      uniforms: { tex: { value: texture } },
+      uniforms: { tex: { value: this.texture } },
       ...sm_settings,
     });
     const mesh = new THREE.Mesh(geom_for_quad_mesh, mat_for_quad_mesh);
     mesh.position.set(width / 2, height / 2, 0);
     this.add(mesh);
   }
+
+  debug_draw = () => {
+    const x = this.position.x + 5;
+    const y = this.position.y + 20;
+    s_logger.draw_string(
+      "state: " + Ready_State[this.video_elm.readyState],
+      x,
+      y
+    );
+    s_logger.draw_string("dur: " + this.video_elm.duration + " sec", x, y + 15);
+    s_logger.draw_string(
+      "cur: " + this.video_elm.currentTime + " sec",
+      x,
+      y + 30
+    );
+  };
+
+  play = () => {
+    this.video_elm.play();
+  };
+
+  pause = () => {
+    this.video_elm.pause();
+  };
+
+  set_position = (pct) => {};
+
+  get_tex = () => {
+    return this.texture;
+  };
+
+  video_elm;
+  texture;
 }
 
 export { Video_Player, Video_Settings, Shader_Mat_Settings };
