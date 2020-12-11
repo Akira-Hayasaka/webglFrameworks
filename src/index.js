@@ -6,6 +6,7 @@ ReactDOM.render(
   <React.StrictMode>
     <div>Hello from react</div>
     <Entry_Point />
+    <div>to next paragraph</div>
   </React.StrictMode>,
   document.getElementById("root")
 );

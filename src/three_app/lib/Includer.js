@@ -16,6 +16,11 @@ import {
 } from "./graphic/Image";
 import Polyline from "./util/Polyline";
 import Post_Process from "./graphic/Post_Process";
+import {
+  Video_Player,
+  Video_Settings,
+  Shader_Mat_Settings as Vid_Shader_Mat_Settings,
+} from "./graphic/Video_Player";
 
 export {
   Constants,
@@ -33,4 +38,7 @@ export {
   Img_Shader_Mat_Settings,
   Polyline,
   Post_Process,
+  Video_Player,
+  Video_Settings,
+  Vid_Shader_Mat_Settings,
 };

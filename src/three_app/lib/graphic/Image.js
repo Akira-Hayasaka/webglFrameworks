@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import { Object3D } from "three";
 import Constants from "../Constants";
 
 const Loader_Settings = {
@@ -14,7 +13,7 @@ const Shader_Mat_Settings = {
   side: THREE.DoubleSide,
 };
 
-class Image extends Object3D {
+class Image extends THREE.Object3D {
   constructor(
     path,
     loader_settings = Loader_Settings,

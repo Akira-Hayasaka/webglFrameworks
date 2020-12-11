@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import * as AA from "./lib/Includer";
 import test_img from "./data/img/test.png";
+import test_vid from "./data/mov/big_buck_bunny.mp4";
 
 import Line_Tweak from "./src/Line_Tweak";
 
@@ -22,6 +23,10 @@ class App {
     this.scene2d = new THREE.Scene();
     this.scene2d.background = new THREE.Color("rgb(240, 240, 240)");
     this.scene2d.add(this.img);
+
+    this.vid = new AA.Video_Player(test_vid, 640 * 0.5, 360 * 0.5);
+    this.vid.position.set(50, 300, 0);
+    this.scene2d.add(this.vid);
 
     this.camera_2d = new AA.Camera2d();
 
@@ -60,6 +65,7 @@ class App {
   camera_3d;
 
   img;
+  vid;
   scene2d;
   camera_2d;
 
