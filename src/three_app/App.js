@@ -36,8 +36,10 @@ class App {
     this.scene2d.add(this.tree);
     this.scene2d.add(this.ant);
 
-    this.vid = new AA.Video_Player(test_vid, 640 * 0.5, 360 * 0.5);
-    this.vid.position.set(50, 300, 0);
+    this.vid = new AA.Video_Player();
+    this.vid.load(test_vid, 640 * 0.5, 360 * 0.5).then((vid) => {
+      vid.position.set(50, 300, 0);
+    });
     this.scene2d.add(this.vid);
 
     this.camera_2d = new AA.Camera2d();

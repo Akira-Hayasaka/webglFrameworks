@@ -29,42 +29,51 @@ const Shader_Mat_Settings = {
 };
 
 class Video_Player extends THREE.Object3D {
-  constructor(
+  load(
     path,
     width,
     height,
     video_settings = Video_Settings,
     sm_settings = Shader_Mat_Settings
   ) {
-    super();
+    const that = this;
+    return new Promise((resolve, reject) => {
+      try {
+        this.video_elm = document.createElement("VIDEO");
+        this.video_elm.autoplay = video_settings.autoplay;
+        this.video_elm.crossOrigin = video_settings.crossOrigin;
+        this.video_elm.loop = video_settings.loop;
+        this.video_elm.muted = video_settings.muted;
+        this.video_elm.preload = video_settings.preload;
+        this.video_elm.style.display = "none";
+        const source_elm = document.createElement("SOURCE");
+        source_elm.src = path;
+        source_elm.type = `video/mp4; codecs="avc1.42E01E, mp4a.40.2"`;
+        this.video_elm.appendChild(source_elm);
+        Globals.CONTAINER.appendChild(this.video_elm);
 
-    this.video_elm = document.createElement("VIDEO");
-    this.video_elm.autoplay = video_settings.autoplay;
-    this.video_elm.crossOrigin = video_settings.crossOrigin;
-    this.video_elm.loop = video_settings.loop;
-    this.video_elm.muted = video_settings.muted;
-    this.video_elm.preload = video_settings.preload;
-    this.video_elm.style.display = "none";
-    const source_elm = document.createElement("SOURCE");
-    source_elm.src = path;
-    source_elm.type = `video/mp4; codecs="avc1.42E01E, mp4a.40.2"`;
-    this.video_elm.appendChild(source_elm);
-    Globals.CONTAINER.appendChild(this.video_elm);
+        this.video_elm.load();
 
-    this.video_elm.load();
-
-    this.texture = new THREE.VideoTexture(this.video_elm);
-    const geom_for_quad_mesh = new THREE.PlaneBufferGeometry(width, height);
-    const mat_for_quad_mesh = new THREE.ShaderMaterial({
-      uniforms: { tex: { value: this.texture } },
-      ...sm_settings,
+        this.texture = new THREE.VideoTexture(this.video_elm);
+        const geom_for_quad_mesh = new THREE.PlaneBufferGeometry(width, height);
+        const mat_for_quad_mesh = new THREE.ShaderMaterial({
+          uniforms: { tex: { value: this.texture } },
+          ...sm_settings,
+        });
+        this.mesh = new THREE.Mesh(geom_for_quad_mesh, mat_for_quad_mesh);
+        this.mesh.position.set(width / 2, height / 2, 0);
+        this.add(this.mesh);
+        resolve(that);
+      } catch {
+        console.log("error loading vid:", path);
+        reject(that);
+      }
     });
-    const mesh = new THREE.Mesh(geom_for_quad_mesh, mat_for_quad_mesh);
-    mesh.position.set(width / 2, height / 2, 0);
-    this.add(mesh);
   }
 
   debug_draw = () => {
+    if (!this.video_elm) return;
+
     const x = this.position.x + 5;
     const y = this.position.y + 20;
     s_logger.draw_string(
@@ -81,34 +90,52 @@ class Video_Player extends THREE.Object3D {
   };
 
   get_state = () => {
-    return Ready_State[this.video_elm.readyState];
+    if (this.video_elm) {
+      return Ready_State[this.video_elm.readyState];
+    } else {
+      return Ready_State[0];
+    }
   };
 
   play = () => {
-    this.video_elm.play();
+    if (this.video_elm) this.video_elm.play();
   };
 
   pause = () => {
-    this.video_elm.pause();
+    if (this.video_elm) this.video_elm.pause();
   };
 
   set_position = (pct) => {
-    this.video_elm.currentTime = map(
-      pct,
-      0.0,
-      1.0,
-      0.0,
-      this.video_elm.duration,
-      true
-    );
+    if (this.video_elm)
+      this.video_elm.currentTime = map(
+        pct,
+        0.0,
+        1.0,
+        0.0,
+        this.video_elm.duration,
+        true
+      );
   };
 
   get_tex = () => {
     return this.texture;
   };
 
-  video_elm;
-  texture;
+  get_width = () => {
+    if (this.texture) return this.texture.image.width;
+  };
+
+  get_height = () => {
+    if (this.texture) return this.texture.image.height;
+  };
+
+  set_anchor = (x, y) => {
+    if (this.mesh) this.mesh.position.set(x, y);
+  };
+
+  video_elm = null;
+  mesh = null;
+  texture = null;
 }
 
 export { Video_Player, Video_Settings, Shader_Mat_Settings };
