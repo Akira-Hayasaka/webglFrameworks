@@ -7,5 +7,6 @@ const Globals = {
   APP_X: 0,
   APP_Y: 0,
   APP_RECT: null,
+  ELAPSED_TIME: 0,
 };
 export default Globals;

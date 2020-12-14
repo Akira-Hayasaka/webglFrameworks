@@ -45,7 +45,9 @@ class Main {
     this.update();
   }
 
-  update = () => {
+  update = (time) => {
+    if (this.start === undefined) this.start = time;
+    else AA.Globals.ELAPSED_TIME = (time - this.start) * 0.001;
     this.stats.begin();
     AA.s_log.flush_scrn();
     this.app.update();
@@ -56,7 +58,7 @@ class Main {
 
   props;
   app;
-
+  start;
   stats;
 }
 
