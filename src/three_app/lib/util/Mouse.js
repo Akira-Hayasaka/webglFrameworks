@@ -11,13 +11,14 @@ const get_arg = (e) => {
   const arg = {
     e,
     screen: new THREE.Vector2(e.clientX, e.clientY),
+    is_inside_canvas: false,
+    canvas: new THREE.Vector2(0, 0),
   };
-  if (Globals.APP_RECT.is_inside(e.clientX, e.clientY)) {
-    arg.is_inside_canvas = true;
-    arg.canvas = map_client_to_canvas(e.clientX, e.clientY);
-  } else {
-    arg.is_inside_canvas = false;
-    arg.canvas = new THREE.Vector2(0, 0);
+  if (Globals.APP_RECT) {
+    if (Globals.APP_RECT.is_inside(e.clientX, e.clientY)) {
+      arg.is_inside_canvas = true;
+      arg.canvas = map_client_to_canvas(e.clientX, e.clientY);
+    }
   }
   return arg;
 };
