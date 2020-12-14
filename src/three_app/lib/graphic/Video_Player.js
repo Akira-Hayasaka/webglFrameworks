@@ -2,6 +2,7 @@ import * as THREE from "three";
 import Globals from "../Globals";
 import Constants from "../Constants";
 import s_logger from "../util/Screen_Logger";
+import { map } from "../util/Util";
 
 const Ready_State = {
   0: "HAVE_NOTHING",
@@ -79,6 +80,10 @@ class Video_Player extends THREE.Object3D {
     );
   };
 
+  get_state = () => {
+    return Ready_State[this.video_elm.readyState];
+  };
+
   play = () => {
     this.video_elm.play();
   };
@@ -87,7 +92,16 @@ class Video_Player extends THREE.Object3D {
     this.video_elm.pause();
   };
 
-  set_position = (pct) => {};
+  set_position = (pct) => {
+    this.video_elm.currentTime = map(
+      pct,
+      0.0,
+      1.0,
+      0.0,
+      this.video_elm.duration,
+      true
+    );
+  };
 
   get_tex = () => {
     return this.texture;
