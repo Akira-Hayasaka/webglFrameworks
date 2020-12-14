@@ -1,5 +1,6 @@
 const Constants = {
   // event names
+  WINDOW_RESIZED: "windworesized",
   KEY_PRESSED: "keypressed",
   KEY_RELEASED: "keyreleased",
   MOUSE_CLICK: "mouseclick",

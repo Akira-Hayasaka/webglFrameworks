@@ -2,18 +2,24 @@ import Globals from "../Globals";
 
 class Screen_Logger {
   constructor() {
-    const canvas_elm = document.createElement("CANVAS");
-    canvas_elm.style.backgroundColor = "transparent";
-    canvas_elm.style.position = "absolute";
-    canvas_elm.style.left = `${Globals.APP_X}px`;
-    canvas_elm.style.top = `${Globals.APP_Y}px`;
-    canvas_elm.style.zIndex = "10";
-    canvas_elm.width = Globals.APP_W;
-    canvas_elm.height = Globals.APP_H;
-    Globals.CONTAINER.appendChild(canvas_elm);
-    this.ctx = canvas_elm.getContext("2d");
+    this.canvas_elm = document.createElement("CANVAS");
+    this.setup_elm_style();
+    Globals.CONTAINER.appendChild(this.canvas_elm);
+    this.ctx = this.canvas_elm.getContext("2d");
   }
+
+  setup_elm_style = () => {
+    this.canvas_elm.style.backgroundColor = "transparent";
+    this.canvas_elm.style.position = "absolute";
+    this.canvas_elm.style.left = `${Globals.APP_X}px`;
+    this.canvas_elm.style.top = `${Globals.APP_Y}px`;
+    this.canvas_elm.style.zIndex = "10";
+    this.canvas_elm.width = Globals.APP_W;
+    this.canvas_elm.height = Globals.APP_H;
+  };
+
   ctx;
+  canvas_elm;
 }
 
 let s_logger = null;
