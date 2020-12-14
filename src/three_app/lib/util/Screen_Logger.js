@@ -1,4 +1,6 @@
+import Constants from "../Constants";
 import Globals from "../Globals";
+import ev from "../util/Event";
 
 class Screen_Logger {
   constructor() {
@@ -6,6 +8,10 @@ class Screen_Logger {
     this.setup_elm_style();
     Globals.CONTAINER.appendChild(this.canvas_elm);
     this.ctx = this.canvas_elm.getContext("2d");
+
+    ev.add_listener(Constants.WINDOW_RESIZED, () => {
+      this.setup_elm_style();
+    });
   }
 
   setup_elm_style = () => {

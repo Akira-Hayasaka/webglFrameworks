@@ -46,6 +46,7 @@ class Main {
 
     if (this.does_need_resizing()) {
       this.setup_app_resolusion();
+      AA.ev.notify(AA.Constants.WINDOW_RESIZED);
     }
 
     this.stats.begin();
