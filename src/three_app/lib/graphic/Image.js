@@ -14,36 +14,49 @@ const Shader_Mat_Settings = {
 };
 
 class Image extends THREE.Object3D {
-  constructor(
+  load = (
     path,
     loader_settings = Loader_Settings,
     sm_settings = Shader_Mat_Settings
-  ) {
-    super();
+  ) => {
+    const that = this;
+    return new Promise((resolve, reject) => {
+      const loader = new THREE.ImageBitmapLoader();
+      loader.setOptions({ ...loader_settings });
+      loader.load(
+        path,
+        (img) => {
+          this.texture = new THREE.CanvasTexture(img);
+          const w = this.texture.image.width;
+          const h = this.texture.image.height;
+          const geom_for_quad_mesh = new THREE.PlaneBufferGeometry(w, h);
+          const mat_for_quad_mesh = new THREE.ShaderMaterial({
+            uniforms: { tex: { value: this.texture } },
+            ...sm_settings,
+          });
+          const mesh = new THREE.Mesh(geom_for_quad_mesh, mat_for_quad_mesh);
+          mesh.position.set(w / 2, h / 2, 0);
+          this.add(mesh);
+          resolve(that);
+        },
+        (prog) => {},
+        (err) => {
+          console.log("Image loading fail", err);
+          reject(that);
+        }
+      );
+    });
+  };
 
-    const loader = new THREE.ImageBitmapLoader();
-    loader.setOptions({ ...loader_settings });
-    loader.load(
-      path,
-      (img) => {
-        const texture = new THREE.CanvasTexture(img);
-        const w = texture.image.width;
-        const h = texture.image.height;
-        const geom_for_quad_mesh = new THREE.PlaneBufferGeometry(w, h);
-        const mat_for_quad_mesh = new THREE.ShaderMaterial({
-          uniforms: { tex: { value: texture } },
-          ...sm_settings,
-        });
-        const mesh = new THREE.Mesh(geom_for_quad_mesh, mat_for_quad_mesh);
-        mesh.position.set(w / 2, h / 2, 0);
-        this.add(mesh);
-      },
-      (prog) => {},
-      (err) => {
-        console.log("Image loading fail", err);
-      }
-    );
-  }
+  get_width = () => {
+    if (this.texture) return this.texture.image.width;
+  };
+
+  get_height = () => {
+    if (this.texture) return this.texture.image.height;
+  };
+
+  texture = null;
 }
 
 export { Image, Loader_Settings, Shader_Mat_Settings };

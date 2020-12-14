@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import * as AA from "./lib/Includer";
-import test_img from "./data/img/test.png";
+import tree_img from "./data/img/tree.png";
+import ant_img from "./data/img/ant.png";
 import test_vid from "./data/mov/big_buck_bunny.mp4";
 
 import Line_Tweak from "./src/Line_Tweak";
@@ -15,14 +16,24 @@ class App {
     this.scene3d.add(this.cube);
     this.camera_3d = new AA.Camera3d();
 
-    this.img = new AA.Image(
-      // "https://threejsfundamentals.org/threejs/resources/images/flower-1.jpg"
-      test_img
-    );
-    this.img.position.set(20, 20, 0);
+    this.tree = new AA.Image();
+    this.tree.load(tree_img).then((img) => {
+      img.position.set(20, 20, 0);
+    });
+    this.ant = new AA.Image();
+    this.ant.load(ant_img).then((img) => {
+      img.position.set(
+        AA.Globals.APP_W - img.get_width(),
+        AA.Globals.APP_H - img.get_height(),
+        0
+      );
+    });
+
+    this.ant.position.set(20, 300, 0);
     this.scene2d = new THREE.Scene();
     this.scene2d.background = new THREE.Color("rgb(240, 240, 240)");
-    this.scene2d.add(this.img);
+    this.scene2d.add(this.tree);
+    this.scene2d.add(this.ant);
 
     this.vid = new AA.Video_Player(test_vid, 640 * 0.5, 360 * 0.5);
     this.vid.position.set(50, 300, 0);
@@ -75,7 +86,8 @@ class App {
   scene3d;
   camera_3d;
 
-  img;
+  tree;
+  ant;
   vid;
   scene2d;
   camera_2d;
