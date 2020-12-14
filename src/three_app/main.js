@@ -2,6 +2,7 @@ import * as THREE from "three";
 import Stats from "three/examples/jsm/libs/stats.module.js";
 import * as AA from "./lib/Includer";
 import App from "./App";
+import { Object3D } from "three";
 
 class Main {
   constructor(props) {
@@ -19,8 +20,6 @@ class Main {
       AA.Globals.APP_W,
       AA.Globals.APP_H
     );
-    console.log("w", AA.Globals.APP_W);
-    console.log("h", AA.Globals.APP_H);
 
     AA.Globals.RENDERER = new THREE.WebGLRenderer({
       canvas: AA.Globals.CANVAS,
@@ -42,6 +41,10 @@ class Main {
     this.stats = new Stats();
     this.stats.showPanel(0);
     AA.Globals.CONTAINER.appendChild(this.stats.dom);
+
+    for (const [key, value] of Object.entries(AA.Globals)) {
+      console.log(`${key}: ${value}`);
+    }
 
     this.update();
   }
