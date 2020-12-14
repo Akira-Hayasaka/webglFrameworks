@@ -18,7 +18,8 @@ class App {
 
     this.tree = new AA.Image();
     this.tree.load(tree_img).then((img) => {
-      img.position.set(20, 20, 0);
+      img.set_anchor(0, 0);
+      img.position.set(img.get_width() / 2 + 20, img.get_height() / 2 + 20, 0);
     });
     this.ant = new AA.Image();
     this.ant.load(ant_img).then((img) => {
@@ -52,6 +53,7 @@ class App {
   update = () => {
     this.cube.rotation.x += 0.01;
     this.cube.rotation.y += 0.01;
+    this.tree.rotation.z += 0.01;
     this.line_tweak.update();
   };
 

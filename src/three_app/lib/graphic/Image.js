@@ -34,9 +34,9 @@ class Image extends THREE.Object3D {
             uniforms: { tex: { value: this.texture } },
             ...sm_settings,
           });
-          const mesh = new THREE.Mesh(geom_for_quad_mesh, mat_for_quad_mesh);
-          mesh.position.set(w / 2, h / 2, 0);
-          this.add(mesh);
+          this.mesh = new THREE.Mesh(geom_for_quad_mesh, mat_for_quad_mesh);
+          this.mesh.position.set(w / 2, h / 2, 0);
+          this.add(this.mesh);
           resolve(that);
         },
         (prog) => {},
@@ -56,6 +56,11 @@ class Image extends THREE.Object3D {
     if (this.texture) return this.texture.image.height;
   };
 
+  set_anchor = (x, y) => {
+    if (this.mesh) this.mesh.position.set(x, y);
+  };
+
+  mesh = null;
   texture = null;
 }
 
