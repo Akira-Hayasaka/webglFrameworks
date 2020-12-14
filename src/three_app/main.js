@@ -9,8 +9,8 @@ class Main {
 
     AA.Globals.CONTAINER = props.container;
     AA.Globals.CANVAS = props.canvas;
-    AA.Globals.APP_W = AA.Globals.CANVAS.clientWidth;
-    AA.Globals.APP_H = AA.Globals.CANVAS.clientHeight;
+    AA.Globals.APP_W = AA.Globals.CANVAS.getBoundingClientRect().width;
+    AA.Globals.APP_H = AA.Globals.CANVAS.getBoundingClientRect().height;
     AA.Globals.APP_X = AA.Globals.CANVAS.getBoundingClientRect().x;
     AA.Globals.APP_Y = AA.Globals.CANVAS.getBoundingClientRect().y;
     AA.Globals.APP_RECT = new AA.Rectangle(
@@ -28,7 +28,7 @@ class Main {
       antialias: true,
     });
     AA.Globals.RENDERER.autoClear = false;
-    AA.Globals.RENDERER.setSize(AA.Globals.APP_W, AA.Globals.APP_H);
+    AA.Globals.RENDERER.setSize(AA.Globals.APP_W, AA.Globals.APP_H, false);
 
     this.app = new App();
     AA.ev.add_listener(AA.Constants.KEY_PRESSED, this.app.on_keypressed);

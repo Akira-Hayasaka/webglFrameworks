@@ -20,7 +20,7 @@ function EntryPoint() {
 
   return (
     <>
-      <div ref={container_elm}>
+      <div id="app_container" ref={container_elm}>
         <canvas id="three_app" ref={canvas_elem} />
       </div>
     </>
