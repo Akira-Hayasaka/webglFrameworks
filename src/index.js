@@ -1,12 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Entry_Point from "./Entry_Point";
+import EntryPoint from "./EntryPoint";
+import index_css from "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <div>Hello from react</div>
-    <Entry_Point />
-    <div>to next paragraph</div>
+    <EntryPoint />
   </React.StrictMode>,
   document.getElementById("root")
 );

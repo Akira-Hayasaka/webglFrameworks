@@ -4,22 +4,13 @@ import * as AA from "./lib/Includer";
 import App from "./App";
 
 class Main {
-  constructor(container_elm, props) {
+  constructor(props) {
     this.props = props;
 
-    AA.Globals.CONTAINER = container_elm;
-    AA.Globals.APP_W = props.width;
-    AA.Globals.APP_H = props.height;
-
-    AA.Globals.RENDERER = new THREE.WebGLRenderer({
-      alpha: true,
-      antialias: true,
-    });
-    AA.Globals.RENDERER.setSize(AA.Globals.APP_W, AA.Globals.APP_H);
-    AA.Globals.RENDERER.autoClear = false;
-    AA.Globals.CANVAS = AA.Globals.CONTAINER.appendChild(
-      AA.Globals.RENDERER.domElement
-    );
+    AA.Globals.CONTAINER = props.container;
+    AA.Globals.CANVAS = props.canvas;
+    AA.Globals.APP_W = AA.Globals.CANVAS.clientWidth;
+    AA.Globals.APP_H = AA.Globals.CANVAS.clientHeight;
     AA.Globals.APP_X = AA.Globals.CANVAS.getBoundingClientRect().x;
     AA.Globals.APP_Y = AA.Globals.CANVAS.getBoundingClientRect().y;
     AA.Globals.APP_RECT = new AA.Rectangle(
@@ -28,6 +19,16 @@ class Main {
       AA.Globals.APP_W,
       AA.Globals.APP_H
     );
+    console.log("w", AA.Globals.APP_W);
+    console.log("h", AA.Globals.APP_H);
+
+    AA.Globals.RENDERER = new THREE.WebGLRenderer({
+      canvas: AA.Globals.CANVAS,
+      alpha: true,
+      antialias: true,
+    });
+    AA.Globals.RENDERER.autoClear = false;
+    AA.Globals.RENDERER.setSize(AA.Globals.APP_W, AA.Globals.APP_H);
 
     this.app = new App();
     AA.ev.add_listener(AA.Constants.KEY_PRESSED, this.app.on_keypressed);
