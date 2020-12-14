@@ -61,13 +61,15 @@ class App {
 
   draw = () => {
     this.rbo.feed(this.scene2d, this.camera_2d, false);
-    this.rbo.feed(this.scene3d, this.camera_3d, false);
+    // this.rbo.feed(this.scene3d, this.camera_3d, false);
 
     const { scene, camera } = this.line_tweak.get_scene_and_cam();
     this.rbo.feed(scene, camera, false);
 
-    // this.rbo.draw();
     this.post_process.render();
+
+    AA.Globals.RENDERER.clearDepth();
+    AA.Globals.RENDERER.render(this.scene3d, this.camera_3d);
 
     this.vid.debug_draw();
   };

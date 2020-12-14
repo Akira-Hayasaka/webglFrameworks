@@ -52,7 +52,17 @@ class RBO {
     this.screen_quad_scene = new THREE.Scene();
     this.screen_quad_scene.add(this.quad_mesh);
     this.camera_2d = new Camera2d();
+
+    // offscreen_tex(WebGLRenderTarget)
+    // geom_for_quad_mesh(PlaneBufferGeometry)
+    // this.quad_mesh(Object3D) remove clear
   }
+
+  resize = (_width, _height) => {
+    this.width = _width;
+    this.height = _height;
+    this.offscreen_tex.setSize(this.width, this.height);
+  };
 
   feed = (scene, camera, b_clear = true) => {
     this.renderer.setRenderTarget(this.offscreen_tex);
