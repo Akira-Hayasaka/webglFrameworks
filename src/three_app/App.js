@@ -64,12 +64,13 @@ class App {
     // this.rbo.feed(this.scene3d, this.camera_3d, false);
 
     const { scene, camera } = this.line_tweak.get_scene_and_cam();
-    this.rbo.feed(scene, camera, false);
+    // this.rbo.feed(scene, camera, false);
 
     this.post_process.render();
 
     AA.Globals.RENDERER.clearDepth();
     AA.Globals.RENDERER.render(this.scene3d, this.camera_3d);
+    AA.Globals.RENDERER.render(scene, camera);
 
     this.vid.debug_draw();
   };

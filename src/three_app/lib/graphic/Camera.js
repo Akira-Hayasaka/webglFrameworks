@@ -13,6 +13,16 @@ class Camera2d extends OrthographicCamera {
     far = 1000
   ) {
     super(left, right, top, bottom, near, far);
+
+    ev.add_listener(Constants.WINDOW_RESIZED, () => {
+      this.left = 0;
+      this.right = Globals.APP_W;
+      this.top = 0;
+      this.bottom = Globals.APP_H;
+      this.near = -1;
+      this.far = 1000;
+      this.updateProjectionMatrix();
+    });
   }
 }
 
