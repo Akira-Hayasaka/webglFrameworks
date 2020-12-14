@@ -57,11 +57,17 @@ class App {
     this.vid.debug_draw();
   };
 
-  keypressed = (key) => {};
-  keyreleased = (key) => {
-    if (key.val === " ") this.vid.play();
-    if (key.val === "p") this.vid.pause();
+  on_keypressed = (arg) => {};
+  on_keyreleased = (arg) => {
+    if (arg.val === " ") this.vid.play();
+    if (arg.val === "p") this.vid.pause();
   };
+
+  on_mouseclick = (arg) => {};
+  on_mousedblclick = (arg) => {};
+  on_mousedown = (arg) => {};
+  on_mousemove = (arg) => {};
+  on_mouseup = (arg) => {};
 
   rbo;
 

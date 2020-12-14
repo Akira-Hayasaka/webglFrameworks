@@ -30,8 +30,13 @@ class Main {
     );
 
     this.app = new App();
-    AA.ev.add_listener(AA.Constants.KEY_PRESSED, this.app.keypressed);
-    AA.ev.add_listener(AA.Constants.KEY_RELEASED, this.app.keyreleased);
+    AA.ev.add_listener(AA.Constants.KEY_PRESSED, this.app.on_keypressed);
+    AA.ev.add_listener(AA.Constants.KEY_RELEASED, this.app.on_keyreleased);
+    AA.ev.add_listener(AA.Constants.MOUSE_CLICK, this.app.on_mouseclick);
+    AA.ev.add_listener(AA.Constants.MOUSE_DBLCLICK, this.app.on_mousedblclick);
+    AA.ev.add_listener(AA.Constants.MOUSE_DOWN, this.app.on_mousedown);
+    AA.ev.add_listener(AA.Constants.MOUSE_MOVE, this.app.on_mousemove);
+    AA.ev.add_listener(AA.Constants.MOUSE_UP, this.app.on_mouseup);
 
     this.stats = new Stats();
     this.stats.showPanel(0);
