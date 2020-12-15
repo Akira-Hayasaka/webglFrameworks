@@ -39,10 +39,14 @@ class RBO {
     this.renderer = _renderer;
     this.sm_settings = sm_settings;
 
+    this.camera_2d = new Camera2d();
+    this.screen_quad_scene = new THREE.Scene();
+
     const dispose = () => {
       if (this.offscreen_tex) this.offscreen_tex.dispose();
       if (this.geom_for_quad_mesh) this.geom_for_quad_mesh.dispose();
       if (this.mat_for_quad_mesh) this.mat_for_quad_mesh.dispose();
+      if (this.quad_mesh) this.screen_quad_scene.remove(this.quad_mesh);
     };
 
     const setup = () => {
@@ -70,9 +74,7 @@ class RBO {
       this.quad_mesh = new THREE.Object3D();
       this.quad_mesh.add(this.inner_mesh);
 
-      this.screen_quad_scene = new THREE.Scene();
       this.screen_quad_scene.add(this.quad_mesh);
-      this.camera_2d = new Camera2d();
     };
 
     setup();

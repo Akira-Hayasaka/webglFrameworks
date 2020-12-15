@@ -49,7 +49,7 @@ class App {
     this.line_tweak = new Line_Tweak();
 
     this.post_process = new AA.Post_Process(this.rbo.get_postprocess_params());
-    this.post_process.add_fxaa();
+    // this.post_process.add_fxaa();
   }
 
   update = () => {
@@ -64,14 +64,14 @@ class App {
     // this.rbo.feed(this.scene3d, this.camera_3d, false);
 
     const { scene, camera } = this.line_tweak.get_scene_and_cam();
-    // this.rbo.feed(scene, camera, false);
+    this.rbo.feed(scene, camera, false);
 
-    // this.post_process.render();
-    this.rbo.draw(0, 0);
+    this.post_process.render();
+    // this.rbo.draw(0, 0);
 
     AA.Globals.RENDERER.clearDepth();
     AA.Globals.RENDERER.render(this.scene3d, this.camera_3d);
-    AA.Globals.RENDERER.render(scene, camera);
+    // AA.Globals.RENDERER.render(scene, camera);
 
     this.vid.debug_draw();
   };
