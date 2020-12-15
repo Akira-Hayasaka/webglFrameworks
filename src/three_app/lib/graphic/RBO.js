@@ -5,6 +5,7 @@ import * as THREE from "three";
 import Constants from "../Constants";
 import Globals from "../Globals";
 import { Camera2d } from "./Camera";
+import ev from "../util/Event";
 
 const RT_Settings = {
   minFilter: THREE.LinearFilter,
