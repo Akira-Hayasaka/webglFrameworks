@@ -1,13 +1,13 @@
 const Constants = {
   // event names
-  WINDOW_RESIZED: "windworesized",
-  KEY_PRESSED: "keypressed",
-  KEY_RELEASED: "keyreleased",
-  MOUSE_CLICK: "mouseclick",
-  MOUSE_DBLCLICK: "mousedblclick",
-  MOUSE_DOWN: "mousedown",
-  MOUSE_MOVE: "mousemove",
-  MOUSE_UP: "mouseup",
+  WINDOW_RESIZED_EVENT: "windworesized",
+  KEY_PRESSED_EVENT: "keypressed",
+  KEY_RELEASED_EVENT: "keyreleased",
+  MOUSE_CLICK_EVENT: "mouseclick",
+  MOUSE_DBLCLICK_EVENT: "mousedblclick",
+  MOUSE_DOWN_EVENT: "mousedown",
+  MOUSE_MOVE_EVENT: "mousemove",
+  MOUSE_UP_EVENT: "mouseup",
   // shader string
   MINIMUM_VERT: `			
   varying vec2 v_uv;

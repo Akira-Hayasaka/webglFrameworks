@@ -1,6 +1,5 @@
 import * as THREE from "three";
 import Constants from "../Constants";
-import ev from "../util/Event";
 
 const Loader_Settings = {
   imageOrientation: "none",
@@ -15,12 +14,6 @@ const Shader_Mat_Settings = {
 };
 
 class Image extends THREE.Object3D {
-  constructor() {
-    super();
-
-    ev.add_listener(Constants.WINDOW_RESIZED, () => {});
-  }
-
   load = (
     path,
     loader_settings = Loader_Settings,

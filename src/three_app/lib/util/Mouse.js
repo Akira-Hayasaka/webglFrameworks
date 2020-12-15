@@ -26,27 +26,27 @@ const get_arg = (e) => {
 const notify_mouse_event = () => {
   const notify_click = () => {
     document.addEventListener("click", (e) => {
-      ev.notify(Constants.MOUSE_CLICK, get_arg(e));
+      ev.notify(Constants.MOUSE_CLICK_EVENT, get_arg(e));
     });
   };
   const notify_dblclick = () => {
     document.addEventListener("dblclick", (e) => {
-      ev.notify(Constants.MOUSE_DBLCLICK, get_arg(e));
+      ev.notify(Constants.MOUSE_DBLCLICK_EVENT, get_arg(e));
     });
   };
   const notify_mousedown = () => {
     document.addEventListener("mousedown", (e) => {
-      ev.notify(Constants.MOUSE_DOWN, get_arg(e));
+      ev.notify(Constants.MOUSE_DOWN_EVENT, get_arg(e));
     });
   };
   const notify_mousemove = () => {
     document.addEventListener("mousemove", (e) => {
-      ev.notify(Constants.MOUSE_MOVE, get_arg(e));
+      ev.notify(Constants.MOUSE_MOVE_EVENT, get_arg(e));
     });
   };
   const notify_mouseup = () => {
     document.addEventListener("mouseup", (e) => {
-      ev.notify(Constants.MOUSE_UP, get_arg(e));
+      ev.notify(Constants.MOUSE_UP_EVENT, get_arg(e));
     });
   };
   notify_click();

@@ -23,13 +23,19 @@ class Main {
     this.initial_app_height = AA.Globals.APP_H;
 
     this.app = new App();
-    AA.ev.add_listener(AA.Constants.KEY_PRESSED, this.app.on_keypressed);
-    AA.ev.add_listener(AA.Constants.KEY_RELEASED, this.app.on_keyreleased);
-    AA.ev.add_listener(AA.Constants.MOUSE_CLICK, this.app.on_mouseclick);
-    AA.ev.add_listener(AA.Constants.MOUSE_DBLCLICK, this.app.on_mousedblclick);
-    AA.ev.add_listener(AA.Constants.MOUSE_DOWN, this.app.on_mousedown);
-    AA.ev.add_listener(AA.Constants.MOUSE_MOVE, this.app.on_mousemove);
-    AA.ev.add_listener(AA.Constants.MOUSE_UP, this.app.on_mouseup);
+    AA.ev.add_listener(AA.Constants.KEY_PRESSED_EVENT, this.app.on_keypressed);
+    AA.ev.add_listener(
+      AA.Constants.KEY_RELEASED_EVENT,
+      this.app.on_keyreleased
+    );
+    AA.ev.add_listener(AA.Constants.MOUSE_CLICK_EVENT, this.app.on_mouseclick);
+    AA.ev.add_listener(
+      AA.Constants.MOUSE_DBLCLICK_EVENT,
+      this.app.on_mousedblclick
+    );
+    AA.ev.add_listener(AA.Constants.MOUSE_DOWN_EVENT, this.app.on_mousedown);
+    AA.ev.add_listener(AA.Constants.MOUSE_MOVE_EVENT, this.app.on_mousemove);
+    AA.ev.add_listener(AA.Constants.MOUSE_UP_EVENT, this.app.on_mouseup);
 
     this.stats = new Stats();
     this.stats.showPanel(0);
@@ -49,7 +55,7 @@ class Main {
     if (this.does_need_resizing()) {
       this.fix_global_resolusion_params();
       // need to debounce on reciever
-      AA.ev.notify(AA.Constants.WINDOW_RESIZED);
+      AA.ev.notify(AA.Constants.WINDOW_RESIZED_EVENT);
     }
 
     this.stats.begin();

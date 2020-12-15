@@ -78,7 +78,7 @@ class RBO {
     setup();
 
     ev.add_listener(
-      Constants.WINDOW_RESIZED,
+      Constants.WINDOW_RESIZED_EVENT,
       debounce(() => {
         this.cur_width = this.initial_width + Globals.APP_WINRESIZE_DIFFX;
         this.cur_height = this.initial_height + Globals.APP_WINRESIZE_DIFFY;

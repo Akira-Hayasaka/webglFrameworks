@@ -16,7 +16,7 @@ class Camera2d extends OrthographicCamera {
     super(left, right, top, bottom, near, far);
 
     ev.add_listener(
-      Constants.WINDOW_RESIZED,
+      Constants.WINDOW_RESIZED_EVENT,
       debounce(() => {
         this.left = 0;
         this.right = Globals.APP_W;
@@ -41,7 +41,7 @@ class Camera3d extends PerspectiveCamera {
     this.position.z = 5;
 
     ev.add_listener(
-      Constants.WINDOW_RESIZED,
+      Constants.WINDOW_RESIZED_EVENT,
       debounce(() => {
         this.aspect = Globals.APP_W / Globals.APP_H;
         this.updateProjectionMatrix();

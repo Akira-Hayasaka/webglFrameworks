@@ -4,12 +4,12 @@ import Constants from "../Constants";
 const notify_key_event = () => {
   const notify_keypressed = () => {
     document.addEventListener("keydown", (e) => {
-      ev.notify(Constants.KEY_PRESSED, e.key);
+      ev.notify(Constants.KEY_PRESSED_EVENT, e.key);
     });
   };
   const notify_keyreleased = () => {
     document.addEventListener("keyup", (e) => {
-      ev.notify(Constants.KEY_RELEASED, e.key);
+      ev.notify(Constants.KEY_RELEASED_EVENT, e.key);
     });
   };
   notify_keypressed();

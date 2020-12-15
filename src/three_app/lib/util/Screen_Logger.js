@@ -11,7 +11,7 @@ class Screen_Logger {
     this.ctx = this.canvas_elm.getContext("2d");
 
     ev.add_listener(
-      Constants.WINDOW_RESIZED,
+      Constants.WINDOW_RESIZED_EVENT,
       debounce(() => {
         this.setup_elm_style();
       }, Constants.DEFAULT_WINDOW_RESIZE_DEBOUNCE_MSEC)
