@@ -81,8 +81,9 @@ class Main {
   };
 
   fix_global_resolusion_params = () => {
-    AA.Globals.APP_W = AA.Globals.CANVAS.clientWidth;
-    AA.Globals.APP_H = AA.Globals.CANVAS.clientHeight;
+    const px_ratio = window.devicePixelRatio;
+    AA.Globals.APP_W = (AA.Globals.CANVAS.clientWidth * px_ratio) | 0;
+    AA.Globals.APP_H = (AA.Globals.CANVAS.clientHeight * px_ratio) | 0;
     AA.Globals.APP_X = AA.Globals.CANVAS.getBoundingClientRect().x;
     AA.Globals.APP_Y = AA.Globals.CANVAS.getBoundingClientRect().y;
     AA.Globals.APP_RECT = new AA.Rectangle(

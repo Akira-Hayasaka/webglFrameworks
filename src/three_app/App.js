@@ -8,7 +8,9 @@ class App {
     this.error = "shokichi";
     this.tree = new AA.Image();
     this.tree
-      .load(tree_img)
+      .load(
+        "https://threejsfundamentals.org/threejs/resources/images/flower-6.jpg"
+      )
       .then((img) => {
         img.set_anchor(0, 0);
         img.position.set(
