@@ -6,6 +6,7 @@ import Constants from "../Constants";
 import Globals from "../Globals";
 import { Camera2d } from "./Camera";
 import ev from "../util/Event";
+import { debounce } from "../util/Util";
 
 const RT_Settings = {
   minFilter: THREE.LinearFilter,
@@ -29,26 +30,37 @@ class RBO {
     sm_settings = Shader_Mat_Settings,
     _renderer = Globals.RENDERER
   ) {
-    this.width = _width;
-    this.height = _height;
+    this.initial_app_width = Globals.APP_W;
+    this.initial_app_height = Globals.APP_H;
+    this.initial_width = _width;
+    this.initial_height = _height;
+    this.cur_width = this.initial_width;
+    this.cur_height = this.initial_height;
     this.renderer = _renderer;
 
-    this.offscreen_tex = new THREE.WebGLRenderTarget(this.width, this.height, {
-      ...rt_settings,
-    });
+    this.offscreen_tex = new THREE.WebGLRenderTarget(
+      this.cur_width,
+      this.cur_height,
+      {
+        ...rt_settings,
+      }
+    );
 
-    const geom_for_quad_mesh = new THREE.PlaneBufferGeometry(
-      this.width,
-      this.height
+    this.geom_for_quad_mesh = new THREE.PlaneBufferGeometry(
+      this.cur_width,
+      this.cur_height
     );
     const mat_for_quad_mesh = new THREE.ShaderMaterial({
       uniforms: { tex: { value: this.offscreen_tex.texture } },
       ...sm_settings,
     });
-    const mesh = new THREE.Mesh(geom_for_quad_mesh, mat_for_quad_mesh);
-    mesh.position.set(this.width / 2, this.height / 2, 0);
+    this.inner_mesh = new THREE.Mesh(
+      this.geom_for_quad_mesh,
+      mat_for_quad_mesh
+    );
+    this.inner_mesh.position.set(this.cur_width / 2, this.cur_height / 2, 0);
     this.quad_mesh = new THREE.Object3D();
-    this.quad_mesh.add(mesh);
+    this.quad_mesh.add(this.inner_mesh);
 
     this.screen_quad_scene = new THREE.Scene();
     this.screen_quad_scene.add(this.quad_mesh);
@@ -57,13 +69,28 @@ class RBO {
     // offscreen_tex(WebGLRenderTarget)
     // geom_for_quad_mesh(PlaneBufferGeometry)
     // this.quad_mesh(Object3D) remove clear
-  }
 
-  resize = (_width, _height) => {
-    this.width = _width;
-    this.height = _height;
-    this.offscreen_tex.setSize(this.width, this.height);
-  };
+    ev.add_listener(
+      Constants.WINDOW_RESIZED,
+      debounce(() => {
+        const diffx = Globals.APP_W - this.initial_app_width;
+        const diffy = Globals.APP_H - this.initial_app_height;
+        this.cur_width = this.initial_width + diffx;
+        this.cur_height = this.initial_height + diffy;
+        this.offscreen_tex.setSize(this.cur_width, this.cur_height);
+        this.geom_for_quad_mesh.width = new THREE.PlaneBufferGeometry(
+          this.cur_width,
+          this.cur_height
+        );
+        // const cur_mesh_pos = this.inner_mesh.position;
+        // this.inner_mesh.position.set(
+        //   cur_mesh_pos.x + diffx,
+        //   cur_mesh_pos.y + diffy,
+        //   0
+        // );
+      }, Constants.DEFAULT_WINDOW_RESIZE_DEBOUNCE_MSEC)
+    );
+  }
 
   feed = (scene, camera, b_clear = true) => {
     this.renderer.setRenderTarget(this.offscreen_tex);
@@ -101,21 +128,27 @@ class RBO {
       scene: this.screen_quad_scene,
       camera: this.camera_2d,
       renderer: this.renderer,
-      width: this.width,
-      height: this.height,
+      width: this.cur_width,
+      height: this.cur_height,
     };
     return params;
   };
 
-  width;
-  height;
+  initial_app_width;
+  initial_app_height;
+  initial_width;
+  initial_height;
+  cur_width;
+  cur_height;
+
   renderer;
   offscreen_tex;
+  geom_for_quad_mesh;
+  inner_mesh;
   quad_mesh;
+
   screen_quad_scene;
   camera_2d;
-
-  composer;
 }
 
 export { RBO, RT_Settings, Shader_Mat_Settings };
