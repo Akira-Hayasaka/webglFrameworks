@@ -39,6 +39,12 @@ class Main {
 
     this.stats = new Stats();
     this.stats.showPanel(0);
+    Object.assign(this.stats.dom.style, {
+      position: "fixed",
+      height: "max-content",
+      left: "auto",
+      right: 0,
+    });
     AA.Globals.CONTAINER.appendChild(this.stats.dom);
 
     for (const [key, value] of Object.entries(AA.Globals)) {
