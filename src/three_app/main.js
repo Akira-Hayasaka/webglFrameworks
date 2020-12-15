@@ -45,6 +45,7 @@ class Main {
     else AA.Globals.ELAPSED_TIME = (time - this.start) * 0.001;
 
     if (this.does_need_resizing()) {
+      // need debounce??
       this.fix_global_resolusion_params();
       AA.ev.notify(AA.Constants.WINDOW_RESIZED);
     }

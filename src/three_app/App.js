@@ -73,9 +73,6 @@ class App {
     AA.Globals.RENDERER.render(this.scene3d, this.camera_3d);
     AA.Globals.RENDERER.render(scene, camera);
 
-    AA.Globals.RENDERER.clearDepth();
-    AA.Globals.RENDERER.render(this.scene3d, this.camera_3d);
-
     this.vid.debug_draw();
   };
 
