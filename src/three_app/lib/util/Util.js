@@ -17,4 +17,14 @@ const map = (val, in_min, in_max, out_min, out_max, b_clamp = true) => {
   }
 };
 
-export { map };
+const debounce = (func, delay) => {
+  let inDebounce;
+  return function () {
+    const context = this;
+    const args = arguments;
+    clearTimeout(inDebounce);
+    inDebounce = setTimeout(() => func.apply(context, args), delay);
+  };
+};
+
+export { map, debounce };

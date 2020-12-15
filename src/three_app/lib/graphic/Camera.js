@@ -2,6 +2,7 @@ import { OrthographicCamera, PerspectiveCamera } from "three";
 import Constants from "../Constants";
 import Globals from "../Globals";
 import ev from "../util/Event";
+import { debounce } from "../util/Util";
 
 class Camera2d extends OrthographicCamera {
   constructor(
@@ -14,15 +15,18 @@ class Camera2d extends OrthographicCamera {
   ) {
     super(left, right, top, bottom, near, far);
 
-    ev.add_listener(Constants.WINDOW_RESIZED, () => {
-      this.left = 0;
-      this.right = Globals.APP_W;
-      this.top = 0;
-      this.bottom = Globals.APP_H;
-      this.near = -1;
-      this.far = 1000;
-      this.updateProjectionMatrix();
-    });
+    ev.add_listener(
+      Constants.WINDOW_RESIZED,
+      debounce(() => {
+        this.left = 0;
+        this.right = Globals.APP_W;
+        this.top = 0;
+        this.bottom = Globals.APP_H;
+        this.near = -1;
+        this.far = 1000;
+        this.updateProjectionMatrix();
+      }, Constants.DEFAULT_WINDOW_RESIZE_DEBOUNCE_MSEC)
+    );
   }
 }
 
@@ -36,10 +40,13 @@ class Camera3d extends PerspectiveCamera {
     super(fov, aspect, near, far);
     this.position.z = 5;
 
-    ev.add_listener(Constants.WINDOW_RESIZED, () => {
-      this.aspect = Globals.APP_W / Globals.APP_H;
-      this.updateProjectionMatrix();
-    });
+    ev.add_listener(
+      Constants.WINDOW_RESIZED,
+      debounce(() => {
+        this.aspect = Globals.APP_W / Globals.APP_H;
+        this.updateProjectionMatrix();
+      }, Constants.DEFAULT_WINDOW_RESIZE_DEBOUNCE_MSEC)
+    );
   }
 }
 

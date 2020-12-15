@@ -1,5 +1,6 @@
 import Constants from "../Constants";
 import Globals from "../Globals";
+import { debounce } from "../util/Util";
 import ev from "../util/Event";
 
 class Screen_Logger {
@@ -9,9 +10,12 @@ class Screen_Logger {
     Globals.CONTAINER.appendChild(this.canvas_elm);
     this.ctx = this.canvas_elm.getContext("2d");
 
-    ev.add_listener(Constants.WINDOW_RESIZED, () => {
-      this.setup_elm_style();
-    });
+    ev.add_listener(
+      Constants.WINDOW_RESIZED,
+      debounce(() => {
+        this.setup_elm_style();
+      }, Constants.DEFAULT_WINDOW_RESIZE_DEBOUNCE_MSEC)
+    );
   }
 
   setup_elm_style = () => {

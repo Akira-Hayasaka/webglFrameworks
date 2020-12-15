@@ -32,6 +32,8 @@ const Constants = {
     gl_FragColor = texture2D(tex, uv);
   }
   `,
+  // misc
+  DEFAULT_WINDOW_RESIZE_DEBOUNCE_MSEC: 100,
 };
 
 export default Constants;

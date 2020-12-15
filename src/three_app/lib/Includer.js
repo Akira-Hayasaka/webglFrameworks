@@ -1,7 +1,7 @@
 import Constants from "./Constants";
 import Globals from "./Globals";
 import s_log from "./util/Screen_Logger";
-import { map } from "./util/Util";
+import { map, debounce } from "./util/Util";
 import ev from "./util/Event";
 import key from "./util/Key";
 import mouse from "./util/Mouse";
@@ -30,6 +30,7 @@ export {
   Globals,
   s_log,
   map,
+  debounce,
   ev,
   key,
   mouse,
