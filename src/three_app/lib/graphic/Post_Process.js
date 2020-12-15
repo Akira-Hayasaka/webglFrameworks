@@ -78,9 +78,6 @@ class Post_Process {
     this.composer.render();
   };
 
-  scene;
-  camera;
-
   initial_width;
   initial_height;
   cur_width;
