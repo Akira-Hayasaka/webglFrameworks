@@ -66,7 +66,8 @@ class App {
     const { scene, camera } = this.line_tweak.get_scene_and_cam();
     // this.rbo.feed(scene, camera, false);
 
-    this.post_process.render();
+    // this.post_process.render();
+    this.rbo.draw(0, 0);
 
     AA.Globals.RENDERER.clearDepth();
     AA.Globals.RENDERER.render(this.scene3d, this.camera_3d);
