@@ -7,6 +7,8 @@ const Globals = {
   APP_X: 0,
   APP_Y: 0,
   APP_RECT: null,
+  APP_WINRESIZE_DIFFX: 0,
+  APP_WINRESIZE_DIFFY: 0,
   ELAPSED_TIME: 0,
 };
 export default Globals;

@@ -80,10 +80,8 @@ class RBO {
     ev.add_listener(
       Constants.WINDOW_RESIZED,
       debounce(() => {
-        const diffx = Globals.APP_W - this.initial_app_width;
-        const diffy = Globals.APP_H - this.initial_app_height;
-        this.cur_width = this.initial_width + diffx;
-        this.cur_height = this.initial_height + diffy;
+        this.cur_width = this.initial_width + Globals.APP_WINRESIZE_DIFFX;
+        this.cur_height = this.initial_height + Globals.APP_WINRESIZE_DIFFY;
         setup();
       }, Constants.DEFAULT_WINDOW_RESIZE_DEBOUNCE_MSEC)
     );
@@ -131,8 +129,6 @@ class RBO {
     return params;
   };
 
-  initial_app_width;
-  initial_app_height;
   initial_width;
   initial_height;
   cur_width;

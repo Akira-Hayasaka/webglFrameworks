@@ -19,6 +19,8 @@ class Main {
     AA.Globals.RENDERER.setClearColor(0x000000, 0);
 
     this.fix_global_resolusion_params();
+    this.initial_app_width = AA.Globals.APP_W;
+    this.initial_app_height = AA.Globals.APP_H;
 
     this.app = new App();
     AA.ev.add_listener(AA.Constants.KEY_PRESSED, this.app.on_keypressed);
@@ -77,10 +79,14 @@ class Main {
       AA.Globals.APP_W,
       AA.Globals.APP_H
     );
+    AA.Globals.APP_WINRESIZE_DIFFX = AA.Globals.APP_W - this.initial_app_width;
+    AA.Globals.APP_WINRESIZE_DIFFY = AA.Globals.APP_H - this.initial_app_height;
     AA.Globals.RENDERER.setSize(AA.Globals.APP_W, AA.Globals.APP_H, false);
   };
 
   props;
+  initial_app_width;
+  initial_app_height;
   app;
   start;
   stats;
