@@ -7,7 +7,7 @@ const Loader_Settings = {
 
 const Shader_Mat_Settings = {
   vertexShader: Constants.MINIMUM_VERT,
-  fragmentShader: Constants.MINIMUM_FRAG,
+  fragmentShader: Constants.MINIMUM_FRAG_VFLIP,
   depthWrite: false,
   transparent: true,
   side: THREE.DoubleSide,
@@ -21,12 +21,14 @@ class Image extends THREE.Object3D {
   ) => {
     const that = this;
     return new Promise((resolve, reject) => {
-      const loader = new THREE.ImageBitmapLoader();
-      loader.setOptions({ ...loader_settings });
+      // const loader = new THREE.ImageBitmapLoader(); // <= didnt work on ios
+      // loader.setOptions({ ...loader_settings });
+      const loader = new THREE.ImageLoader();
       loader.load(
         path,
         (img) => {
           this.texture = new THREE.CanvasTexture(img);
+          this.texture.flipY = true;
           const w = this.texture.image.width;
           const h = this.texture.image.height;
           const geom_for_quad_mesh = new THREE.PlaneBufferGeometry(w, h);
@@ -42,7 +44,7 @@ class Image extends THREE.Object3D {
         (prog) => {},
         (err) => {
           console.log("Image loading fail", err);
-          reject(that);
+          reject(that, err);
         }
       );
     });
@@ -58,6 +60,10 @@ class Image extends THREE.Object3D {
 
   set_anchor = (x, y) => {
     if (this.mesh) this.mesh.position.set(x, y);
+  };
+
+  get_tex = () => {
+    return this.texture;
   };
 
   mesh = null;
