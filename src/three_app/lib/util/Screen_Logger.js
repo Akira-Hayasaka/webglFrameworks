@@ -28,8 +28,45 @@ class Screen_Logger {
     this.canvas_elm.height = Globals.APP_H;
   };
 
+  draw_string = (str, x, y) => {
+    const met = this.ctx.measureText(str);
+    const width = met.actualBoundingBoxRight - met.actualBoundingBoxLeft;
+    const height = met.actualBoundingBoxAscent + met.actualBoundingBoxDescent;
+    this.ctx.fillStyle = "#000000";
+    this.ctx.fillRect(
+      x - this.margin,
+      y - this.margin - height,
+      width + this.margin * 2,
+      height + this.margin * 2
+    );
+    this.ctx.fillStyle = "#ffffff";
+    this.ctx.fillText(str, x, y);
+    this.ctx.fillStyle = "#000000";
+  };
+
+  push = (str) => {
+    console.log("msg", str);
+    this.msgs.push({ born_time: Globals.ELAPSED_TIME, msg: str });
+  };
+
+  flush_scrn = () => {
+    this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+    this.msgs.forEach((arg, i) => {
+      const y = Globals.APP_H - 10 - i * 15;
+      this.draw_string(arg.msg, 10, y);
+    });
+    this.msgs = this.msgs.filter(
+      (arg) => Globals.ELAPSED_TIME - arg.born_time < this.expire_sec
+    );
+  };
+
   ctx;
   canvas_elm;
+
+  margin = 2;
+
+  msgs = [];
+  expire_sec = 2.0;
 }
 
 let s_logger = null;
@@ -40,33 +77,18 @@ const make_new_if_necessary = () => {
   }
 };
 
-const margin = 2;
-
 const s_log = {
   draw_string: (str, x, y) => {
     make_new_if_necessary();
-    const met = s_logger.ctx.measureText(str);
-    const width = met.actualBoundingBoxRight - met.actualBoundingBoxLeft;
-    const height = met.actualBoundingBoxAscent + met.actualBoundingBoxDescent;
-    s_logger.ctx.fillStyle = "#000000";
-    s_logger.ctx.fillRect(
-      x - margin,
-      y - margin - height,
-      width + margin * 2,
-      height + margin * 2
-    );
-    s_logger.ctx.fillStyle = "#ffffff";
-    s_logger.ctx.fillText(str, x, y);
-    s_logger.ctx.fillStyle = "#000000";
+    s_logger.draw_string(str, x, y);
+  },
+  push: (str) => {
+    make_new_if_necessary();
+    s_logger.push(str);
   },
   flush_scrn: () => {
     make_new_if_necessary();
-    s_logger.ctx.clearRect(
-      0,
-      0,
-      s_logger.ctx.canvas.width,
-      s_logger.ctx.canvas.height
-    );
+    s_logger.flush_scrn();
   },
 };
 
