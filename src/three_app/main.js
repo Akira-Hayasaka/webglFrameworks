@@ -65,6 +65,7 @@ class Main {
     if (this.does_need_resizing()) {
       this.fix_global_resolusion_params();
       // need to debounce on reciever
+      console.log("resizing");
       AA.ev.notify(AA.Constants.WINDOW_RESIZED_EVENT);
     }
 
@@ -85,9 +86,9 @@ class Main {
   };
 
   fix_global_resolusion_params = () => {
-    const px_ratio = window.devicePixelRatio;
-    AA.Globals.APP_W = (AA.Globals.CANVAS.clientWidth * px_ratio) | 0;
-    AA.Globals.APP_H = (AA.Globals.CANVAS.clientHeight * px_ratio) | 0;
+    AA.Globals.DPR = window.devicePixelRatio;
+    AA.Globals.APP_W = (AA.Globals.CANVAS.clientWidth * AA.Globals.DPR) | 0;
+    AA.Globals.APP_H = (AA.Globals.CANVAS.clientHeight * AA.Globals.DPR) | 0;
     AA.Globals.APP_X = AA.Globals.CANVAS.getBoundingClientRect().x;
     AA.Globals.APP_Y = AA.Globals.CANVAS.getBoundingClientRect().y;
     AA.Globals.APP_RECT = new AA.Rectangle(
@@ -99,6 +100,31 @@ class Main {
     AA.Globals.APP_WINRESIZE_DIFFX = AA.Globals.APP_W - this.initial_app_width;
     AA.Globals.APP_WINRESIZE_DIFFY = AA.Globals.APP_H - this.initial_app_height;
     AA.Globals.RENDERER.setSize(AA.Globals.APP_W, AA.Globals.APP_H, false);
+  };
+
+  put_screen_related_log_on_screen = () => {
+    AA.s_log.draw_string(
+      "client w:" +
+        AA.Globals.CANVAS.clientWidth +
+        " client h:" +
+        AA.Globals.CANVAS.clientHeight,
+      10,
+      20
+    );
+    AA.s_log.draw_string(
+      "canvas w:" +
+        AA.Globals.CANVAS.width +
+        " canvas h:" +
+        AA.Globals.CANVAS.height,
+      10,
+      35
+    );
+    AA.s_log.draw_string("px ratio:" + window.devicePixelRatio, 10, 50);
+    AA.s_log.draw_string(
+      "APP_W:" + AA.Globals.APP_W + " APP_H:" + AA.Globals.APP_H,
+      10,
+      65
+    );
   };
 
   props;

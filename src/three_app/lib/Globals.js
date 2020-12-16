@@ -1,4 +1,5 @@
 const Globals = {
+  DPR: 0.0,
   CONTAINER: null,
   CANVAS: null,
   RENDERER: null,

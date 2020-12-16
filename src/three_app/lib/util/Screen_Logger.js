@@ -21,11 +21,11 @@ class Screen_Logger {
   setup_elm_style = () => {
     this.canvas_elm.style.backgroundColor = "transparent";
     this.canvas_elm.style.position = "absolute";
-    this.canvas_elm.style.left = `${Globals.APP_X}px`;
-    this.canvas_elm.style.top = `${Globals.APP_Y}px`;
+    this.canvas_elm.style.left = `${Globals.APP_X / Globals.DPR}px`;
+    this.canvas_elm.style.top = `${Globals.APP_Y / Globals.DPR}px`;
     this.canvas_elm.style.zIndex = "10";
-    this.canvas_elm.width = Globals.APP_W;
-    this.canvas_elm.height = Globals.APP_H;
+    this.canvas_elm.width = Globals.APP_W / Globals.DPR;
+    this.canvas_elm.height = Globals.APP_H / Globals.DPR;
   };
 
   draw_string = (str, x, y) => {
@@ -51,7 +51,7 @@ class Screen_Logger {
   flush_scrn = () => {
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.msgs.forEach((arg, i) => {
-      const y = Globals.APP_H - 10 - i * 15;
+      const y = Globals.APP_H / Globals.DPR - 10 - i * 15;
       this.draw_string(arg.msg, 10, y);
     });
     this.msgs = this.msgs.filter(
