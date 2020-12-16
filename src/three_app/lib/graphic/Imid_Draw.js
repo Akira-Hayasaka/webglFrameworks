@@ -6,7 +6,11 @@ import ant_img from "../../data/img/ant.png";
 import { Image } from "../graphic/Image";
 
 const circle_geom = new THREE.CircleBufferGeometry(1, 32);
-const circle_mat = new THREE.MeshBasicMaterial();
+const circle_mat = new THREE.MeshBasicMaterial({
+  depthWrite: false,
+  transparent: true,
+  side: THREE.DoubleSide,
+});
 
 class Circle extends THREE.Mesh {
   constructor(geom = circle_geom, mat = circle_mat) {

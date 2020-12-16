@@ -40,29 +40,29 @@ class App {
     // AA.Globals.RENDERER.clearDepth();
     // AA.Globals.RENDERER.render(this.scene2d, this.camera_2d);
 
-    AA.draw_circle(0, 0, 0, 1, new THREE.Color(THREE.Color.NAMES.cyan));
-
-    if (this.to_draw) {
-      AA.draw_circle(2, 2, 0, 1, new THREE.Color(THREE.Color.NAMES.cyan));
-    }
-
-    // AA.draw_circle(
-    //   AA.Globals.APP_W / 2,
-    //   AA.Globals.APP_H / 2,
-    //   0,
-    //   10,
-    //   new THREE.Color(THREE.Color.NAMES.cyan)
-    // );
+    // AA.draw_circle(0, 0, 0, 1, new THREE.Color(THREE.Color.NAMES.cyan));
 
     // if (this.to_draw) {
-    //   AA.draw_circle(
-    //     AA.Globals.APP_W / 2 + 100,
-    //     AA.Globals.APP_H / 2 + 100,
-    //     0,
-    //     10,
-    //     new THREE.Color(THREE.Color.NAMES.cyan)
-    //   );
+    //   AA.draw_circle(2, 2, 0, 1, new THREE.Color(THREE.Color.NAMES.cyan));
     // }
+
+    AA.draw_circle(
+      AA.Globals.APP_W / 2,
+      AA.Globals.APP_H / 2,
+      0,
+      10,
+      new THREE.Color(THREE.Color.NAMES.cyan)
+    );
+
+    if (this.to_draw) {
+      AA.draw_circle(
+        AA.Globals.APP_W / 2 + 100,
+        AA.Globals.APP_H / 2 + 100,
+        0,
+        10,
+        new THREE.Color(THREE.Color.NAMES.cyan)
+      );
+    }
   };
 
   on_keypressed = (arg) => {
