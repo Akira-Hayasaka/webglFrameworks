@@ -42,6 +42,13 @@ class Main {
     AA.ev.add_listener(AA.Constants.MOUSE_DOWN_EVENT, this.app.on_mousedown);
     AA.ev.add_listener(AA.Constants.MOUSE_MOVE_EVENT, this.app.on_mousemove);
     AA.ev.add_listener(AA.Constants.MOUSE_UP_EVENT, this.app.on_mouseup);
+    AA.ev.add_listener(AA.Constants.TOUCH_TAP_EVENT, this.app.on_tap);
+    AA.ev.add_listener(AA.Constants.TOUCH_DBLTAP_EVENT, this.app.on_dbltap);
+    AA.ev.add_listener(AA.Constants.TOUCH_PAN_EVENT, this.app.on_pan);
+    AA.ev.add_listener(AA.Constants.TOUCH_SWIPE_EVENT, this.app.on_swipe);
+    AA.ev.add_listener(AA.Constants.TOUCH_PRESS_EVENT, this.app.on_press);
+    AA.ev.add_listener(AA.Constants.TOUCH_PINCH_EVENT, this.app.on_pinch);
+    AA.ev.add_listener(AA.Constants.TOUCH_ROTATE_EVENT, this.app.on_rotate);
 
     this.stats = new Stats();
     this.stats.showPanel(0);

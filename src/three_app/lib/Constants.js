@@ -8,6 +8,13 @@ const Constants = {
   MOUSE_DOWN_EVENT: "mousedown",
   MOUSE_MOVE_EVENT: "mousemove",
   MOUSE_UP_EVENT: "mouseup",
+  TOUCH_TAP_EVENT: "touchtap",
+  TOUCH_DBLTAP_EVENT: "touchdbltap",
+  TOUCH_PAN_EVENT: "touchpan",
+  TOUCH_SWIPE_EVENT: "touchswipe",
+  TOUCH_PRESS_EVENT: "touchpress",
+  TOUCH_PINCH_EVENT: "touchpinch",
+  TOUCH_ROTATE_EVENT: "touchrotate",
   // shader string
   MINIMUM_VERT: `			
   varying vec2 v_uv;

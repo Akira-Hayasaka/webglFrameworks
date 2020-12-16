@@ -45,20 +45,23 @@ class App {
     // AA.Globals.RENDERER.clearDepth();
     AA.Globals.RENDERER.render(this.scene2d, this.camera_2d);
   };
-  on_keypressed = (arg) => {
-    AA.s_log.push("key " + arg.val);
-  };
+
+  on_keypressed = (arg) => {};
   on_keyreleased = (arg) => {};
-  on_mouseclick = (arg) => {
-    // AA.s_log.push("scnx " + arg.val.screen.x);
-    // AA.s_log.push("scny " + arg.val.screen.y);
-    // AA.s_log.push("cvsx " + arg.val.canvas.x);
-    // AA.s_log.push("cvsy " + arg.val.canvas.y);
-  };
+  on_mouseclick = (arg) => {};
   on_mousedblclick = (arg) => {};
   on_mousedown = (arg) => {};
   on_mousemove = (arg) => {};
   on_mouseup = (arg) => {};
+  on_tap = (arg) => {
+    console.log("tap", JSON.stringify(arg.val, null, 2));
+  };
+  on_dbltap = (arg) => {};
+  on_pan = (arg) => {};
+  on_swipe = (arg) => {};
+  on_press = (arg) => {};
+  on_pinch = (arg) => {};
+  on_rotate = (arg) => {};
 
   tree;
   ant;
