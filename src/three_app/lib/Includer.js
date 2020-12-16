@@ -25,6 +25,11 @@ import {
   Video_Settings,
   Shader_Mat_Settings as Vid_Shader_Mat_Settings,
 } from "./graphic/Video_Player";
+import {
+  init_imid_draw_env,
+  draw_circle,
+  reset_imid_draw_loop,
+} from "./graphic/Imid_Draw";
 
 export {
   Constants,
@@ -51,4 +56,7 @@ export {
   Video_Player,
   Video_Settings,
   Vid_Shader_Mat_Settings,
+  init_imid_draw_env,
+  draw_circle,
+  reset_imid_draw_loop,
 };

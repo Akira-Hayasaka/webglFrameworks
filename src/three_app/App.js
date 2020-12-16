@@ -27,7 +27,7 @@ class App {
     });
 
     this.scene2d = new THREE.Scene();
-    // this.scene2d.background = new THREE.Color("rgb(240, 240, 240)");
+    this.scene2d.background = new THREE.Color("rgb(150, 150, 150)");
     this.scene2d.add(this.tree);
     this.scene2d.add(this.ant);
 
@@ -38,20 +38,43 @@ class App {
 
   draw = () => {
     // AA.Globals.RENDERER.clearDepth();
-    AA.Globals.RENDERER.render(this.scene2d, this.camera_2d);
+    // AA.Globals.RENDERER.render(this.scene2d, this.camera_2d);
+
+    AA.draw_circle(0, 0, 0, 1, new THREE.Color(THREE.Color.NAMES.cyan));
+
+    if (this.to_draw) {
+      AA.draw_circle(2, 2, 0, 1, new THREE.Color(THREE.Color.NAMES.cyan));
+    }
+
+    // AA.draw_circle(
+    //   AA.Globals.APP_W / 2,
+    //   AA.Globals.APP_H / 2,
+    //   0,
+    //   10,
+    //   new THREE.Color(THREE.Color.NAMES.cyan)
+    // );
+
+    // if (this.to_draw) {
+    //   AA.draw_circle(
+    //     AA.Globals.APP_W / 2 + 100,
+    //     AA.Globals.APP_H / 2 + 100,
+    //     0,
+    //     10,
+    //     new THREE.Color(THREE.Color.NAMES.cyan)
+    //   );
+    // }
   };
 
-  on_keypressed = (arg) => {};
+  on_keypressed = (arg) => {
+    this.to_draw = !this.to_draw;
+  };
   on_keyreleased = (arg) => {};
   on_mouseclick = (arg) => {};
   on_mousedblclick = (arg) => {};
   on_mousedown = (arg) => {};
   on_mousemove = (arg) => {};
   on_mouseup = (arg) => {};
-  on_tap = (arg) => {
-    console.log("tap", JSON.stringify(arg.val, null, 2));
-    AA.s_log.push(JSON.stringify(arg.val.canvas_pos));
-  };
+  on_tap = (arg) => {};
   on_dbltap = (arg) => {};
   on_pan = (arg) => {};
   on_swipe = (arg) => {};
@@ -63,6 +86,8 @@ class App {
   ant;
   scene2d;
   camera_2d;
+
+  to_draw = false;
 }
 
 export default App;

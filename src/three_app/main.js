@@ -23,6 +23,7 @@ class Main {
     this.initial_app_width = AA.Globals.APP_W;
     this.initial_app_height = AA.Globals.APP_H;
 
+    AA.init_imid_draw_env();
     AA.init_screen_logger(true);
     AA.register_key_event(document);
     AA.register_mouse_event(AA.Globals.CONTAINER);
@@ -68,6 +69,8 @@ class Main {
   }
 
   update = (time) => {
+    this.stats.begin();
+
     if (this.start === undefined) this.start = time;
     else AA.Globals.ELAPSED_TIME = (time - this.start) * 0.001;
 
@@ -78,11 +81,12 @@ class Main {
       AA.ev.notify(AA.Constants.WINDOW_RESIZED_EVENT);
     }
 
-    this.stats.begin();
     AA.s_log.flush_scrn();
+    AA.reset_imid_draw_loop();
     this.put_screen_related_log_on_screen();
     this.app.update();
     this.app.draw();
+
     this.stats.end();
 
     requestAnimationFrame(this.update);
