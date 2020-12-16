@@ -18,7 +18,6 @@ function EntryPoint() {
 
   useEffect(init_three, []);
 
-  console.log("ant_img");
   return (
     <>
       <div id="app_container" ref={container_elm}>

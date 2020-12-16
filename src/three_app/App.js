@@ -17,9 +17,6 @@ class App {
           img.get_height() / 2 + 20,
           0
         );
-      })
-      .catch((img, err) => {
-        this.error = err;
       });
     this.ant = new AA.Image();
     this.ant.load(ant_img).then((img) => {
@@ -30,7 +27,6 @@ class App {
       );
     });
 
-    this.ant.position.set(20, 300, 0);
     this.scene2d = new THREE.Scene();
     // this.scene2d.background = new THREE.Color("rgb(240, 240, 240)");
     this.scene2d.add(this.tree);
@@ -68,8 +64,6 @@ class App {
   ant;
   scene2d;
   camera_2d;
-
-  error;
 }
 
 export default App;
