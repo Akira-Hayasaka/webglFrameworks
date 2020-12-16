@@ -38,13 +38,39 @@ class App {
 
   draw = () => {
     // AA.Globals.RENDERER.clearDepth();
-    // AA.Globals.RENDERER.render(this.scene2d, this.camera_2d);
+    AA.Globals.RENDERER.render(this.scene2d, this.camera_2d);
 
     // AA.draw_circle(0, 0, 0, 1, new THREE.Color(THREE.Color.NAMES.cyan));
 
     // if (this.to_draw) {
     //   AA.draw_circle(2, 2, 0, 1, new THREE.Color(THREE.Color.NAMES.cyan));
     // }
+
+    AA.draw_circle(0, 0, 0, 200, new THREE.Color(THREE.Color.NAMES.deeppink));
+
+    AA.draw_circle(
+      AA.Globals.APP_W,
+      0,
+      0,
+      200,
+      new THREE.Color(THREE.Color.NAMES.darkorchid)
+    );
+
+    AA.draw_circle(
+      AA.Globals.APP_W,
+      AA.Globals.APP_H,
+      0,
+      200,
+      new THREE.Color(THREE.Color.NAMES.chartreuse)
+    );
+
+    AA.draw_circle(
+      0,
+      AA.Globals.APP_H,
+      0,
+      200,
+      new THREE.Color(THREE.Color.NAMES.gold)
+    );
 
     AA.draw_circle(
       AA.Globals.APP_W / 2,
