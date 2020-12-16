@@ -1,7 +1,7 @@
 import Constants from "../Constants";
 import Globals from "../Globals";
 import { debounce } from "../util/Util";
-import ev from "../util/Event";
+import ev from "../event/Event";
 
 class Screen_Logger {
   constructor() {

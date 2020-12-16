@@ -1,7 +1,7 @@
 import { OrthographicCamera, PerspectiveCamera } from "three";
 import Constants from "../Constants";
 import Globals from "../Globals";
-import ev from "../util/Event";
+import ev from "../event/Event";
 import { debounce } from "../util/Util";
 
 class Camera2d extends OrthographicCamera {

@@ -7,7 +7,7 @@ import { FXAAShader } from "three/examples/jsm/shaders/FXAAShader.js";
 
 import Constants from "../Constants";
 import Globals from "../Globals";
-import ev from "../util/Event";
+import ev from "../event/Event";
 import { debounce } from "../util/Util";
 
 const RT_Settings = {

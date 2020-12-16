@@ -2,9 +2,9 @@ import Constants from "./Constants";
 import Globals from "./Globals";
 import s_log from "./util/Screen_Logger";
 import { map, debounce } from "./util/Util";
-import ev from "./util/Event";
-import register_key_event from "./util/Key";
-import register_mouse_event from "./util/Mouse";
+import ev from "./event/Event";
+import register_key_event from "./event/Key";
+import register_mouse_event from "./event/Mouse";
 import { Camera2d, Camera3d } from "./graphic/Camera";
 import {
   RBO,

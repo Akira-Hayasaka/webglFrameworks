@@ -5,7 +5,7 @@ import * as THREE from "three";
 import Constants from "../Constants";
 import Globals from "../Globals";
 import { Camera2d } from "./Camera";
-import ev from "../util/Event";
+import ev from "../event/Event";
 import { debounce } from "../util/Util";
 
 const RT_Settings = {
