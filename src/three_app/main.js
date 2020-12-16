@@ -23,6 +23,7 @@ class Main {
     this.initial_app_width = AA.Globals.APP_W;
     this.initial_app_height = AA.Globals.APP_H;
 
+    AA.init_screen_logger(true);
     AA.register_key_event(document);
     AA.register_mouse_event(AA.Globals.CONTAINER);
     AA.register_touch_event(AA.Globals.CONTAINER);
@@ -66,7 +67,7 @@ class Main {
     if (this.does_need_resizing()) {
       this.fix_global_resolusion_params();
       // need to debounce on reciever
-      AA.s_log.push("resizing");
+      AA.s_log.push("resizing"); // <= dangerously put
       AA.ev.notify(AA.Constants.WINDOW_RESIZED_EVENT);
     }
 

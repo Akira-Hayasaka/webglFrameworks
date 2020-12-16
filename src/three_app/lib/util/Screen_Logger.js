@@ -4,8 +4,12 @@ import { debounce } from "../util/Util";
 import ev from "../event/Event";
 
 class Screen_Logger {
-  constructor() {
+  constructor(b_debug) {
+    this.b_debug = b_debug;
+    if (!this.b_debug) return;
+
     this.canvas_elm = document.createElement("CANVAS");
+    this.canvas_elm.id = "screen_logger";
     this.setup_elm_style();
     Globals.CONTAINER.appendChild(this.canvas_elm);
     this.ctx = this.canvas_elm.getContext("2d");
@@ -19,6 +23,7 @@ class Screen_Logger {
   }
 
   setup_elm_style = () => {
+    if (!this.b_debug) return;
     this.canvas_elm.style.backgroundColor = "transparent";
     this.canvas_elm.style.position = "absolute";
     this.canvas_elm.style.left = `${Globals.APP_X / Globals.DPR}px`;
@@ -29,6 +34,7 @@ class Screen_Logger {
   };
 
   draw_string = (str, x, y) => {
+    if (!this.b_debug) return;
     const met = this.ctx.measureText(str);
     const width = met.actualBoundingBoxRight - met.actualBoundingBoxLeft;
     const height = met.actualBoundingBoxAscent + met.actualBoundingBoxDescent;
@@ -45,10 +51,12 @@ class Screen_Logger {
   };
 
   push = (str) => {
+    if (!this.b_debug) return;
     this.msgs.push({ born_time: Globals.ELAPSED_TIME, msg: str });
   };
 
   flush_scrn = () => {
+    if (!this.b_debug) return;
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.msgs.forEach((arg, i) => {
       const y = Globals.APP_H / Globals.DPR - 10 - i * 15;
@@ -58,6 +66,8 @@ class Screen_Logger {
       (arg) => Globals.ELAPSED_TIME - arg.born_time < this.expire_sec
     );
   };
+
+  b_debug;
 
   ctx;
   canvas_elm;
@@ -70,25 +80,20 @@ class Screen_Logger {
 
 let s_logger = null;
 
-const make_new_if_necessary = () => {
-  if (s_logger === null) {
-    s_logger = new Screen_Logger();
-  }
-};
-
 const s_log = {
   draw_string: (str, x, y) => {
-    make_new_if_necessary();
     s_logger.draw_string(str, x, y);
   },
   push: (str) => {
-    make_new_if_necessary();
     s_logger.push(str);
   },
   flush_scrn: () => {
-    make_new_if_necessary();
     s_logger.flush_scrn();
   },
 };
 
-export default s_log;
+const init_screen_logger = (b_debug = true) => {
+  s_logger = new Screen_Logger(b_debug);
+};
+
+export { init_screen_logger, s_log };

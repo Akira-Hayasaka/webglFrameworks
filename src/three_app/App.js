@@ -50,10 +50,10 @@ class App {
   };
   on_keyreleased = (arg) => {};
   on_mouseclick = (arg) => {
-    AA.s_log.push("scnx " + arg.val.screen.x);
-    AA.s_log.push("scny " + arg.val.screen.y);
-    AA.s_log.push("cvsx " + arg.val.canvas.x);
-    AA.s_log.push("cvsy " + arg.val.canvas.y);
+    // AA.s_log.push("scnx " + arg.val.screen.x);
+    // AA.s_log.push("scny " + arg.val.screen.y);
+    // AA.s_log.push("cvsx " + arg.val.canvas.x);
+    // AA.s_log.push("cvsy " + arg.val.canvas.y);
   };
   on_mousedblclick = (arg) => {};
   on_mousedown = (arg) => {};

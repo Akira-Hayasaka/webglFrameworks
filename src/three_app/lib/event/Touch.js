@@ -1,10 +1,10 @@
 import Hammer from "hammerjs";
-import s_log from "../util/Screen_Logger";
+import { s_log } from "../util/Screen_Logger";
 
 let mc = null;
 
 const register_touch_event = (dom_elm) => {
-  mc = new Hammer.Manager(dom_elm);
+  mc = new Hammer(dom_elm);
 
   mc.on("tap", (ev) => {
     s_log.push("tap " + ev.scale);

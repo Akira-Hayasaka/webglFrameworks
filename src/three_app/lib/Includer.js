@@ -1,6 +1,6 @@
 import Constants from "./Constants";
 import Globals from "./Globals";
-import s_log from "./util/Screen_Logger";
+import { init_screen_logger, s_log } from "./util/Screen_Logger";
 import { map, debounce } from "./util/Util";
 import ev from "./event/Event";
 import register_key_event from "./event/Key";
@@ -29,6 +29,7 @@ import {
 export {
   Constants,
   Globals,
+  init_screen_logger,
   s_log,
   map,
   debounce,
