@@ -1,3 +1,17 @@
+import * as THREE from "three";
+import Globals from "../Globals";
+
+const map_device_to_canvas = (x, y) => {
+  // on device scale
+  const dx = x - Globals.APP_X;
+  const dy = y - Globals.APP_Y;
+  // map to app scale
+  return new THREE.Vector2(
+    Math.round(map(dx, 0, Globals.APP_DEVICE_W, 0, Globals.APP_W, true)),
+    Math.round(map(dy, 0, Globals.APP_DEVICE_H, 0, Globals.APP_H, true))
+  );
+};
+
 const map = (val, in_min, in_max, out_min, out_max, b_clamp = true) => {
   if (Math.abs(in_min - in_max) < Number.EPSILON) {
     return out_min;
@@ -27,4 +41,4 @@ const debounce = (func, delay) => {
   };
 };
 
-export { map, debounce };
+export { map_device_to_canvas, map, debounce };

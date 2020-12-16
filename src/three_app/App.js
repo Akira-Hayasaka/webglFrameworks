@@ -55,6 +55,7 @@ class App {
   on_mouseup = (arg) => {};
   on_tap = (arg) => {
     console.log("tap", JSON.stringify(arg.val, null, 2));
+    AA.s_log.push(JSON.stringify(arg.val.canvas_pos));
   };
   on_dbltap = (arg) => {};
   on_pan = (arg) => {};
