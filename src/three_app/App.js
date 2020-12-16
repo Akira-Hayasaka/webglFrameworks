@@ -4,7 +4,6 @@ import ant_img from "./data/img/ant.png";
 
 class App {
   constructor() {
-    this.error = "shokichi";
     this.tree = new AA.Image();
     this.tree
       .load(
