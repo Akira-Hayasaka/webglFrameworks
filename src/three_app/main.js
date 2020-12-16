@@ -22,6 +22,9 @@ class Main {
     this.initial_app_width = AA.Globals.APP_W;
     this.initial_app_height = AA.Globals.APP_H;
 
+    AA.register_key_event(document);
+    AA.register_mouse_event(AA.Globals.CONTAINER);
+
     this.app = new App();
     AA.ev.add_listener(AA.Constants.KEY_PRESSED_EVENT, this.app.on_keypressed);
     AA.ev.add_listener(

@@ -23,29 +23,29 @@ const get_arg = (e) => {
   return arg;
 };
 
-const notify_mouse_event = () => {
+const register_mouse_event = (dom_elm) => {
   const notify_click = () => {
-    document.addEventListener("click", (e) => {
+    dom_elm.addEventListener("click", (e) => {
       ev.notify(Constants.MOUSE_CLICK_EVENT, get_arg(e));
     });
   };
   const notify_dblclick = () => {
-    document.addEventListener("dblclick", (e) => {
+    dom_elm.addEventListener("dblclick", (e) => {
       ev.notify(Constants.MOUSE_DBLCLICK_EVENT, get_arg(e));
     });
   };
   const notify_mousedown = () => {
-    document.addEventListener("mousedown", (e) => {
+    dom_elm.addEventListener("mousedown", (e) => {
       ev.notify(Constants.MOUSE_DOWN_EVENT, get_arg(e));
     });
   };
   const notify_mousemove = () => {
-    document.addEventListener("mousemove", (e) => {
+    dom_elm.addEventListener("mousemove", (e) => {
       ev.notify(Constants.MOUSE_MOVE_EVENT, get_arg(e));
     });
   };
   const notify_mouseup = () => {
-    document.addEventListener("mouseup", (e) => {
+    dom_elm.addEventListener("mouseup", (e) => {
       ev.notify(Constants.MOUSE_UP_EVENT, get_arg(e));
     });
   };
@@ -56,7 +56,4 @@ const notify_mouse_event = () => {
   notify_mouseup();
 };
 
-notify_mouse_event();
-const mouse = 0;
-
-export default mouse;
+export default register_mouse_event;

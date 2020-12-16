@@ -1,14 +1,14 @@
 import ev from "./Event";
 import Constants from "../Constants";
 
-const notify_key_event = () => {
+const register_key_event = (dom_elm) => {
   const notify_keypressed = () => {
-    document.addEventListener("keydown", (e) => {
+    dom_elm.addEventListener("keydown", (e) => {
       ev.notify(Constants.KEY_PRESSED_EVENT, e.key);
     });
   };
   const notify_keyreleased = () => {
-    document.addEventListener("keyup", (e) => {
+    dom_elm.addEventListener("keyup", (e) => {
       ev.notify(Constants.KEY_RELEASED_EVENT, e.key);
     });
   };
@@ -16,7 +16,4 @@ const notify_key_event = () => {
   notify_keyreleased();
 };
 
-notify_key_event();
-const key = 0;
-
-export default key;
+export default register_key_event;

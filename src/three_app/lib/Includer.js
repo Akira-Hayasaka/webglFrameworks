@@ -3,8 +3,8 @@ import Globals from "./Globals";
 import s_log from "./util/Screen_Logger";
 import { map, debounce } from "./util/Util";
 import ev from "./util/Event";
-import key from "./util/Key";
-import mouse from "./util/Mouse";
+import register_key_event from "./util/Key";
+import register_mouse_event from "./util/Mouse";
 import { Camera2d, Camera3d } from "./graphic/Camera";
 import {
   RBO,
@@ -32,8 +32,8 @@ export {
   map,
   debounce,
   ev,
-  key,
-  mouse,
+  register_key_event,
+  register_mouse_event,
   Camera2d,
   Camera3d,
   RBO,

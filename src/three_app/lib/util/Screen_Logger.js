@@ -45,7 +45,6 @@ class Screen_Logger {
   };
 
   push = (str) => {
-    console.log("msg", str);
     this.msgs.push({ born_time: Globals.ELAPSED_TIME, msg: str });
   };
 
