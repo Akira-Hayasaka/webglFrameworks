@@ -10,8 +10,8 @@ const map_client_to_canvas = (cx, cy) => {
   const dy = cy - Globals.APP_Y;
   // map to app scale
   return new THREE.Vector2(
-    map(dx, 0, Globals.APP_DEVICE_W, 0, Globals.APP_W, true),
-    map(dy, 0, Globals.APP_DEVICE_H, 0, Globals.APP_H, true)
+    Math.round(map(dx, 0, Globals.APP_DEVICE_W, 0, Globals.APP_W, true)),
+    Math.round(map(dy, 0, Globals.APP_DEVICE_H, 0, Globals.APP_H, true))
   );
 };
 

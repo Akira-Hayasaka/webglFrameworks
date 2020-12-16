@@ -7,25 +7,25 @@ const register_touch_event = (dom_elm) => {
   mc = new Hammer.Manager(dom_elm);
 
   mc.on("tap", (ev) => {
-    s_log.draw_string("tap " + ev.scale);
+    s_log.push("tap " + ev.scale);
   });
   mc.on("doubletap", (ev) => {
-    s_log.draw_string("doubletap " + ev.scale);
+    s_log.push("doubletap " + ev.scale);
   });
   mc.on("pan", (ev) => {
-    s_log.draw_string("pan " + ev.scale);
+    s_log.push("pan " + ev.scale);
   });
   mc.on("swipe", (ev) => {
-    s_log.draw_string("swipe " + ev.scale);
+    s_log.push("swipe " + ev.scale);
   });
   mc.on("press", (ev) => {
-    s_log.draw_string("press " + ev.scale);
+    s_log.push("press " + ev.scale);
   });
   mc.on("pinch", (ev) => {
-    s_log.draw_string("pinch " + ev.scale);
+    s_log.push("pinch " + ev.scale);
   });
   mc.on("rotate ", (ev) => {
-    s_log.draw_string("rotate " + ev.scale);
+    s_log.push("rotate " + ev.scale);
   });
 };
 

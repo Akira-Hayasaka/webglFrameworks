@@ -7,6 +7,7 @@ class Main {
   constructor(props) {
     this.props = props;
 
+    AA.Globals.DPR = window.devicePixelRatio;
     AA.Globals.CONTAINER = props.container;
     AA.Globals.CANVAS = props.canvas;
 
@@ -65,7 +66,7 @@ class Main {
     if (this.does_need_resizing()) {
       this.fix_global_resolusion_params();
       // need to debounce on reciever
-      console.log("resizing");
+      AA.s_log.push("resizing");
       AA.ev.notify(AA.Constants.WINDOW_RESIZED_EVENT);
     }
 
@@ -81,15 +82,20 @@ class Main {
 
   does_need_resizing = () => {
     return (
-      AA.Globals.CANVAS.width !== AA.Globals.CANVAS.clientWidth ||
-      AA.Globals.CANVAS.height !== AA.Globals.CANVAS.clientHeight
+      AA.Globals.CANVAS.width !==
+        Math.round(AA.Globals.CANVAS.clientWidth * AA.Globals.DPR) ||
+      AA.Globals.CANVAS.height !==
+        Math.round(AA.Globals.CANVAS.clientHeight * AA.Globals.DPR)
     );
   };
 
   fix_global_resolusion_params = () => {
-    AA.Globals.DPR = window.devicePixelRatio;
-    AA.Globals.APP_W = (AA.Globals.CANVAS.clientWidth * AA.Globals.DPR) | 0;
-    AA.Globals.APP_H = (AA.Globals.CANVAS.clientHeight * AA.Globals.DPR) | 0;
+    AA.Globals.APP_W = Math.round(
+      AA.Globals.CANVAS.clientWidth * AA.Globals.DPR
+    );
+    AA.Globals.APP_H = Math.round(
+      AA.Globals.CANVAS.clientHeight * AA.Globals.DPR
+    );
     AA.Globals.APP_X = AA.Globals.CANVAS.getBoundingClientRect().x;
     AA.Globals.APP_Y = AA.Globals.CANVAS.getBoundingClientRect().y;
     AA.Globals.APP_RECT = new AA.Rectangle(
