@@ -5,8 +5,6 @@ import ev from "./Event";
 import { map_device_to_canvas } from "../util/Util";
 import { s_log } from "../util/Screen_Logger";
 
-let mc = null;
-
 const get_arg = (e) => {
   const x = e.center.x;
   const y = e.center.y;
@@ -17,7 +15,7 @@ const get_arg = (e) => {
 };
 
 const register_touch_event = (dom_elm) => {
-  mc = new Hammer(dom_elm);
+  const mc = new Hammer(dom_elm);
 
   const log = (e) => {
     // s_log.push("touch event " + JSON.stringify(e));
