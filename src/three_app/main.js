@@ -71,6 +71,7 @@ class Main {
 
     this.stats.begin();
     AA.s_log.flush_scrn();
+    this.put_screen_related_log_on_screen();
     this.app.update();
     this.app.draw();
     this.stats.end();
@@ -96,6 +97,14 @@ class Main {
       AA.Globals.APP_Y,
       AA.Globals.APP_W,
       AA.Globals.APP_H
+    );
+    AA.Globals.APP_DEVICE_W = AA.Globals.CANVAS.clientWidth;
+    AA.Globals.APP_DEVICE_H = AA.Globals.CANVAS.clientHeight;
+    AA.Globals.APP_DEVICE_RECT = new AA.Rectangle(
+      AA.Globals.APP_X,
+      AA.Globals.APP_Y,
+      AA.Globals.APP_DEVICE_W,
+      AA.Globals.APP_DEVICE_H
     );
     AA.Globals.APP_WINRESIZE_DIFFX = AA.Globals.APP_W - this.initial_app_width;
     AA.Globals.APP_WINRESIZE_DIFFY = AA.Globals.APP_H - this.initial_app_height;

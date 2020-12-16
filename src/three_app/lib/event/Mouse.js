@@ -2,9 +2,17 @@ import * as THREE from "three";
 import ev from "./Event";
 import Constants from "../Constants";
 import Globals from "../Globals";
+import { map } from "../util/Util";
 
 const map_client_to_canvas = (cx, cy) => {
-  return new THREE.Vector2(cx - Globals.APP_X, cy - Globals.APP_Y);
+  // on device scale
+  const dx = cx - Globals.APP_X;
+  const dy = cy - Globals.APP_Y;
+  // map to app scale
+  return new THREE.Vector2(
+    map(dx, 0, Globals.APP_DEVICE_W, 0, Globals.APP_W, true),
+    map(dy, 0, Globals.APP_DEVICE_H, 0, Globals.APP_H, true)
+  );
 };
 
 const get_arg = (e) => {
@@ -14,8 +22,8 @@ const get_arg = (e) => {
     is_inside_canvas: false,
     canvas: new THREE.Vector2(0, 0),
   };
-  if (Globals.APP_RECT) {
-    if (Globals.APP_RECT.is_inside(e.clientX, e.clientY)) {
+  if (Globals.APP_DEVICE_RECT) {
+    if (Globals.APP_DEVICE_RECT.is_inside(e.clientX, e.clientY)) {
       arg.is_inside_canvas = true;
       arg.canvas = map_client_to_canvas(e.clientX, e.clientY);
     }
