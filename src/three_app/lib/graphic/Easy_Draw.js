@@ -116,7 +116,7 @@ class Object_Manager {
 
 let object_mgr = null;
 
-const init_imid_draw_env = (camera = new Camera_Orho()) => {
+const init_easy_draw_env = (camera = new Camera_Orho()) => {
   object_mgr = new Object_Manager(camera);
 };
 
@@ -150,18 +150,18 @@ const draw_rect = (
   object_mgr.draw_rect(x, y, z, w, h, { rot, col, opacity, blending });
 };
 
-const reset_imid_draw_loop = () => {
+const reset_easy_draw_loop = () => {
   object_mgr.reset_counter();
 };
 
-const render_imid_scene = () => {
+const render_easy_draw_scene = () => {
   object_mgr.render();
 };
 
 export {
-  init_imid_draw_env,
+  init_easy_draw_env,
   draw_circle,
   draw_rect,
-  reset_imid_draw_loop,
-  render_imid_scene,
+  reset_easy_draw_loop,
+  render_easy_draw_scene,
 };

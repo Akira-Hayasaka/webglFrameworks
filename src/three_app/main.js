@@ -22,7 +22,7 @@ class Main {
     this.initial_app_width = AA.Globals.APP_W;
     this.initial_app_height = AA.Globals.APP_H;
 
-    AA.init_imid_draw_env();
+    AA.init_easy_draw_env();
     AA.init_screen_logger(true);
     AA.register_key_event(document);
     AA.register_mouse_event(AA.Globals.CONTAINER);
@@ -82,11 +82,11 @@ class Main {
 
     AA.s_log.flush_scrn();
     AA.Globals.RENDERER.clear();
-    AA.reset_imid_draw_loop();
+    AA.reset_easy_draw_loop();
     this.put_screen_related_log_on_screen();
     this.app.update();
     this.app.draw();
-    AA.render_imid_scene();
+    AA.render_easy_draw_scene();
     this.stats.end();
 
     requestAnimationFrame(this.update);

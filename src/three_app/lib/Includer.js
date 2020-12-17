@@ -14,11 +14,11 @@ import Rectangle from "./util/Rectangle";
 import Post_Process from "./graphic/Post_Process";
 import Video_Player from "./graphic/Video_Player";
 import {
-  init_imid_draw_env,
+  init_easy_draw_env,
   draw_circle,
   draw_rect,
-  reset_imid_draw_loop,
-  render_imid_scene,
+  reset_easy_draw_loop,
+  render_easy_draw_scene,
 } from "./graphic/Easy_Draw";
 
 export {
@@ -40,9 +40,9 @@ export {
   Rectangle,
   Post_Process,
   Video_Player,
-  init_imid_draw_env,
+  init_easy_draw_env,
   draw_circle,
   draw_rect,
-  reset_imid_draw_loop,
-  render_imid_scene,
+  reset_easy_draw_loop,
+  render_easy_draw_scene,
 };
