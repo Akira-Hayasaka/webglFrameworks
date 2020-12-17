@@ -35,7 +35,7 @@ class Circle_Manager {
     to_draw.position.set(x, y, z);
     to_draw.scale.set(rad, rad, 0);
     to_draw.mat.color = col;
-    Globals.RENDERER.render(this.scene, this.camera);
+    to_draw.mat.opacity = 0.5;
     this.counter++;
   }
 
@@ -48,6 +48,11 @@ class Circle_Manager {
     }
     this.counter = 0;
   }
+
+  render = () => {
+    Globals.RENDERER.clearDepth();
+    Globals.RENDERER.render(this.scene, this.camera);
+  };
 
   scene;
   camera;
@@ -75,4 +80,13 @@ const reset_imid_draw_loop = () => {
   circle_mgr.reset_counter();
 };
 
-export { init_imid_draw_env, draw_circle, reset_imid_draw_loop };
+const render_imid_scene = () => {
+  circle_mgr.render();
+};
+
+export {
+  init_imid_draw_env,
+  draw_circle,
+  reset_imid_draw_loop,
+  render_imid_scene,
+};

@@ -17,7 +17,6 @@ class Main {
       antialias: true,
     });
     AA.Globals.RENDERER.autoClear = false;
-    AA.Globals.RENDERER.setClearColor(0x000000, 0);
 
     this.fix_global_resolusion_params();
     this.initial_app_width = AA.Globals.APP_W;
@@ -82,11 +81,12 @@ class Main {
     }
 
     AA.s_log.flush_scrn();
+    AA.Globals.RENDERER.clear();
     AA.reset_imid_draw_loop();
     this.put_screen_related_log_on_screen();
     this.app.update();
     this.app.draw();
-
+    AA.render_imid_scene();
     this.stats.end();
 
     requestAnimationFrame(this.update);

@@ -29,6 +29,7 @@ import {
   init_imid_draw_env,
   draw_circle,
   reset_imid_draw_loop,
+  render_imid_scene,
 } from "./graphic/Imid_Draw";
 
 export {
@@ -59,4 +60,5 @@ export {
   init_imid_draw_env,
   draw_circle,
   reset_imid_draw_loop,
+  render_imid_scene,
 };

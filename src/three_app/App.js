@@ -37,7 +37,6 @@ class App {
   update = () => {};
 
   draw = () => {
-    // AA.Globals.RENDERER.clearDepth();
     AA.Globals.RENDERER.render(this.scene2d, this.camera_2d);
 
     // AA.draw_circle(0, 0, 0, 1, new THREE.Color(THREE.Color.NAMES.cyan));
@@ -49,6 +48,14 @@ class App {
     const col = new THREE.Color("rgb(255, 0, 0)");
     col.alpha = 0.5;
     AA.draw_circle(0, 0, 0, 200, col);
+
+    AA.draw_circle(
+      AA.Globals.APP_W,
+      0,
+      0,
+      100,
+      new THREE.Color(THREE.Color.NAMES.darkorchid)
+    );
 
     AA.draw_circle(
       AA.Globals.APP_W,
