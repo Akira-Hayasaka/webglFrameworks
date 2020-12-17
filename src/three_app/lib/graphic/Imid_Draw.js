@@ -23,19 +23,6 @@ class Circle_Manager {
   constructor() {
     this.scene = new THREE.Scene();
     this.camera = new Camera2d();
-
-    // const geometry = new THREE.CircleBufferGeometry(1, 32);
-    // const material = new THREE.MeshBasicMaterial({
-    //   depthWrite: false,
-    //   transparent: true,
-    //   side: THREE.DoubleSide,
-    // });
-    // const circle = new THREE.Mesh(geometry, material);
-    // circle.position.set(300, 500, 0);
-    // const s = 20;
-    // circle.scale.set(s, s, 0);
-    // material.color = new THREE.Color(THREE.Color.NAMES.darkorchid);
-    // this.scene.add(circle);
   }
 
   draw_circle(x, y, z, rad, col) {
