@@ -23,31 +23,31 @@ const register_touch_event = (dom_elm) => {
   };
 
   mc.on("tap", (e) => {
-    ev.notify(Constants.TOUCH_TAP_EVENT, get_arg(e));
+    ev.notify(Constants.EVENT.TOUCH.TAP, get_arg(e));
     log(e);
   });
   mc.on("doubletap", (e) => {
-    ev.notify(Constants.TOUCH_DBLTAP_EVENT, get_arg(e));
+    ev.notify(Constants.EVENT.TOUCH.DBLTAP, get_arg(e));
     log(e);
   });
   mc.on("pan", (e) => {
-    ev.notify(Constants.TOUCH_PAN_EVENT, get_arg(e));
+    ev.notify(Constants.EVENT.TOUCH.PAN, get_arg(e));
     log(e);
   });
   mc.on("swipe", (e) => {
-    ev.notify(Constants.TOUCH_SWIPE_EVENT, get_arg(e));
+    ev.notify(Constants.EVENT.TOUCH.SWIPE, get_arg(e));
     log(e);
   });
   mc.on("press", (e) => {
-    ev.notify(Constants.TOUCH_PRESS_EVENT, get_arg(e));
+    ev.notify(Constants.EVENT.TOUCH.PRESS, get_arg(e));
     log(e);
   });
   mc.on("pinch", (e) => {
-    ev.notify(Constants.TOUCH_PINCH_EVENT, get_arg(e));
+    ev.notify(Constants.EVENT.TOUCH.PINCH, get_arg(e));
     log(e);
   });
   mc.on("rotate ", (e) => {
-    ev.notify(Constants.TOUCH_ROTATE_EVENT, get_arg(e));
+    ev.notify(Constants.EVENT.TOUCH.ROTATE, get_arg(e));
     log(e);
   });
 };

@@ -22,19 +22,19 @@ const get_arg = (e) => {
 
 const register_mouse_event = (dom_elm) => {
   dom_elm.addEventListener("click", (e) => {
-    ev.notify(Constants.MOUSE_CLICK_EVENT, get_arg(e));
+    ev.notify(Constants.EVENT.MOUSE.CLICK, get_arg(e));
   });
   dom_elm.addEventListener("dblclick", (e) => {
-    ev.notify(Constants.MOUSE_DBLCLICK_EVENT, get_arg(e));
+    ev.notify(Constants.EVENT.MOUSE.DBLCLICK, get_arg(e));
   });
   dom_elm.addEventListener("mousedown", (e) => {
-    ev.notify(Constants.MOUSE_DOWN_EVENT, get_arg(e));
+    ev.notify(Constants.EVENT.MOUSE.DOWN, get_arg(e));
   });
   dom_elm.addEventListener("mousemove", (e) => {
-    ev.notify(Constants.MOUSE_MOVE_EVENT, get_arg(e));
+    ev.notify(Constants.EVENT.MOUSE.MOVE, get_arg(e));
   });
   dom_elm.addEventListener("mouseup", (e) => {
-    ev.notify(Constants.MOUSE_UP_EVENT, get_arg(e));
+    ev.notify(Constants.EVENT.MOUSE.UP, get_arg(e));
   });
 };
 

@@ -2,21 +2,29 @@ import * as THREE from "three";
 
 const Constants = {
   // event names
-  WINDOW_RESIZED_EVENT: "windworesized",
-  KEY_PRESSED_EVENT: "keypressed",
-  KEY_RELEASED_EVENT: "keyreleased",
-  MOUSE_CLICK_EVENT: "mouseclick",
-  MOUSE_DBLCLICK_EVENT: "mousedblclick",
-  MOUSE_DOWN_EVENT: "mousedown",
-  MOUSE_MOVE_EVENT: "mousemove",
-  MOUSE_UP_EVENT: "mouseup",
-  TOUCH_TAP_EVENT: "touchtap",
-  TOUCH_DBLTAP_EVENT: "touchdbltap",
-  TOUCH_PAN_EVENT: "touchpan",
-  TOUCH_SWIPE_EVENT: "touchswipe",
-  TOUCH_PRESS_EVENT: "touchpress",
-  TOUCH_PINCH_EVENT: "touchpinch",
-  TOUCH_ROTATE_EVENT: "touchrotate",
+  EVENT: {
+    WINDOW_RESIZED: "windworesized",
+    KEY: {
+      PRESSED: "keypressed",
+      RELEASED: "keyreleased",
+    },
+    MOUSE: {
+      CLICK: "mouseclick",
+      DBLCLICK: "mousedblclick",
+      DOWN: "mousedown",
+      MOVE: "mousemove",
+      UP: "mouseup",
+    },
+    TOUCH: {
+      TAP: "touchtap",
+      DBLTAP: "touchdbltap",
+      PAN: "touchpan",
+      SWIPE: "touchswipe",
+      PRESS: "touchpress",
+      PINCH: "touchpinch",
+      ROTATE: "touchrotate",
+    },
+  },
   // blending
   BLEND: {
     NO: THREE.NoBlending,

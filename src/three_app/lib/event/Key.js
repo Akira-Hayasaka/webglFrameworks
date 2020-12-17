@@ -3,10 +3,10 @@ import Constants from "../Constants";
 
 const register_key_event = (dom_elm) => {
   dom_elm.addEventListener("keydown", (e) => {
-    ev.notify(Constants.KEY_PRESSED_EVENT, e.key);
+    ev.notify(Constants.EVENT.KEY.PRESSED, e.key);
   });
   dom_elm.addEventListener("keyup", (e) => {
-    ev.notify(Constants.KEY_RELEASED_EVENT, e.key);
+    ev.notify(Constants.EVENT.KEY.RELEASED, e.key);
   });
 };
 
