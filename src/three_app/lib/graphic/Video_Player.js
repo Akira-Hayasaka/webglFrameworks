@@ -3,6 +3,7 @@ import Globals from "../Globals";
 import Constants from "../Constants";
 import { s_log } from "../util/Screen_Logger";
 import { map } from "../util/Util";
+import { draw_img } from "../graphic/Easy_Draw";
 
 const Ready_State = {
   0: "HAVE_NOTHING",
@@ -52,14 +53,14 @@ class Video_Player extends THREE.Object3D {
 
         this.texture = new THREE.VideoTexture(this.video_elm);
         const geom_for_quad_mesh = new THREE.PlaneBufferGeometry(width, height);
-        const mat_for_quad_mesh = new THREE.ShaderMaterial({
+        this.mat = new THREE.ShaderMaterial({
           uniforms: {
             tex: { value: this.texture },
             opacity: { value: 1.0 },
           },
           ...sm_settings,
         });
-        this.mesh = new THREE.Mesh(geom_for_quad_mesh, mat_for_quad_mesh);
+        this.mesh = new THREE.Mesh(geom_for_quad_mesh, this.mat);
         this.mesh.position.set(width / 2, height / 2, 0);
         this.add(this.mesh);
         resolve(that);
@@ -69,6 +70,21 @@ class Video_Player extends THREE.Object3D {
       }
     });
   }
+
+  draw = (
+    x,
+    y,
+    z,
+    sx,
+    sy,
+    {
+      rot = new THREE.Euler(0, 0, 0, "XYZ"),
+      opacity = 1.0,
+      blending = THREE.NormalBlending,
+    } = {}
+  ) => {
+    draw_img(this, x, y, z, sx, sy, { rot, opacity, blending });
+  };
 
   debug_draw = () => {
     if (!this.video_elm) return;
@@ -125,6 +141,7 @@ class Video_Player extends THREE.Object3D {
   };
 
   video_elm = null;
+  mat = null;
   mesh = null;
   texture = null;
 }

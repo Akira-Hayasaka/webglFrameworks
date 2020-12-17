@@ -2,12 +2,19 @@ import * as THREE from "three";
 import * as AA from "./lib/Includer";
 import ant_img from "./data/img/ant.png";
 import tree_img from "./data/img/tree.png";
+import test_vid from "./data/mov/big_buck_bunny.mp4";
 
 class App {
   constructor() {
     this.tree = new AA.Image();
     this.tree.load(tree_img).then((img) => {
       img.set_anchor(0, 0);
+    });
+
+    this.vid = new AA.Video_Player();
+    this.vid.load(test_vid, 640, 360).then((vid) => {
+      // vid.play();
+      vid.set_anchor(0, 0);
     });
 
     this.flower = new AA.Image();
@@ -92,6 +99,12 @@ class App {
       rot: this.rot,
       blending: AA.Constants.BLEND.ADD,
     });
+
+    this.vid.draw(700, 800, 0, 1.0, 1.0, {
+      opacity: 0.8,
+      // rot: this.rot,
+      blending: AA.Constants.BLEND.NORMAL,
+    });
   };
   rot = new THREE.Euler(0, 0, 0, "XYZ");
   on_keypressed = (arg) => {
@@ -111,6 +124,7 @@ class App {
   on_pinch = (arg) => {};
   on_rotate = (arg) => {};
 
+  vid;
   tree;
   flower;
   ant;
