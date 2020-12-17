@@ -8,7 +8,7 @@ import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
 class Line_Tweak {
   constructor() {
     this.rbo = new AA.RBO(AA.Globals.APP_W, AA.Globals.APP_H);
-    this.camera_2d = new AA.Camera2d();
+    this.camera_2d = new AA.Camera_Orho();
     this.scene = new THREE.Scene();
 
     this.polyline = new AA.Polyline();

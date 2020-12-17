@@ -31,7 +31,7 @@ class App {
     this.scene2d.add(this.tree);
     this.scene2d.add(this.ant);
 
-    this.camera_2d = new AA.Camera2d();
+    this.camera_2d = new AA.Camera_Orho();
   }
 
   update = () => {};

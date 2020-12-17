@@ -4,7 +4,7 @@
 import * as THREE from "three";
 import Constants from "../Constants";
 import Globals from "../Globals";
-import { Camera2d } from "./Camera";
+import { Camera_Orho } from "./Camera";
 import ev from "../event/Event";
 import { debounce } from "../util/Util";
 
@@ -39,7 +39,7 @@ class RBO {
     this.renderer = _renderer;
     this.sm_settings = sm_settings;
 
-    this.camera_2d = new Camera2d();
+    this.camera_2d = new Camera_Orho();
     this.screen_quad_scene = new THREE.Scene();
 
     const dispose = () => {

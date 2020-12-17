@@ -4,7 +4,7 @@ import Globals from "../Globals";
 import ev from "../event/Event";
 import { debounce } from "../util/Util";
 
-class Camera2d extends OrthographicCamera {
+class Camera_Orho extends OrthographicCamera {
   constructor(
     left = 0,
     right = Globals.APP_W,
@@ -30,7 +30,7 @@ class Camera2d extends OrthographicCamera {
   }
 }
 
-class Camera3d extends PerspectiveCamera {
+class Camera_Pers extends PerspectiveCamera {
   constructor(
     fov = 75,
     aspect = Globals.APP_W / Globals.APP_H,
@@ -50,4 +50,4 @@ class Camera3d extends PerspectiveCamera {
   }
 }
 
-export { Camera2d, Camera3d };
+export { Camera_Orho, Camera_Pers };

@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import Globals from "../Globals";
-import { Camera2d, Camera3d } from "./Camera";
+import { Camera_Orho, Camera_Pers } from "./Camera";
 
 const circle_geom = new THREE.CircleBufferGeometry(1, 32);
 
@@ -22,7 +22,7 @@ class Circle extends THREE.Mesh {
 class Circle_Manager {
   constructor() {
     this.scene = new THREE.Scene();
-    this.camera = new Camera2d();
+    this.camera = new Camera_Orho();
   }
 
   draw_circle(x, y, z, rad, col) {

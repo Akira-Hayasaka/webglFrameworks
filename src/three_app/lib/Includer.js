@@ -6,7 +6,7 @@ import ev from "./event/Event";
 import register_key_event from "./event/Key";
 import register_mouse_event from "./event/Mouse";
 import register_touch_event from "./event/Touch";
-import { Camera2d, Camera3d } from "./graphic/Camera";
+import { Camera_Orho, Camera_Pers } from "./graphic/Camera";
 import {
   RBO,
   RT_Settings,
@@ -42,8 +42,8 @@ export {
   register_key_event,
   register_mouse_event,
   register_touch_event,
-  Camera2d,
-  Camera3d,
+  Camera_Orho,
+  Camera_Pers,
   RBO,
   RT_Settings,
   RBO_Shader_Mat_Settings,
