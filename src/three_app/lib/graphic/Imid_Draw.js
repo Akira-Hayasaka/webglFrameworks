@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import Globals from "../Globals";
-import { Camera_Orho, Camera_Pers } from "./Camera";
+import { Camera_Orho } from "./Camera";
 
 const circle_geom = new THREE.CircleBufferGeometry(1, 32);
 
@@ -20,9 +20,9 @@ class Circle extends THREE.Mesh {
 }
 
 class Circle_Manager {
-  constructor() {
+  constructor(camera) {
     this.scene = new THREE.Scene();
-    this.camera = new Camera_Orho();
+    this.camera = camera;
   }
 
   draw_circle(x, y, z, rad, col) {
@@ -57,8 +57,8 @@ class Circle_Manager {
 
 let circle_mgr = null;
 
-const init_imid_draw_env = () => {
-  circle_mgr = new Circle_Manager();
+const init_imid_draw_env = (camera = new Camera_Orho()) => {
+  circle_mgr = new Circle_Manager(camera);
 };
 
 const draw_circle = (

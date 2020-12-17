@@ -46,7 +46,9 @@ class App {
     //   AA.draw_circle(2, 2, 0, 1, new THREE.Color(THREE.Color.NAMES.cyan));
     // }
 
-    AA.draw_circle(0, 0, 0, 200, new THREE.Color(THREE.Color.NAMES.deeppink));
+    const col = new THREE.Color("rgb(255, 0, 0)");
+    col.alpha = 0.5;
+    AA.draw_circle(0, 0, 0, 200, col);
 
     AA.draw_circle(
       AA.Globals.APP_W,
