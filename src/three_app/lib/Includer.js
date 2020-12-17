@@ -16,6 +16,7 @@ import Video_Player from "./graphic/Video_Player";
 import {
   init_imid_draw_env,
   draw_circle,
+  draw_rect,
   reset_imid_draw_loop,
   render_imid_scene,
 } from "./graphic/Imid_Draw";
@@ -41,6 +42,7 @@ export {
   Video_Player,
   init_imid_draw_env,
   draw_circle,
+  draw_rect,
   reset_imid_draw_loop,
   render_imid_scene,
 };

@@ -39,12 +39,6 @@ class App {
   draw = () => {
     AA.Globals.RENDERER.render(this.scene2d, this.camera_2d);
 
-    // AA.draw_circle(0, 0, 0, 1, new THREE.Color(THREE.Color.NAMES.cyan));
-
-    // if (this.to_draw) {
-    //   AA.draw_circle(2, 2, 0, 1, new THREE.Color(THREE.Color.NAMES.cyan));
-    // }
-
     const col = new THREE.Color("rgb(255, 0, 0)");
     AA.draw_circle(0, 0, 0, 200, { col, opacity: 0.5 });
 
@@ -79,8 +73,15 @@ class App {
         { col: new THREE.Color(THREE.Color.NAMES.cyan) }
       );
     }
-  };
 
+    AA.draw_rect(300, 200, 0, 50, 50);
+    AA.draw_rect(300, 400, 0, 150, 50, {
+      col: new THREE.Color(THREE.Color.NAMES.deepskyblue),
+      rot: this.rot,
+    });
+    this.rot.set(this.rot.x, this.rot.y, this.rot.z + 0.01, this.rot.order);
+  };
+  rot = new THREE.Euler(0, 0, 0, "XYZ");
   on_keypressed = (arg) => {
     this.to_draw = !this.to_draw;
   };
