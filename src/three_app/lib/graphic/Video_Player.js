@@ -53,7 +53,10 @@ class Video_Player extends THREE.Object3D {
         this.texture = new THREE.VideoTexture(this.video_elm);
         const geom_for_quad_mesh = new THREE.PlaneBufferGeometry(width, height);
         const mat_for_quad_mesh = new THREE.ShaderMaterial({
-          uniforms: { tex: { value: this.texture } },
+          uniforms: {
+            tex: { value: this.texture },
+            opacity: { value: 1.0 },
+          },
           ...sm_settings,
         });
         this.mesh = new THREE.Mesh(geom_for_quad_mesh, mat_for_quad_mesh);
