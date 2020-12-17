@@ -5,14 +5,14 @@ import ev from "../event/Event";
 import { debounce } from "../util/Util";
 
 class Camera_Orho extends OrthographicCamera {
-  constructor(
+  constructor({
     left = 0,
     right = Globals.APP_W,
     top = 0,
     bottom = Globals.APP_H,
     near = -1,
-    far = 1000
-  ) {
+    far = 1000,
+  } = {}) {
     super(left, right, top, bottom, near, far);
 
     ev.add_listener(
@@ -31,12 +31,12 @@ class Camera_Orho extends OrthographicCamera {
 }
 
 class Camera_Pers extends PerspectiveCamera {
-  constructor(
+  constructor({
     fov = 75,
     aspect = Globals.APP_W / Globals.APP_H,
     near = 0.1,
-    far = 1000
-  ) {
+    far = 1000,
+  } = {}) {
     super(fov, aspect, near, far);
     this.position.z = 5;
 

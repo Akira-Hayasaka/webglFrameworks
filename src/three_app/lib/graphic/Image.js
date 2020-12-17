@@ -1,23 +1,17 @@
 import * as THREE from "three";
 import Constants from "../Constants";
 
-const Loader_Settings = {
-  imageOrientation: "none",
-};
-
-const Shader_Mat_Settings = {
-  vertexShader: Constants.MINIMUM_VERT,
-  fragmentShader: Constants.MINIMUM_FRAG_VFLIP,
-  depthWrite: false,
-  transparent: true,
-  side: THREE.DoubleSide,
-};
-
 class Image extends THREE.Object3D {
   load = (
     path,
-    loader_settings = Loader_Settings,
-    sm_settings = Shader_Mat_Settings
+    loader_settings = { imageOrientation: "none" },
+    sm_settings = {
+      vertexShader: Constants.MINIMUM_VERT,
+      fragmentShader: Constants.MINIMUM_FRAG_VFLIP,
+      depthWrite: false,
+      transparent: true,
+      side: THREE.DoubleSide,
+    }
   ) => {
     const that = this;
     return new Promise((resolve, reject) => {
@@ -70,4 +64,4 @@ class Image extends THREE.Object3D {
   texture = null;
 }
 
-export { Image, Loader_Settings, Shader_Mat_Settings };
+export default Image;

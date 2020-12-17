@@ -10,16 +10,14 @@ import Globals from "../Globals";
 import ev from "../event/Event";
 import { debounce } from "../util/Util";
 
-const RT_Settings = {
-  minFilter: THREE.LinearFilter,
-  magFilter: THREE.NearestFilter,
-  format: THREE.RGBAFormat,
-};
-
 class Post_Process {
   constructor(
     { scene, camera, renderer, width, height },
-    rt_settings = RT_Settings
+    rt_settings = {
+      minFilter: THREE.LinearFilter,
+      magFilter: THREE.NearestFilter,
+      format: THREE.RGBAFormat,
+    }
   ) {
     this.px_ratio = renderer.getPixelRatio();
     this.initial_width = width;

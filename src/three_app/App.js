@@ -68,9 +68,7 @@ class App {
       col: new THREE.Color(THREE.Color.NAMES.gold),
     });
 
-    AA.draw_circle(AA.Globals.APP_W / 2, AA.Globals.APP_H / 2, 0, 10, {
-      col: new THREE.Color(THREE.Color.NAMES.cyan),
-    });
+    AA.draw_circle(AA.Globals.APP_W / 2, AA.Globals.APP_H / 2, 0, 10);
 
     if (this.to_draw) {
       AA.draw_circle(

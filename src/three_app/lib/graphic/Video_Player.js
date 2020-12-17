@@ -12,29 +12,25 @@ const Ready_State = {
   4: "HAVE_ENOUGH_DATA",
 };
 
-const Video_Settings = {
-  autoplay: false,
-  crossOrigin: "anonymous",
-  loop: true,
-  muted: true,
-  preload: true,
-};
-
-const Shader_Mat_Settings = {
-  vertexShader: Constants.MINIMUM_VERT,
-  fragmentShader: Constants.MINIMUM_FRAG_VFLIP,
-  depthWrite: false,
-  transparent: true,
-  side: THREE.DoubleSide,
-};
-
 class Video_Player extends THREE.Object3D {
   load(
     path,
     width,
     height,
-    video_settings = Video_Settings,
-    sm_settings = Shader_Mat_Settings
+    video_settings = {
+      autoplay: false,
+      crossOrigin: "anonymous",
+      loop: true,
+      muted: true,
+      preload: true,
+    },
+    sm_settings = {
+      vertexShader: Constants.MINIMUM_VERT,
+      fragmentShader: Constants.MINIMUM_FRAG_VFLIP,
+      depthWrite: false,
+      transparent: true,
+      side: THREE.DoubleSide,
+    }
   ) {
     const that = this;
     return new Promise((resolve, reject) => {
@@ -130,4 +126,4 @@ class Video_Player extends THREE.Object3D {
   texture = null;
 }
 
-export { Video_Player, Video_Settings, Shader_Mat_Settings };
+export default Video_Player;

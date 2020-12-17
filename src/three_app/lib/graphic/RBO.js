@@ -8,26 +8,22 @@ import { Camera_Orho } from "./Camera";
 import ev from "../event/Event";
 import { debounce } from "../util/Util";
 
-const RT_Settings = {
-  minFilter: THREE.LinearFilter,
-  magFilter: THREE.NearestFilter,
-  format: THREE.RGBAFormat,
-};
-
-const Shader_Mat_Settings = {
-  vertexShader: Constants.MINIMUM_VERT,
-  fragmentShader: Constants.MINIMUM_FRAG_VFLIP,
-  depthWrite: false,
-  transparent: true,
-  side: THREE.DoubleSide,
-};
-
 class RBO {
   constructor(
     _width,
     _height,
-    rt_settings = RT_Settings,
-    sm_settings = Shader_Mat_Settings,
+    rt_settings = {
+      minFilter: THREE.LinearFilter,
+      magFilter: THREE.NearestFilter,
+      format: THREE.RGBAFormat,
+    },
+    sm_settings = {
+      vertexShader: Constants.MINIMUM_VERT,
+      fragmentShader: Constants.MINIMUM_FRAG_VFLIP,
+      depthWrite: false,
+      transparent: true,
+      side: THREE.DoubleSide,
+    },
     _renderer = Globals.RENDERER
   ) {
     this.initial_app_width = Globals.APP_W;
@@ -148,4 +144,4 @@ class RBO {
   camera_2d;
 }
 
-export { RBO, RT_Settings, Shader_Mat_Settings };
+export default RBO;
