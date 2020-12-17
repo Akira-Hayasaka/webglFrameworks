@@ -25,7 +25,7 @@ class Circle_Manager {
     this.camera = camera;
   }
 
-  draw_circle(x, y, z, rad, col) {
+  draw_circle(x, y, z, rad, { col, opacity, blending }) {
     if (!this.circles[this.counter]) {
       const circle = new Circle();
       this.circles.push(circle);
@@ -35,7 +35,8 @@ class Circle_Manager {
     to_draw.position.set(x, y, z);
     to_draw.scale.set(rad, rad, 0);
     to_draw.mat.color = col;
-    to_draw.mat.opacity = 0.5;
+    to_draw.mat.opacity = opacity;
+    to_draw.mat.blending = blending;
     this.counter++;
   }
 
@@ -71,9 +72,13 @@ const draw_circle = (
   y,
   z,
   rad,
-  col = new THREE.Color(THREE.Color.NAMES.ghostwhite)
+  {
+    col = new THREE.Color(THREE.Color.NAMES.ghostwhite),
+    opacity = 1.0,
+    blending = THREE.NormalBlending,
+  } = {}
 ) => {
-  circle_mgr.draw_circle(x, y, z, rad, col);
+  circle_mgr.draw_circle(x, y, z, rad, { col, opacity, blending });
 };
 
 const reset_imid_draw_loop = () => {

@@ -46,48 +46,31 @@ class App {
     // }
 
     const col = new THREE.Color("rgb(255, 0, 0)");
-    col.alpha = 0.5;
-    AA.draw_circle(0, 0, 0, 200, col);
+    AA.draw_circle(0, 0, 0, 200, { col, opacity: 0.5 });
 
-    AA.draw_circle(
-      AA.Globals.APP_W,
-      0,
-      0,
-      100,
-      new THREE.Color(THREE.Color.NAMES.darkorchid)
-    );
+    AA.draw_circle(AA.Globals.APP_W, 0, 0, 100, {
+      col: new THREE.Color(THREE.Color.NAMES.darkorchid),
+      opacity: 0.25,
+      blending: AA.Constants.BLEND.ADD,
+    });
 
-    AA.draw_circle(
-      AA.Globals.APP_W,
-      0,
-      0,
-      200,
-      new THREE.Color(THREE.Color.NAMES.darkorchid)
-    );
+    AA.draw_circle(AA.Globals.APP_W, 0, 0, 200, {
+      col: new THREE.Color(THREE.Color.NAMES.darkorchid),
+      opacity: 0.25,
+    });
 
-    AA.draw_circle(
-      AA.Globals.APP_W,
-      AA.Globals.APP_H,
-      0,
-      200,
-      new THREE.Color(THREE.Color.NAMES.chartreuse)
-    );
+    AA.draw_circle(AA.Globals.APP_W, AA.Globals.APP_H, 0, 200, {
+      col: new THREE.Color(THREE.Color.NAMES.chartreuse),
+      blending: AA.Constants.BLEND.ADD,
+    });
 
-    AA.draw_circle(
-      0,
-      AA.Globals.APP_H,
-      0,
-      200,
-      new THREE.Color(THREE.Color.NAMES.gold)
-    );
+    AA.draw_circle(0, AA.Globals.APP_H, 0, 200, {
+      col: new THREE.Color(THREE.Color.NAMES.gold),
+    });
 
-    AA.draw_circle(
-      AA.Globals.APP_W / 2,
-      AA.Globals.APP_H / 2,
-      0,
-      10,
-      new THREE.Color(THREE.Color.NAMES.cyan)
-    );
+    AA.draw_circle(AA.Globals.APP_W / 2, AA.Globals.APP_H / 2, 0, 10, {
+      col: new THREE.Color(THREE.Color.NAMES.cyan),
+    });
 
     if (this.to_draw) {
       AA.draw_circle(
@@ -95,7 +78,7 @@ class App {
         AA.Globals.APP_H / 2 + 100,
         0,
         10,
-        new THREE.Color(THREE.Color.NAMES.cyan)
+        { col: new THREE.Color(THREE.Color.NAMES.cyan) }
       );
     }
   };

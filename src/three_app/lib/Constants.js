@@ -1,3 +1,5 @@
+import * as THREE from "three";
+
 const Constants = {
   // event names
   WINDOW_RESIZED_EVENT: "windworesized",
@@ -15,6 +17,14 @@ const Constants = {
   TOUCH_PRESS_EVENT: "touchpress",
   TOUCH_PINCH_EVENT: "touchpinch",
   TOUCH_ROTATE_EVENT: "touchrotate",
+  // blending
+  BLEND: {
+    NO: THREE.NoBlending,
+    NORMAL: THREE.NormalBlending,
+    ADD: THREE.AdditiveBlending,
+    SUBTRACT: THREE.SubtractiveBlending,
+    MULTIPLY: THREE.MultiplyBlending,
+  },
   // shader string
   MINIMUM_VERT: `			
   varying vec2 v_uv;
