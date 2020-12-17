@@ -19,7 +19,7 @@ import {
   draw_rect,
   reset_imid_draw_loop,
   render_imid_scene,
-} from "./graphic/Imid_Draw";
+} from "./graphic/Easy_Draw";
 
 export {
   Constants,
