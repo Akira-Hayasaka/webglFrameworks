@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import Constants from "../Constants";
+import { draw_img } from "../graphic/Easy_Draw";
 
 class Image extends THREE.Object3D {
   load = (
@@ -26,11 +27,14 @@ class Image extends THREE.Object3D {
           const w = this.texture.image.width;
           const h = this.texture.image.height;
           const geom_for_quad_mesh = new THREE.PlaneBufferGeometry(w, h);
-          const mat_for_quad_mesh = new THREE.ShaderMaterial({
-            uniforms: { tex: { value: this.texture } },
+          this.mat = new THREE.ShaderMaterial({
+            uniforms: {
+              tex: { value: this.texture },
+              opacity: { value: 1.0 },
+            },
             ...sm_settings,
           });
-          this.mesh = new THREE.Mesh(geom_for_quad_mesh, mat_for_quad_mesh);
+          this.mesh = new THREE.Mesh(geom_for_quad_mesh, this.mat);
           this.mesh.position.set(w / 2, h / 2, 0);
           this.add(this.mesh);
           resolve(that);
@@ -42,6 +46,21 @@ class Image extends THREE.Object3D {
         }
       );
     });
+  };
+
+  draw = (
+    x,
+    y,
+    z,
+    sx,
+    sy,
+    {
+      rot = new THREE.Euler(0, 0, 0, "XYZ"),
+      opacity = 1.0,
+      blending = THREE.NormalBlending,
+    } = {}
+  ) => {
+    draw_img(this, x, y, z, sx, sy, { rot, opacity, blending });
   };
 
   get_width = () => {
@@ -60,6 +79,7 @@ class Image extends THREE.Object3D {
     return this.texture;
   };
 
+  mat = null;
   mesh = null;
   texture = null;
 }

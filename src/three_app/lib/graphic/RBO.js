@@ -59,7 +59,10 @@ class RBO {
         this.cur_height
       );
       this.mat_for_quad_mesh = new THREE.ShaderMaterial({
-        uniforms: { tex: { value: this.offscreen_tex.texture } },
+        uniforms: {
+          tex: { value: this.offscreen_tex.texture },
+          opacity: { value: 1.0 },
+        },
         ...this.sm_settings,
       });
       this.inner_mesh = new THREE.Mesh(

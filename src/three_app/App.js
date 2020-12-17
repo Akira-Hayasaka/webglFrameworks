@@ -1,11 +1,17 @@
 import * as THREE from "three";
 import * as AA from "./lib/Includer";
 import ant_img from "./data/img/ant.png";
+import tree_img from "./data/img/tree.png";
 
 class App {
   constructor() {
     this.tree = new AA.Image();
-    this.tree
+    this.tree.load(tree_img).then((img) => {
+      img.set_anchor(0, 0);
+    });
+
+    this.flower = new AA.Image();
+    this.flower
       .load(
         "https://threejsfundamentals.org/threejs/resources/images/flower-6.jpg"
       )
@@ -28,7 +34,7 @@ class App {
 
     this.scene2d = new THREE.Scene();
     this.scene2d.background = new THREE.Color("rgb(150, 150, 150)");
-    this.scene2d.add(this.tree);
+    this.scene2d.add(this.flower);
     this.scene2d.add(this.ant);
 
     this.camera_2d = new AA.Camera_Orho();
@@ -80,6 +86,12 @@ class App {
       rot: this.rot,
     });
     this.rot.set(this.rot.x, this.rot.y, this.rot.z + 0.01, this.rot.order);
+
+    this.tree.draw(200, 400, 0, 1.0, 1.0, {
+      opacity: 1.0,
+      rot: this.rot,
+      blending: AA.Constants.BLEND.ADD,
+    });
   };
   rot = new THREE.Euler(0, 0, 0, "XYZ");
   on_keypressed = (arg) => {
@@ -100,6 +112,7 @@ class App {
   on_rotate = (arg) => {};
 
   tree;
+  flower;
   ant;
   scene2d;
   camera_2d;

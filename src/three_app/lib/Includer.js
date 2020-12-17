@@ -17,6 +17,7 @@ import {
   init_easy_draw_env,
   draw_circle,
   draw_rect,
+  draw_img,
   reset_easy_draw_loop,
   render_easy_draw_scene,
 } from "./graphic/Easy_Draw";
@@ -43,6 +44,7 @@ export {
   init_easy_draw_env,
   draw_circle,
   draw_rect,
+  draw_img,
   reset_easy_draw_loop,
   render_easy_draw_scene,
 };
