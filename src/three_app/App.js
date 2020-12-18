@@ -3,6 +3,7 @@ import * as AA from "./lib/Includer";
 import ant_img from "./data/img/ant.png";
 import tree_img from "./data/img/tree.png";
 import test_vid from "./data/mov/big_buck_bunny.mp4";
+import { Object3D } from "three";
 
 class App {
   constructor() {
@@ -106,16 +107,43 @@ class App {
       blending: AA.Constants.BLEND.NORMAL,
     });
 
-    const freq = 1.0;
-    const mag = 100.0;
-    const nx = AA.signed_noise(AA.Globals.ELAPSED_TIME * freq, Math.PI) * mag;
-    const ny =
-      AA.signed_noise(AA.Globals.ELAPSED_TIME * freq, Math.PI * 2) * mag;
+    let freq = 1.0;
+    let mag = 100.0;
+    let nx = AA.signed_noise(AA.Globals.ELAPSED_TIME * freq, Math.PI) * mag;
+    let ny = AA.signed_noise(AA.Globals.ELAPSED_TIME * freq, Math.PI * 2) * mag;
     AA.draw_circle(this.x + nx, this.y + ny, 0, 20, {
       col: new THREE.Color(AA.Constants.COLOR.slateblue),
     });
 
-    for (let i = 0; i < 100; i++) {}
+    freq = 0.5;
+    let col_idx = 0;
+    const cols = Object.values(AA.Constants.COLOR);
+    for (let i = 0; i < 2000; i++) {
+      // around 2000 is the limit on iphone11pro;
+      let nx = AA.map(
+        AA.noise(AA.Globals.ELAPSED_TIME * freq, i, Math.PI),
+        0.0,
+        1.0,
+        0,
+        AA.Globals.APP_W,
+        true
+      );
+      let ny = AA.map(
+        AA.noise(AA.Globals.ELAPSED_TIME * freq, i, Math.PI * 2),
+        0.0,
+        1.0,
+        0,
+        AA.Globals.APP_H,
+        true
+      );
+      // let nx = 100;
+      // let ny = 100;
+      AA.draw_circle(nx, ny, 0, 5, {
+        col: new THREE.Color(cols[col_idx]),
+      });
+      col_idx++;
+      if (col_idx > cols.length) col_idx = 0;
+    }
   };
 
   x = AA.Globals.APP_W / 2;
