@@ -365,6 +365,7 @@ module.exports = function (webpackEnv) {
           // match the requirements. When no loader matches it will fall
           // back to the "file" loader at the end of the loader list.
           oneOf: [
+            // added to process glsl
             {
               test: /\.(glsl|vs|fs|vert|frag)$/,
               exclude: /node_modules/,

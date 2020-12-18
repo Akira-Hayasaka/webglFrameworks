@@ -24,7 +24,7 @@ class App {
     this.flower
       .load(
         "https://threejsfundamentals.org/threejs/resources/images/flower-6.jpg",
-        { fragmentShader: AA.Constants.MINIMUM_FRAG }
+        { fragmentShader: frag }
       )
       .then((img) => {
         img.set_anchor(0, 0);
