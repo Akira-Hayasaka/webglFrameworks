@@ -46,4 +46,16 @@ const debounce = (func, delay) => {
   };
 };
 
-export { map_device_to_canvas, fast_floor, map, debounce };
+const rdm = (...args) => {
+  if (args.length === 0) {
+    return Math.random();
+  }
+  if (args.length === 1) {
+    return Math.random() * args[0];
+  }
+  if (args.length === 2) {
+    return Math.random() * args[1] + args[0];
+  }
+};
+
+export { map_device_to_canvas, fast_floor, map, debounce, rdm };

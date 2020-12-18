@@ -108,12 +108,14 @@ class App {
 
     const freq = 1.0;
     const mag = 100.0;
-    const nx = AA.signed_noise2(AA.Globals.ELAPSED_TIME * freq, Math.PI) * mag;
+    const nx = AA.signed_noise(AA.Globals.ELAPSED_TIME * freq, Math.PI) * mag;
     const ny =
-      AA.signed_noise2(AA.Globals.ELAPSED_TIME * freq, Math.PI * 2) * mag;
+      AA.signed_noise(AA.Globals.ELAPSED_TIME * freq, Math.PI * 2) * mag;
     AA.draw_circle(this.x + nx, this.y + ny, 0, 20, {
-      col: new THREE.Color(THREE.Color.NAMES.crimson),
+      col: new THREE.Color(AA.Constants.COLOR.slateblue),
     });
+
+    for (let i = 0; i < 100; i++) {}
   };
 
   x = AA.Globals.APP_W / 2;

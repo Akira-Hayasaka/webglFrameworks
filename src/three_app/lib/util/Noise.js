@@ -499,7 +499,7 @@ const _slang_library_noise4 = (x, y, z, w) => {
   ); /* TODO: The scale factor is preliminary! */
 };
 
-const noise = (x) => {
+const noise1 = (x) => {
   return _slang_library_noise1(x) * 0.5 + 0.5;
 };
 
@@ -515,7 +515,7 @@ const noise4 = (x, y, z, w) => {
   return _slang_library_noise4(x, y, z, w) * 0.5 + 0.5;
 };
 
-const signed_noise = (x) => {
+const signed_noise1 = (x) => {
   return _slang_library_noise1(x);
 };
 
@@ -531,13 +531,18 @@ const signed_noise4 = (x, y, z, w) => {
   return _slang_library_noise4(x, y, z, w);
 };
 
-export {
-  noise,
-  noise2,
-  noise3,
-  noise4,
-  signed_noise,
-  signed_noise2,
-  signed_noise3,
-  signed_noise4,
+const noise = (...args) => {
+  if (args.length === 1) return noise1(...args);
+  if (args.length === 2) return noise2(...args);
+  if (args.length === 3) return noise3(...args);
+  if (args.length === 4) return noise4(...args);
 };
+
+const signed_noise = (...args) => {
+  if (args.length === 1) return signed_noise1(...args);
+  if (args.length === 2) return signed_noise2(...args);
+  if (args.length === 3) return signed_noise3(...args);
+  if (args.length === 4) return signed_noise4(...args);
+};
+
+export { noise, signed_noise };
