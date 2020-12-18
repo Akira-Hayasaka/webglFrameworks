@@ -369,7 +369,7 @@ module.exports = function (webpackEnv) {
             {
               test: /\.(glsl|vs|fs|vert|frag)$/,
               exclude: /node_modules/,
-              use: ["raw-loader"],
+              use: ["raw-loader", "glslify-loader"],
             },
             // TODO: Merge this config once `image/avif` is in the mime-db
             // https://github.com/jshttp/mime-db
