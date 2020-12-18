@@ -5,14 +5,14 @@ import { draw_img } from "../graphic/Easy_Draw";
 class Image extends THREE.Object3D {
   load = (
     path,
-    loader_settings = { imageOrientation: "none" },
-    sm_settings = {
-      vertexShader: Constants.MINIMUM_VERT,
-      fragmentShader: Constants.MINIMUM_FRAG_VFLIP,
-      depthWrite: false,
-      transparent: true,
-      side: THREE.DoubleSide,
-    }
+    {
+      imageOrientation = "none",
+      vertexShader = Constants.MINIMUM_VERT,
+      fragmentShader = Constants.MINIMUM_FRAG_VFLIP,
+      depthWrite = false,
+      transparent = true,
+      side = THREE.DoubleSide,
+    } = {}
   ) => {
     const that = this;
     return new Promise((resolve, reject) => {
@@ -32,7 +32,11 @@ class Image extends THREE.Object3D {
               tex: { value: this.texture },
               opacity: { value: 1.0 },
             },
-            ...sm_settings,
+            vertexShader,
+            fragmentShader,
+            depthWrite,
+            transparent,
+            side,
           });
           this.mesh = new THREE.Mesh(geom_for_quad_mesh, this.mat);
           this.mesh.position.set(w / 2, h / 2, 0);

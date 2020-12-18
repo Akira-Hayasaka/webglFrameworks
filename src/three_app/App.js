@@ -4,6 +4,7 @@ import ant_img from "./data/img/ant.png";
 import tree_img from "./data/img/tree.png";
 import test_vid from "./data/mov/big_buck_bunny.mp4";
 import { Object3D } from "three";
+import frag from "./data/shader/simple.frag";
 
 class App {
   constructor() {
@@ -18,10 +19,12 @@ class App {
       vid.set_anchor(0, 0);
     });
 
+    console.log("frag", JSON.stringify(frag));
     this.flower = new AA.Image();
     this.flower
       .load(
-        "https://threejsfundamentals.org/threejs/resources/images/flower-6.jpg"
+        "https://threejsfundamentals.org/threejs/resources/images/flower-6.jpg",
+        { fragmentShader: AA.Constants.MINIMUM_FRAG }
       )
       .then((img) => {
         img.set_anchor(0, 0);
@@ -46,6 +49,28 @@ class App {
     this.scene2d.add(this.ant);
 
     this.camera_2d = new AA.Camera_Orho();
+
+    // let myFunc = ({ x = 5, y = 8, z = 13 } = {}) => {
+    //   console.log(x, y, z);
+    // };
+
+    // myFunc({ y: 15, x: 10, a: 1 });
+    // myFunc();
+
+    // let myFunc = (b, a = { x: 5, y: 8, z: 13 }) => {
+    //   console.log(b);
+    //   console.log(a);
+    // };
+
+    // myFunc("hey", { y: 15, x: 10 });
+    // myFunc("ho");
+
+    // let myFunc = (a = ({ x = 5, y = 8, z = 13 } = {})) => {
+    //   // console.log(x, y, z);
+    // };
+
+    // myFunc({ y: 15, x: 10, a: 1 });
+    // myFunc();
   }
 
   update = () => {};
@@ -118,7 +143,7 @@ class App {
     freq = 0.5;
     let col_idx = 0;
     const cols = Object.values(AA.Constants.COLOR);
-    for (let i = 0; i < 2000; i++) {
+    for (let i = 0; i < 200; i++) {
       // around 2000 is the limit on iphone11pro;
       let nx = AA.map(
         AA.noise(AA.Globals.ELAPSED_TIME * freq, i, Math.PI),
