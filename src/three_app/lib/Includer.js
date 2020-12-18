@@ -1,7 +1,17 @@
 import Constants from "./Constants";
 import Globals from "./Globals";
 import { init_screen_logger, s_log } from "./util/Screen_Logger";
-import { map, debounce } from "./util/Util";
+import { fast_floor, map, debounce } from "./util/Util";
+import {
+  noise,
+  noise2,
+  noise3,
+  noise4,
+  signed_noise,
+  signed_noise2,
+  signed_noise3,
+  signed_noise4,
+} from "./util/Noise";
 import ev from "./event/Event";
 import register_key_event from "./event/Key";
 import register_mouse_event from "./event/Mouse";
@@ -27,8 +37,17 @@ export {
   Globals,
   init_screen_logger,
   s_log,
+  fast_floor,
   map,
   debounce,
+  noise,
+  noise2,
+  noise3,
+  noise4,
+  signed_noise,
+  signed_noise2,
+  signed_noise3,
+  signed_noise4,
   ev,
   register_key_event,
   register_mouse_event,

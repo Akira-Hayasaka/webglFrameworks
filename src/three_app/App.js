@@ -100,15 +100,29 @@ class App {
       blending: AA.Constants.BLEND.ADD,
     });
 
-    this.vid.draw(700, 800, 0, 1.0, 1.0, {
+    this.vid.draw(300, 500, 0, 0.5, 0.5, {
       opacity: 0.8,
       // rot: this.rot,
       blending: AA.Constants.BLEND.NORMAL,
     });
+
+    const freq = 1.0;
+    const mag = 100.0;
+    const nx = AA.signed_noise2(AA.Globals.ELAPSED_TIME * freq, Math.PI) * mag;
+    const ny =
+      AA.signed_noise2(AA.Globals.ELAPSED_TIME * freq, Math.PI * 2) * mag;
+    AA.draw_circle(this.x + nx, this.y + ny, 0, 20, {
+      col: new THREE.Color(THREE.Color.NAMES.crimson),
+    });
   };
+
+  x = AA.Globals.APP_W / 2;
+  y = 750;
   rot = new THREE.Euler(0, 0, 0, "XYZ");
+
   on_keypressed = (arg) => {
-    this.to_draw = !this.to_draw;
+    if (arg.val === "a") this.to_draw = !this.to_draw;
+    if (arg.val === " ") this.vid.play();
   };
   on_keyreleased = (arg) => {};
   on_mouseclick = (arg) => {};

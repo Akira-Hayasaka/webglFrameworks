@@ -12,6 +12,11 @@ const map_device_to_canvas = (x, y) => {
   );
 };
 
+// https://blog.blakesimpson.co.uk/page.php?id=58&title=fastest-alternative-to-math-floor-in-javascript
+const fast_floor = (x) => {
+  return x << 0;
+};
+
 const map = (val, in_min, in_max, out_min, out_max, b_clamp = true) => {
   if (Math.abs(in_min - in_max) < Number.EPSILON) {
     return out_min;
@@ -41,4 +46,4 @@ const debounce = (func, delay) => {
   };
 };
 
-export { map_device_to_canvas, map, debounce };
+export { map_device_to_canvas, fast_floor, map, debounce };
