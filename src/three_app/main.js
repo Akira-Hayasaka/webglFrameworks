@@ -70,8 +70,9 @@ class Main {
   update = (time) => {
     this.stats.begin();
 
-    if (this.start === undefined) this.start = time;
-    else AA.Globals.ELAPSED_TIME = (time - this.start) * 0.001;
+    AA.TWEEN.update(time);
+    if (this.start_time === undefined) this.start_time = time;
+    else AA.Globals.ELAPSED_TIME = (time - this.start_time) * 0.001;
 
     if (this.does_need_resizing()) {
       this.fix_global_resolusion_params();
@@ -87,6 +88,7 @@ class Main {
     this.app.update();
     this.app.draw();
     AA.render_easy_draw_scene();
+
     this.stats.end();
 
     requestAnimationFrame(this.update);
@@ -158,7 +160,7 @@ class Main {
   initial_app_width;
   initial_app_height;
   app;
-  start;
+  start_time;
   stats;
 }
 

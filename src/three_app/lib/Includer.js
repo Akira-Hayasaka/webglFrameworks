@@ -31,6 +31,7 @@ import {
   reset_easy_draw_loop,
   render_easy_draw_scene,
 } from "./graphic/Easy_Draw";
+import TWEEN from "@tweenjs/tween.js";
 
 export {
   Constants,
@@ -66,4 +67,5 @@ export {
   draw_img,
   reset_easy_draw_loop,
   render_easy_draw_scene,
+  TWEEN,
 };
