@@ -26,11 +26,16 @@ class Object_Manager {
     this.camera = camera;
   }
 
-  draw_circle = (x, y, z, rad, { col, opacity, blending }) => {
+  fix_col_and_opacity = (col, opacity) => {
     if (col.constructor.name === "RGBA") {
-      opacity = col.get_opacity();
-      col = col.to3();
+      return ({ col, opacity } = col.to3());
+    } else {
+      return { col, opacity };
     }
+  };
+
+  draw_circle = (x, y, z, rad, { col, opacity, blending }) => {
+    ({ col, opacity } = this.fix_col_and_opacity(col, opacity));
     const the_store = this.store.circle;
     this.push_and_add_geom(the_store, this.scene, circle_geom);
     this.fix_params(

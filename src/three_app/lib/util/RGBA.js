@@ -15,13 +15,6 @@ class RGBA {
     }
   }
 
-  get = () => {
-    return {
-      rgb: `rgb(${this.r},${this.g},${this.b})`,
-      opacity: this.a / 255.0,
-    };
-  };
-
   get_style = () => {
     return `rgb(${this.r},${this.g},${this.b})`;
   };
@@ -31,7 +24,10 @@ class RGBA {
   };
 
   to3 = () => {
-    return new Color(this.get().rgb);
+    return {
+      col: new Color(this.get_style()),
+      opacity: this.get_opacity(),
+    };
   };
 
   r;

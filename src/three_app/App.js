@@ -50,7 +50,7 @@ class App {
     this.camera_2d = new AA.Camera_Orho();
 
     const col = new AA.RGBA(255, 212, 22, 128);
-    console.log("col", col.get());
+    console.log("col", col.get_style());
     console.log("col type", col.constructor.name);
     console.log("col type", new THREE.Color("rgb(255, 0, 0)").constructor.name);
   }
@@ -60,7 +60,7 @@ class App {
   draw = () => {
     AA.Globals.RENDERER.render(this.scene2d, this.camera_2d);
 
-    AA.draw_circle(0, 0, 0, 200, { col: new AA.RGBA(0, 0, 255, 200) });
+    AA.draw_circle(0, 0, 0, 200, { col: new AA.RGBA(0, 0, 255, 10) });
 
     AA.draw_circle(AA.Globals.APP_W, 0, 0, 100, {
       col: new THREE.Color(THREE.Color.NAMES.darkorchid),
