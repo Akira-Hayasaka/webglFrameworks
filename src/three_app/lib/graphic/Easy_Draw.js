@@ -27,6 +27,10 @@ class Object_Manager {
   }
 
   draw_circle = (x, y, z, rad, { col, opacity, blending }) => {
+    if (col.constructor.name === "RGBA") {
+      opacity = col.get_opacity();
+      col = col.to3();
+    }
     const the_store = this.store.circle;
     this.push_and_add_geom(the_store, this.scene, circle_geom);
     this.fix_params(

@@ -3,6 +3,7 @@ import Globals from "./Globals";
 import { init_screen_logger, s_log } from "./util/Screen_Logger";
 import { fast_floor, map, debounce, rdm } from "./util/Util";
 import { noise, signed_noise } from "./util/Noise";
+import RGBA from "./util/RGBA";
 import ev from "./event/Event";
 import register_key_event from "./event/Key";
 import register_mouse_event from "./event/Mouse";
@@ -35,6 +36,7 @@ export {
   rdm,
   noise,
   signed_noise,
+  RGBA,
   ev,
   register_key_event,
   register_mouse_event,

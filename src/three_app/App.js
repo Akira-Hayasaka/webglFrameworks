@@ -3,7 +3,6 @@ import * as AA from "./lib/Includer";
 import ant_img from "./data/img/ant.png";
 import tree_img from "./data/img/tree.png";
 import test_vid from "./data/mov/big_buck_bunny.mp4";
-import { Object3D } from "three";
 import frag from "./data/shader/simple.frag";
 
 class App {
@@ -50,27 +49,10 @@ class App {
 
     this.camera_2d = new AA.Camera_Orho();
 
-    // let myFunc = ({ x = 5, y = 8, z = 13 } = {}) => {
-    //   console.log(x, y, z);
-    // };
-
-    // myFunc({ y: 15, x: 10, a: 1 });
-    // myFunc();
-
-    // let myFunc = (b, a = { x: 5, y: 8, z: 13 }) => {
-    //   console.log(b);
-    //   console.log(a);
-    // };
-
-    // myFunc("hey", { y: 15, x: 10 });
-    // myFunc("ho");
-
-    // let myFunc = (a = ({ x = 5, y = 8, z = 13 } = {})) => {
-    //   // console.log(x, y, z);
-    // };
-
-    // myFunc({ y: 15, x: 10, a: 1 });
-    // myFunc();
+    const col = new AA.RGBA(255, 212, 22, 128);
+    console.log("col", col.get());
+    console.log("col type", col.constructor.name);
+    console.log("col type", new THREE.Color("rgb(255, 0, 0)").constructor.name);
   }
 
   update = () => {};
@@ -78,8 +60,7 @@ class App {
   draw = () => {
     AA.Globals.RENDERER.render(this.scene2d, this.camera_2d);
 
-    const col = new THREE.Color("rgb(255, 0, 0)");
-    AA.draw_circle(0, 0, 0, 200, { col, opacity: 0.5 });
+    AA.draw_circle(0, 0, 0, 200, { col: new AA.RGBA(0, 0, 255, 200) });
 
     AA.draw_circle(AA.Globals.APP_W, 0, 0, 100, {
       col: new THREE.Color(THREE.Color.NAMES.darkorchid),
