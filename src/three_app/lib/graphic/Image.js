@@ -8,7 +8,7 @@ class Image extends THREE.Object3D {
     {
       imageOrientation = "none",
       vertexShader = Constants.MINIMUM_VERT,
-      fragmentShader = Constants.MINIMUM_FRAG_VFLIP,
+      fragmentShader = Constants.MINIMUM_FRAG_VFLIP_OPACITY,
       depthWrite = false,
       transparent = true,
       side = THREE.DoubleSide,

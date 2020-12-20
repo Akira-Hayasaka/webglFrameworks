@@ -61,7 +61,6 @@ class RBO {
       this.mat_for_quad_mesh = new THREE.ShaderMaterial({
         uniforms: {
           tex: { value: this.offscreen_tex.texture },
-          opacity: { value: 1.0 },
         },
         ...this.sm_settings,
       });
@@ -102,12 +101,13 @@ class RBO {
     rot = new THREE.Euler(0, 0, 0, "XYZ"),
     to_canvas = true
   ) => {
-    if (to_canvas) {
-      this.renderer.setRenderTarget(null);
-    }
     this.quad_mesh.position.set(x, y, 0);
     this.quad_mesh.scale.set(scale.x, scale.y, scale.z);
     this.quad_mesh.rotation.set(rot.x, rot.y, rot.z, rot.order);
+    if (to_canvas) {
+      this.renderer.setRenderTarget(null);
+      this.renderer.clearDepth();
+    }
     this.renderer.render(this.screen_quad_scene, this.camera_2d);
   };
 

@@ -4,6 +4,7 @@ import ant_img from "./data/img/ant.png";
 import tree_img from "./data/img/tree.png";
 import test_vid from "./data/mov/big_buck_bunny.mp4";
 import frag from "./data/shader/simple.frag";
+import Line_Tweak from "./src/Line_Tweak";
 
 class App {
   constructor() {
@@ -49,15 +50,13 @@ class App {
 
     this.camera_2d = new AA.Camera_Orho();
 
-    const col = new AA.RGBA(255, 212, 22, 128);
-    console.log("col", col.get_style());
-    console.log("col type", col.constructor.name);
-    console.log("col type", new THREE.Color("rgb(255, 0, 0)").constructor.name);
+    this.line = new Line_Tweak();
   }
 
   update = () => {};
 
   draw = () => {
+    this.line.draw();
     AA.Globals.RENDERER.render(this.scene2d, this.camera_2d);
 
     AA.draw_circle(0, 0, 0, 200, { col: new AA.RGBA(0, 0, 255, 10) });
@@ -178,6 +177,7 @@ class App {
   tree;
   flower;
   ant;
+  line;
   scene2d;
   camera_2d;
 
