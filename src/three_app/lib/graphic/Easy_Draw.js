@@ -54,6 +54,7 @@ class Object_Manager {
   };
 
   draw_rect = (x, y, z, w, h, { rot, col, opacity, blending }) => {
+    ({ col, opacity } = this.fix_col_and_opacity(col, opacity));
     const the_store = this.store.rect;
     this.push_and_add_geom(the_store, this.scene, rect_geom);
     this.fix_params(
