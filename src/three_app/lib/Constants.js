@@ -206,7 +206,6 @@ const Constants = {
   void main() {
     vec2 uv = v_uv;
     uv.y = 1.0 - uv.y;
-    // gl_FragColor = vec4(texture2D(tex, uv).rgb, 0.5);
     gl_FragColor = texture2D(tex, uv);
   }
   `,
