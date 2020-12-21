@@ -91,7 +91,7 @@ class RBO {
     this.renderer.setRenderTarget(this.offscreen_tex);
     b_clear && this.renderer.clear();
     this.renderer.render(scene, camera);
-    this.renderer.setRenderTarget(null);
+    // this.renderer.setRenderTarget(null);
   };
 
   draw = (
@@ -106,7 +106,6 @@ class RBO {
     this.quad_mesh.rotation.set(rot.x, rot.y, rot.z, rot.order);
     if (to_canvas) {
       this.renderer.setRenderTarget(null);
-      this.renderer.clearDepth();
     }
     this.renderer.render(this.screen_quad_scene, this.camera_2d);
   };

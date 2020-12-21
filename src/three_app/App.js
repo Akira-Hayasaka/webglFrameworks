@@ -56,10 +56,14 @@ class App {
   update = () => {};
 
   draw = () => {
-    this.line.draw();
     AA.Globals.RENDERER.render(this.scene2d, this.camera_2d);
 
-    AA.draw_circle(0, 0, 0, 200, { col: new AA.RGBA(0, 0, 255, 10) });
+    // this.line.draw();
+    const { scene, camera } = this.line.get_scene_and_cam();
+    AA.Globals.RENDERER.clearDepth();
+    AA.Globals.RENDERER.render(scene, camera);
+
+    AA.draw_circle(0, 0, 0, 200, { col: new AA.RGBA(0, 0, 255, 100) });
 
     AA.draw_circle(AA.Globals.APP_W, 0, 0, 100, {
       col: new THREE.Color(THREE.Color.NAMES.darkorchid),
