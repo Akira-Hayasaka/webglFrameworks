@@ -1,10 +1,10 @@
-import Try_Transparent_RBO from "./src/Try_Transparent_RBO";
+import Try_Transparent_RBO_2 from "./src/Try_Transparent_RBO_2";
 import General_Tweak from "./src/General_Tweak";
 
 class App {
   constructor() {
     this.gt = new General_Tweak();
-    this.ttrbo = new Try_Transparent_RBO();
+    this.ttrbo = new Try_Transparent_RBO_2();
   }
 
   update = () => {
@@ -13,11 +13,12 @@ class App {
   };
 
   draw = () => {
-    if (this.witch) {
-      this.ttrbo.draw();
-    } else {
-      this.gt.draw();
-    }
+    // if (this.witch) {
+    //   this.ttrbo.draw();
+    // } else {
+    //   this.gt.draw();
+    // }
+    this.gt.draw();
   };
 
   on_keypressed = (arg) => {

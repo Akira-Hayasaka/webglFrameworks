@@ -55,7 +55,6 @@ class Line_Tweak {
   draw = () => {
     this.rbo.feed(this.scene, this.camera_2d);
     this.rbo.draw();
-    // AA.Globals.RENDERER.render(this.scene, this.camera_2d);
   };
 
   get_scene_and_cam = () => {

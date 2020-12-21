@@ -17,6 +17,7 @@ class Main {
       antialias: true,
     });
     AA.Globals.RENDERER.autoClear = false;
+    AA.Globals.RENDERER.setClearColor(0x000000, 0);
 
     this.fix_global_resolusion_params();
     this.initial_app_width = AA.Globals.APP_W;

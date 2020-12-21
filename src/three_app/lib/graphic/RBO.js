@@ -91,7 +91,6 @@ class RBO {
     this.renderer.setRenderTarget(this.offscreen_tex);
     b_clear && this.renderer.clear();
     this.renderer.render(scene, camera);
-    // this.renderer.setRenderTarget(null);
   };
 
   draw = (
