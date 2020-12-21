@@ -1,26 +1,37 @@
+import Try_Transparent_RBO from "./src/Try_Transparent_RBO";
 import General_Tweak from "./src/General_Tweak";
 
 class App {
   constructor() {
     this.gt = new General_Tweak();
+    this.ttrbo = new Try_Transparent_RBO();
   }
 
   update = () => {
     this.gt.update();
+    this.ttrbo.update();
   };
 
   draw = () => {
-    this.gt.draw();
+    if (this.witch) {
+      this.ttrbo.draw();
+    } else {
+      this.gt.draw();
+    }
   };
 
   on_keypressed = (arg) => {
-    this.gt.on_keypressed(arg);
+    if (arg.val === " ") {
+      this.witch = !this.witch;
+    }
   };
   on_keyreleased = (arg) => {};
   on_mouseclick = (arg) => {};
   on_mousedblclick = (arg) => {};
   on_mousedown = (arg) => {};
-  on_mousemove = (arg) => {};
+  on_mousemove = (arg) => {
+    this.ttrbo.on_mousemove(arg);
+  };
   on_mouseup = (arg) => {};
   on_tap = (arg) => {};
   on_dbltap = (arg) => {};
@@ -30,7 +41,10 @@ class App {
   on_pinch = (arg) => {};
   on_rotate = (arg) => {};
 
+  witch = true;
+
   gt;
+  ttrbo;
 }
 
 export default App;
