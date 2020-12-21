@@ -52,7 +52,9 @@ class General_Tweak {
     this.line = new Line_Tweak();
   }
 
-  update = () => {};
+  update = () => {
+    this.line.update();
+  };
 
   draw = () => {
     AA.Globals.RENDERER.render(this.scene2d, this.camera_2d);

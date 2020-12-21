@@ -3,8 +3,11 @@ import { CatmullRomCurve3 } from "three";
 
 class Polyline {
   constructor() {
-    this.points = [];
+    this.clear();
   }
+
+  // calc for geometry can be slow. consider using worker, texture gpgpu or webgl 2.0 transform feedback.
+  draw = () => {};
 
   add_vertex = (v) => {
     this.points.push(v);
@@ -20,6 +23,10 @@ class Polyline {
 
   size = () => {
     return this.points.length;
+  };
+
+  clear = () => {
+    this.points = [];
   };
 
   line_to = (v) => {
