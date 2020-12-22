@@ -97,10 +97,29 @@ class Object_Manager {
     the_store.counter++;
   };
 
+  draw_line = (obj, x, y, z, sx, sy, { rot, opacity, blending }) => {
+    const the_store = this.store.line;
+    this.push_and_add_obj(the_store, this.scene, obj);
+    this.fix_params(
+      the_store.objs[the_store.counter],
+      x,
+      y,
+      z,
+      opacity,
+      blending,
+      (to_draw) => {
+        to_draw.scale.set(sx, sy, 1.0);
+        to_draw.rotation.set(rot.x, rot.y, rot.z, rot.order);
+      }
+    );
+    the_store.counter++;
+  };
+
   reset_counter() {
     this.remove_and_pop(this.store.circle, this.scene);
     this.remove_and_pop(this.store.rect, this.scene);
     this.remove_and_pop(this.store.img, this.scene);
+    this.remove_and_pop(this.store.line, this.scene);
   }
 
   render = () => {
@@ -158,6 +177,10 @@ class Object_Manager {
       counter: 0,
       objs: [],
     },
+    line: {
+      counter: 0,
+      objs: [],
+    },
   };
 }
 
@@ -201,6 +224,10 @@ const draw_img = (obj, x, y, z, sx, sy, { rot, opacity, blending }) => {
   object_mgr.draw_img(obj, x, y, z, sx, sy, { rot, opacity, blending });
 };
 
+const draw_line = (obj, x, y, z, sx, sy, { rot, opacity, blending }) => {
+  object_mgr.draw_line(obj, x, y, z, sx, sy, { rot, opacity, blending });
+};
+
 const reset_easy_draw_loop = () => {
   object_mgr.reset_counter();
 };
@@ -214,6 +241,7 @@ export {
   draw_circle,
   draw_rect,
   draw_img,
+  draw_line,
   reset_easy_draw_loop,
   render_easy_draw_scene,
 };

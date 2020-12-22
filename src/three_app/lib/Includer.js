@@ -20,6 +20,7 @@ import {
   draw_circle,
   draw_rect,
   draw_img,
+  draw_line,
   reset_easy_draw_loop,
   render_easy_draw_scene,
 } from "./graphic/Easy_Draw";
@@ -53,6 +54,7 @@ export {
   draw_circle,
   draw_rect,
   draw_img,
+  draw_line,
   reset_easy_draw_loop,
   render_easy_draw_scene,
   TWEEN,
