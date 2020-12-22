@@ -52,8 +52,6 @@ class Line_Tweak {
 
   draw = () => {
     this.polyline.draw({
-      x: 300,
-      sx: 0.5,
       // rot: this.rot,
       cols: new AA.RGBA(100, 0, 0, 100),
       blending: AA.Constants.BLEND.ADD,

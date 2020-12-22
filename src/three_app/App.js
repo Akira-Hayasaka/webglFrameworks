@@ -1,15 +1,18 @@
 import Try_Transparent_RBO_2 from "./src/Try_Transparent_RBO_2";
 import General_Tweak from "./src/General_Tweak";
+import Test_Shape from "./src/Test_Shape";
 
 class App {
   constructor() {
     this.gt = new General_Tweak();
     this.ttrbo = new Try_Transparent_RBO_2();
+    this.ts = new Test_Shape();
   }
 
   update = () => {
     this.gt.update();
     this.ttrbo.update();
+    this.ts.update();
   };
 
   draw = () => {
@@ -19,6 +22,7 @@ class App {
     //   this.gt.draw();
     // }
     this.gt.draw();
+    this.ts.draw();
   };
 
   on_keypressed = (arg) => {
@@ -46,6 +50,7 @@ class App {
 
   gt;
   ttrbo;
+  ts;
 }
 
 export default App;
