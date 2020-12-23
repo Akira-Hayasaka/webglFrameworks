@@ -30,7 +30,9 @@ class App {
       this.witch = !this.witch;
     }
   };
-  on_keyreleased = (arg) => {};
+  on_keyreleased = (arg) => {
+    this.gt.on_keypressed(arg);
+  };
   on_mouseclick = (arg) => {};
   on_mousedblclick = (arg) => {};
   on_mousedown = (arg) => {};

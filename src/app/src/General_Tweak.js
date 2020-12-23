@@ -23,16 +23,16 @@ class General_Tweak {
     this.flower = new aa.Image();
     this.flower
       .load(
-        "https://threejsfundamentals.org/threejs/resources/images/flower-6.jpg",
+        "https://64.media.tumblr.com/ff478aa90a3dcbd9ab7a1b2954c26874/tumblr_mvrmrt3FYH1qeffsuo1_1280.jpg",
         { fragmentShader: frag }
       )
       .then((img) => {
         img.set_anchor(0, 0);
-        img.position.set(
-          img.get_width() / 2 + 20,
-          img.get_height() / 2 + 20,
-          0
-        );
+        const scale = 0.5;
+        const w = img.get_width() * scale;
+        const h = img.get_height() * scale;
+        img.scale.set(scale, scale, 1.0);
+        img.position.set(w / 2 + 20, h / 2 + 20, 0);
       });
     this.ant = new aa.Image();
     this.ant.load(ant_img).then((img) => {
@@ -111,7 +111,7 @@ class General_Tweak {
       blending: aa.Constants.BLEND.ADD,
     });
 
-    this.vid.draw(300, 500, 0, 0.5, 0.5, {
+    this.vid.draw(350, 650, 0, 0.5, 0.5, {
       opacity: 0.8,
       // rot: this.rot,
       blending: aa.Constants.BLEND.NORMAL,

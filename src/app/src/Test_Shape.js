@@ -26,7 +26,8 @@ class Test_Shape {
       color: 0x00ff00,
       transparent: true,
       side: three.DoubleSide,
-      wireframe: true,
+      wireframe: false,
+      opacity: 0.5,
     });
     this.mesh = new three.Mesh(this.geometry, this.material);
     this.scene.add(this.mesh);
