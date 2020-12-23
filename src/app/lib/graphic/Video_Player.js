@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import Globals from "../Globals";
 import Constants from "../Constants";
-import { draw_canvas_string } from "../util/Screen_Logger";
+import { log } from "../util/Screen_Logger";
 import { map } from "../util/Util";
 import { draw_img } from "../graphic/Easy_Draw";
 import Disposable from "./Disposable";
@@ -92,21 +92,9 @@ class Video_Player extends Disposable(THREE.Object3D) {
 
     const x = this.position.x + 5;
     const y = this.position.y + 20;
-    draw_canvas_string.draw_string(
-      "state: " + Ready_State[this.video_elm.readyState],
-      x,
-      y
-    );
-    draw_canvas_string.draw_string(
-      "dur: " + this.video_elm.duration + " sec",
-      x,
-      y + 15
-    );
-    draw_canvas_string.draw_string(
-      "cur: " + this.video_elm.currentTime + " sec",
-      x,
-      y + 30
-    );
+    log.draw_string("state: " + Ready_State[this.video_elm.readyState], x, y);
+    log.draw_string("dur: " + this.video_elm.duration + " sec", x, y + 15);
+    log.draw_string("cur: " + this.video_elm.currentTime + " sec", x, y + 30);
   };
 
   get_state = () => {

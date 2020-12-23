@@ -3,7 +3,7 @@ import Hammer from "hammerjs";
 import Constants from "../Constants";
 import ev from "./Event";
 import { map_device_to_canvas } from "../util/Util";
-import { draw_canvas_string } from "../util/Screen_Logger";
+import { log } from "../util/Screen_Logger";
 
 const get_arg = (e) => {
   const x = e.center.x;
@@ -18,7 +18,7 @@ const register_touch_event = (dom_elm) => {
   const mc = new Hammer(dom_elm);
 
   const log = (e) => {
-    // draw_canvas_string.push("touch event " + JSON.stringify(e));
+    // log.push("touch event " + JSON.stringify(e));
     // console.log("touch event " + JSON.stringify(e, null, 2));
   };
 
