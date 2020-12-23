@@ -4,6 +4,7 @@ import Constants from "../Constants";
 import { draw_canvas_string } from "../util/Screen_Logger";
 import { map } from "../util/Util";
 import { draw_img } from "../graphic/Easy_Draw";
+import Disposable from "./Disposable";
 
 const Ready_State = {
   0: "HAVE_NOTHING",
@@ -13,7 +14,7 @@ const Ready_State = {
   4: "HAVE_ENOUGH_DATA",
 };
 
-class Video_Player extends THREE.Object3D {
+class Video_Player extends Disposable(THREE.Object3D) {
   load(
     path,
     width,
@@ -51,16 +52,16 @@ class Video_Player extends THREE.Object3D {
 
         this.video_elm.load();
 
-        this.texture = new THREE.VideoTexture(this.video_elm);
-        const geom_for_quad_mesh = new THREE.PlaneBufferGeometry(width, height);
+        this.tex = new THREE.VideoTexture(this.video_elm);
+        this.geom = new THREE.PlaneBufferGeometry(width, height);
         this.mat = new THREE.ShaderMaterial({
           uniforms: {
-            tex: { value: this.texture },
+            tex: { value: this.tex },
             opacity: { value: 1.0 },
           },
           ...sm_settings,
         });
-        this.mesh = new THREE.Mesh(geom_for_quad_mesh, this.mat);
+        this.mesh = new THREE.Mesh(this.geom, this.mat);
         this.mesh.position.set(width / 2, height / 2, 0);
         this.add(this.mesh);
         resolve(that);
@@ -137,15 +138,15 @@ class Video_Player extends THREE.Object3D {
   };
 
   get_tex = () => {
-    return this.texture;
+    return this.tex;
   };
 
   get_width = () => {
-    if (this.texture) return this.texture.image.width;
+    if (this.tex) return this.tex.image.width;
   };
 
   get_height = () => {
-    if (this.texture) return this.texture.image.height;
+    if (this.tex) return this.tex.image.height;
   };
 
   set_anchor = (x, y) => {
@@ -153,9 +154,7 @@ class Video_Player extends THREE.Object3D {
   };
 
   video_elm = null;
-  mat = null;
   mesh = null;
-  texture = null;
 }
 
 export default Video_Player;

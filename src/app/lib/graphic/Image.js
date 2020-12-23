@@ -1,8 +1,9 @@
 import * as THREE from "three";
 import Constants from "../Constants";
+import Disposable from "./Disposable";
 import { draw_img } from "../graphic/Easy_Draw";
 
-class Image extends THREE.Object3D {
+class Image extends Disposable(THREE.Object3D) {
   load = (
     path,
     {
@@ -22,14 +23,14 @@ class Image extends THREE.Object3D {
       loader.load(
         path,
         (img) => {
-          this.texture = new THREE.CanvasTexture(img);
-          this.texture.flipY = true;
-          const w = this.texture.image.width;
-          const h = this.texture.image.height;
-          const geom_for_quad_mesh = new THREE.PlaneBufferGeometry(w, h);
+          this.tex = new THREE.CanvasTexture(img);
+          this.tex.flipY = true;
+          const w = this.tex.image.width;
+          const h = this.tex.image.height;
+          this.geom = new THREE.PlaneBufferGeometry(w, h);
           this.mat = new THREE.ShaderMaterial({
             uniforms: {
-              tex: { value: this.texture },
+              tex: { value: this.tex },
               opacity: { value: 1.0 },
             },
             vertexShader,
@@ -38,7 +39,7 @@ class Image extends THREE.Object3D {
             transparent,
             side,
           });
-          this.mesh = new THREE.Mesh(geom_for_quad_mesh, this.mat);
+          this.mesh = new THREE.Mesh(this.geom, this.mat);
           this.mesh.position.set(w / 2, h / 2, 0);
           this.add(this.mesh);
           resolve(that);
@@ -68,11 +69,11 @@ class Image extends THREE.Object3D {
   };
 
   get_width = () => {
-    if (this.texture) return this.texture.image.width;
+    if (this.tex) return this.tex.image.width;
   };
 
   get_height = () => {
-    if (this.texture) return this.texture.image.height;
+    if (this.tex) return this.tex.image.height;
   };
 
   set_anchor = (x, y) => {
@@ -80,12 +81,10 @@ class Image extends THREE.Object3D {
   };
 
   get_tex = () => {
-    return this.texture;
+    return this.tex;
   };
 
-  mat = null;
   mesh = null;
-  texture = null;
 }
 
 export default Image;

@@ -7,8 +7,9 @@ import Globals from "../Globals";
 import { Camera_Orho } from "./Camera";
 import ev from "../event/Event";
 import { debounce } from "../util/Util";
+import Disposable from "./Disposable";
 
-class RBO {
+class RBO extends Disposable(THREE.Object3D) {
   constructor(
     _width,
     _height,
@@ -38,57 +39,45 @@ class RBO {
     this.camera_2d = new Camera_Orho();
     this.screen_quad_scene = new THREE.Scene();
 
-    const dispose = () => {
-      if (this.offscreen_tex) this.offscreen_tex.dispose();
-      if (this.geom_for_quad_mesh) this.geom_for_quad_mesh.dispose();
-      if (this.mat_for_quad_mesh) this.mat_for_quad_mesh.dispose();
-      if (this.quad_mesh) this.screen_quad_scene.remove(this.quad_mesh);
-    };
-
-    const setup = () => {
-      dispose();
-      this.offscreen_tex = new THREE.WebGLRenderTarget(
-        this.cur_width,
-        this.cur_height,
-        {
-          ...rt_settings,
-        }
-      );
-      this.geom_for_quad_mesh = new THREE.PlaneBufferGeometry(
-        this.cur_width,
-        this.cur_height
-      );
-      this.mat_for_quad_mesh = new THREE.ShaderMaterial({
-        uniforms: {
-          tex: { value: this.offscreen_tex.texture },
-        },
-        ...this.sm_settings,
-      });
-      this.inner_mesh = new THREE.Mesh(
-        this.geom_for_quad_mesh,
-        this.mat_for_quad_mesh
-      );
-      this.inner_mesh.position.set(this.cur_width / 2, this.cur_height / 2, 0);
-      this.quad_mesh = new THREE.Object3D();
-      this.quad_mesh.add(this.inner_mesh);
-
-      this.screen_quad_scene.add(this.quad_mesh);
-    };
-
-    setup();
+    this.setup(rt_settings);
 
     ev.add_listener(
       Constants.WINDOW_RESIZED_EVENT,
       debounce(() => {
         this.cur_width = this.initial_width + Globals.APP_WINRESIZE_DIFFX;
         this.cur_height = this.initial_height + Globals.APP_WINRESIZE_DIFFY;
-        setup();
+        this.setup();
       }, Constants.DEFAULT_WINDOW_RESIZE_DEBOUNCE_MSEC)
     );
   }
 
+  setup = (rt_settings) => {
+    this.dispose();
+    this.tex = new THREE.WebGLRenderTarget(this.cur_width, this.cur_height, {
+      ...rt_settings,
+    });
+    this.geom = new THREE.PlaneBufferGeometry(this.cur_width, this.cur_height);
+    this.mat = new THREE.ShaderMaterial({
+      uniforms: {
+        tex: { value: this.tex.texture },
+      },
+      ...this.sm_settings,
+    });
+    this.inner_mesh = new THREE.Mesh(this.geom, this.mat);
+    this.inner_mesh.position.set(this.cur_width / 2, this.cur_height / 2, 0);
+    this.quad_mesh = new THREE.Object3D();
+    this.quad_mesh.add(this.inner_mesh);
+
+    this.screen_quad_scene.add(this.quad_mesh);
+  };
+
+  dispose = () => {
+    super.dispose();
+    if (this.quad_mesh) this.screen_quad_scene.remove(this.quad_mesh);
+  };
+
   feed = (scene, camera, b_clear = true) => {
-    this.renderer.setRenderTarget(this.offscreen_tex);
+    this.renderer.setRenderTarget(this.tex);
     b_clear && this.renderer.clear();
     this.renderer.render(scene, camera);
   };
@@ -110,7 +99,7 @@ class RBO {
   };
 
   get_tex = () => {
-    return this.offscreen_tex.texture;
+    return this.tex.texture;
   };
 
   swap_renderer = (_renderer) => {
@@ -134,10 +123,7 @@ class RBO {
   cur_height;
 
   renderer;
-  offscreen_tex;
-  geom_for_quad_mesh;
   sm_settings;
-  mat_for_quad_mesh;
   inner_mesh;
   quad_mesh;
 

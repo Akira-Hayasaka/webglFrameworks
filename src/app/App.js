@@ -1,28 +1,24 @@
-import Try_Transparent_RBO_2 from "./src/Try_Transparent_RBO_2";
 import General_Tweak from "./src/General_Tweak";
 import Test_Shape from "./src/Test_Shape";
+import Try_Shader from "./src/Try_Shader";
 
 class App {
   constructor() {
     this.gt = new General_Tweak();
-    this.ttrbo = new Try_Transparent_RBO_2();
     this.ts = new Test_Shape();
+    this.shder = new Try_Shader();
   }
 
   update = () => {
     this.gt.update();
-    this.ttrbo.update();
     this.ts.update();
+    this.shder.update();
   };
 
   draw = () => {
-    // if (this.witch) {
-    //   this.ttrbo.draw();
-    // } else {
-    //   this.gt.draw();
-    // }
     this.gt.draw();
     this.ts.draw();
+    this.shder.draw();
   };
 
   on_keypressed = (arg) => {
@@ -51,8 +47,8 @@ class App {
   witch = true;
 
   gt;
-  ttrbo;
   ts;
+  shder;
 }
 
 export default App;
