@@ -1,6 +1,6 @@
 import React from "react";
 import { useRef, useEffect } from "react";
-import Main from "./three_app/main";
+import Main from "./app/main";
 
 let app_main = null;
 
@@ -21,7 +21,7 @@ function EntryPoint() {
   return (
     <>
       <div id="app_container" ref={container_elm}>
-        <canvas id="three_app" ref={canvas_elem} />
+        <canvas id="app" ref={canvas_elem} />
       </div>
     </>
   );
