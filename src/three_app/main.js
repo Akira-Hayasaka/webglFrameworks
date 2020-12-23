@@ -78,11 +78,11 @@ class Main {
     if (this.does_need_resizing()) {
       this.fix_global_resolusion_params();
       // need to debounce on reciever
-      aa.s_log.push("resizing"); // <= dangerously put
+      aa.draw_canvas_string.push("resizing"); // <= dangerously put
       aa.ev.notify(aa.Constants.WINDOW_RESIZED_EVENT);
     }
 
-    aa.s_log.flush_scrn();
+    aa.draw_canvas_string.flush_scrn();
     aa.Globals.RENDERER.clear();
     aa.reset_easy_draw_loop();
     this.put_screen_related_log_on_screen();
@@ -133,7 +133,7 @@ class Main {
   };
 
   put_screen_related_log_on_screen = () => {
-    aa.s_log.draw_string(
+    aa.draw_canvas_string.draw_string(
       "client w:" +
         aa.Globals.CANVAS.clientWidth +
         " client h:" +
@@ -141,7 +141,7 @@ class Main {
       10,
       20
     );
-    aa.s_log.draw_string(
+    aa.draw_canvas_string.draw_string(
       "canvas w:" +
         aa.Globals.CANVAS.width +
         " canvas h:" +
@@ -149,8 +149,12 @@ class Main {
       10,
       35
     );
-    aa.s_log.draw_string("px ratio:" + window.devicePixelRatio, 10, 50);
-    aa.s_log.draw_string(
+    aa.draw_canvas_string.draw_string(
+      "px ratio:" + window.devicePixelRatio,
+      10,
+      50
+    );
+    aa.draw_canvas_string.draw_string(
       "APP_W:" + aa.Globals.APP_W + " APP_H:" + aa.Globals.APP_H,
       10,
       65

@@ -80,7 +80,7 @@ class Screen_Logger {
 
 let s_logger = null;
 
-const s_log = {
+const draw_canvas_string = {
   draw_string: (str, x, y) => {
     s_logger.draw_string(str, x, y);
   },
@@ -96,4 +96,4 @@ const init_screen_logger = (b_debug = true) => {
   s_logger = new Screen_Logger(b_debug);
 };
 
-export { init_screen_logger, s_log };
+export { init_screen_logger, draw_canvas_string };

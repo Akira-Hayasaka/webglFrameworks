@@ -1,6 +1,6 @@
 import Constants from "./Constants";
 import Globals from "./Globals";
-import { init_screen_logger, s_log } from "./util/Screen_Logger";
+import { init_screen_logger, draw_canvas_string } from "./util/Screen_Logger";
 import { fast_floor, map, debounce, rdm } from "./util/Util";
 import { noise, signed_noise } from "./util/Noise";
 import RGBA from "./util/RGBA";
@@ -30,7 +30,7 @@ export {
   Constants,
   Globals,
   init_screen_logger,
-  s_log,
+  draw_canvas_string,
   fast_floor,
   map,
   debounce,
