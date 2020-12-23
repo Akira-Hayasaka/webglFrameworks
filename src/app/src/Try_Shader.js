@@ -42,6 +42,8 @@ class Try_Shader {
     this.shaderplane.draw(600, 700);
   };
 
+  set_mode = (mode) => {};
+
   shaderplane = null;
   img1;
   img2;

@@ -3,7 +3,13 @@ import Disposable from "./Disposable";
 import { draw_img } from "../graphic/Easy_Draw";
 
 class Shaderplane extends Disposable(THREE.Object3D) {
-  constructor(w, h, vertexShader, fragmentShader, uniforms = {}) {
+  constructor(
+    w,
+    h,
+    vertexShader,
+    fragmentShader,
+    uniforms = {} // need to create uniform placeholder before first render
+  ) {
     super();
     this.uniforms = uniforms;
     this.geom = new THREE.PlaneBufferGeometry(w, h);
@@ -30,7 +36,7 @@ class Shaderplane extends Disposable(THREE.Object3D) {
     });
   };
 
-  set_res = (w, h) => {
+  resize = (w, h) => {
     if (w !== this.get_width() || h !== this.get_height()) {
       this.geom.dispose();
       this.geom = new THREE.PlaneBufferGeometry(w, h);

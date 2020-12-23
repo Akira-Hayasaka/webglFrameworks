@@ -8,7 +8,9 @@ uniform int blendMode;
 
 void main ()
 {
-    vec4 baseCol = texture2D(base_tex, v_uv);
-    vec4 blendCol = texture2D(blend_tex, v_uv);
+    vec2 uv = v_uv;
+    uv.y = 1.0 - uv.y;
+    vec4 baseCol = texture2D(base_tex, uv);
+    vec4 blendCol = texture2D(blend_tex, uv);
     gl_FragColor = getBlendCol(blendCol, baseCol, blendMode);
 }
