@@ -53,7 +53,7 @@ class Image extends Disposable(THREE.Object3D) {
     });
   };
 
-  set_res = (w, h) => {
+  resize = (w, h) => {
     if (w !== this.get_width() || h !== this.get_height()) {
       this.geom.dispose();
       this.geom = new THREE.PlaneBufferGeometry(w, h);
@@ -67,9 +67,9 @@ class Image extends Disposable(THREE.Object3D) {
   draw = (
     x,
     y,
-    z,
-    sx,
-    sy,
+    z = 0,
+    sx = 1.0,
+    sy = 1.0,
     {
       rot = new THREE.Euler(0, 0, 0, "XYZ"),
       opacity = 1.0,

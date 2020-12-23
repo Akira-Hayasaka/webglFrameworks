@@ -275,3 +275,5 @@ vec4 getBlendCol(vec4 baseCol, vec4 blendCol, int mode)
     
     return vec4(result, 1.0);
 }
+
+#pragma glslify: export(getBlendCol)

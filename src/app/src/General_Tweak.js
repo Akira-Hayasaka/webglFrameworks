@@ -3,7 +3,6 @@ import * as aa from "../lib/Includer";
 import ant_img from "../data/img/ant.png";
 import tree_img from "../data/img/tree.png";
 import test_vid from "../data/mov/big_buck_bunny.mp4";
-import frag from "../data/shader/simple.frag";
 import Line_Tweak from "./Line_Tweak";
 
 class General_Tweak {
@@ -19,15 +18,13 @@ class General_Tweak {
       vid.set_anchor(0, 0);
     });
 
-    console.log("frag", JSON.stringify(frag));
     this.flower = new aa.Image();
     this.flower
       .load(
-        "https://64.media.tumblr.com/ff478aa90a3dcbd9ab7a1b2954c26874/tumblr_mvrmrt3FYH1qeffsuo1_1280.jpg",
-        { fragmentShader: frag }
+        "https://64.media.tumblr.com/ff478aa90a3dcbd9ab7a1b2954c26874/tumblr_mvrmrt3FYH1qeffsuo1_1280.jpg"
       )
       .then((img) => {
-        img.set_res(img.get_width() * 0.5, img.get_height() * 0.5);
+        img.resize(img.get_width() * 0.5, img.get_height() * 0.5);
         img.position.set(20, 20, 0);
       });
     this.ant = new aa.Image();

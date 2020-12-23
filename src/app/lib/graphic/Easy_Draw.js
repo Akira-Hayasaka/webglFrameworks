@@ -88,7 +88,7 @@ class Object_Manager {
         to_draw.rotation.set(rot.x, rot.y, rot.z, rot.order);
         if (to_draw.mat) {
           to_draw.mat.uniforms = {
-            tex: to_draw.mat.uniforms.tex,
+            ...to_draw.mat.uniforms,
             opacity: { value: opacity },
           };
         }
