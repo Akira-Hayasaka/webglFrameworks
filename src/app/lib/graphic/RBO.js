@@ -27,6 +27,7 @@ class RBO extends Disposable(THREE.Object3D) {
     },
     _renderer = Globals.RENDERER
   ) {
+    super();
     this.initial_app_width = Globals.APP_W;
     this.initial_app_height = Globals.APP_H;
     this.initial_width = _width;
