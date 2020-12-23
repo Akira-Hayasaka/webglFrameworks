@@ -87,10 +87,7 @@ class Object_Manager {
         to_draw.scale.set(sx, sy, 1.0);
         to_draw.rotation.set(rot.x, rot.y, rot.z, rot.order);
         if (to_draw.mat) {
-          to_draw.mat.uniforms = {
-            ...to_draw.mat.uniforms,
-            opacity: { value: opacity },
-          };
+          to_draw.mat.uniforms.opacity = { value: opacity };
         }
       }
     );

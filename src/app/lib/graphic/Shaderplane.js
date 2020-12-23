@@ -3,10 +3,12 @@ import Disposable from "./Disposable";
 import { draw_img } from "../graphic/Easy_Draw";
 
 class Shaderplane extends Disposable(THREE.Object3D) {
-  constructor(w, h, vertexShader, fragmentShader) {
+  constructor(w, h, vertexShader, fragmentShader, uniforms = {}) {
     super();
+    this.uniforms = uniforms;
     this.geom = new THREE.PlaneBufferGeometry(w, h);
     this.mat = new THREE.ShaderMaterial({
+      uniforms: this.uniforms,
       vertexShader,
       fragmentShader,
       depthWrite: false,
@@ -18,8 +20,14 @@ class Shaderplane extends Disposable(THREE.Object3D) {
     this.add(this.mesh);
   }
 
-  set_uniforms = (uniforms) => {
-    this.mat.uniforms = { ...this.mat.uniforms, ...uniforms };
+  set_uniforms = (_uniforms) => {
+    // do not merge like this
+    // => this.uniforms = { ...this.uniforms, ..._uniforms };
+    // it refresh the reference of uniform object
+    // below reuse same reference.
+    Object.keys(_uniforms).forEach((key) => {
+      this.uniforms[key] = _uniforms[key];
+    });
   };
 
   set_res = (w, h) => {
@@ -60,6 +68,7 @@ class Shaderplane extends Disposable(THREE.Object3D) {
     if (this.mesh) this.mesh.position.set(x, y);
   };
 
+  uniforms = null;
   mesh = null;
 }
 

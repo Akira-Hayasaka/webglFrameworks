@@ -99,7 +99,7 @@ class General_Tweak {
     this.rot.set(this.rot.x, this.rot.y, this.rot.z + 0.01, this.rot.order);
 
     this.tree.draw(200, 400, 0, 1.0, 1.0, {
-      opacity: 1.0,
+      opacity: 0.5,
       rot: this.rot,
       blending: aa.Constants.BLEND.ADD,
     });
