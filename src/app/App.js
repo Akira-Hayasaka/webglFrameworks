@@ -32,9 +32,7 @@ class App {
   on_mouseclick = (arg) => {};
   on_mousedblclick = (arg) => {};
   on_mousedown = (arg) => {};
-  on_mousemove = (arg) => {
-    this.ttrbo.on_mousemove(arg);
-  };
+  on_mousemove = (arg) => {};
   on_mouseup = (arg) => {};
   on_tap = (arg) => {};
   on_dbltap = (arg) => {};

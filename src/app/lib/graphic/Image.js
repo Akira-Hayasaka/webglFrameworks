@@ -53,6 +53,17 @@ class Image extends Disposable(THREE.Object3D) {
     });
   };
 
+  set_res = (w, h) => {
+    if (w !== this.get_width() || h !== this.get_height()) {
+      this.geom.dispose();
+      this.geom = new THREE.PlaneBufferGeometry(w, h);
+      this.remove(this.mesh);
+      this.mesh = new THREE.Mesh(this.geom, this.mat);
+      this.mesh.position.set(w / 2, h / 2, 0);
+      this.add(this.mesh);
+    }
+  };
+
   draw = (
     x,
     y,
@@ -69,11 +80,11 @@ class Image extends Disposable(THREE.Object3D) {
   };
 
   get_width = () => {
-    if (this.tex) return this.tex.image.width;
+    if (this.geom) return this.geom.parameters.width;
   };
 
   get_height = () => {
-    if (this.tex) return this.tex.image.height;
+    if (this.geom) return this.geom.parameters.height;
   };
 
   set_anchor = (x, y) => {

@@ -15,6 +15,7 @@ import Polyline from "./util/Polyline";
 import Rectangle from "./util/Rectangle";
 import Post_Process from "./graphic/Post_Process";
 import Video_Player from "./graphic/Video_Player";
+import Shaderplane from "./graphic/Shaderplane";
 import {
   init_easy_draw_env,
   draw_circle,
@@ -50,6 +51,7 @@ export {
   Rectangle,
   Post_Process,
   Video_Player,
+  Shaderplane,
   init_easy_draw_env,
   draw_circle,
   draw_rect,

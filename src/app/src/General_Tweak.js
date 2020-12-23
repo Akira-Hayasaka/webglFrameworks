@@ -27,12 +27,8 @@ class General_Tweak {
         { fragmentShader: frag }
       )
       .then((img) => {
-        img.set_anchor(0, 0);
-        const scale = 0.5;
-        const w = img.get_width() * scale;
-        const h = img.get_height() * scale;
-        img.scale.set(scale, scale, 1.0);
-        img.position.set(w / 2 + 20, h / 2 + 20, 0);
+        img.set_res(img.get_width() * 0.5, img.get_height() * 0.5);
+        img.position.set(20, 20, 0);
       });
     this.ant = new aa.Image();
     this.ant.load(ant_img).then((img) => {
