@@ -1,9 +1,9 @@
 import * as THREE from "three";
-import * as AA from "../lib/Includer";
+import * as aa from "../lib/Includer";
 
 class Line_Tweak {
   constructor() {
-    this.polyline = new AA.Polyline();
+    this.polyline = new aa.Polyline();
     // this.polyline.set_anchor(0, 0);
     this.gen_line();
   }
@@ -19,10 +19,10 @@ class Line_Tweak {
       const freq = 1.0;
       const mag = 30.0;
       for (let i = 0; i < num; i++) {
-        const x = (AA.Globals.APP_W / num) * i;
+        const x = (aa.Globals.APP_W / num) * i;
         const y =
           base_y +
-          AA.signed_noise(AA.Globals.ELAPSED_TIME * freq, i, Math.PI) * mag;
+          aa.signed_noise(aa.Globals.ELAPSED_TIME * freq, i, Math.PI) * mag;
         if (i < 2) {
           this.polyline.add_vertex(new THREE.Vector3(x, y, 0));
         } else {
@@ -44,7 +44,7 @@ class Line_Tweak {
       const x = the_point.x;
       const y = the_point.y;
       // the_point.y +
-      // AA.signed_noise(AA.Globals.ELAPSED_TIME * freq, i, Math.PI) * mag;
+      // aa.signed_noise(aa.Globals.ELAPSED_TIME * freq, i, Math.PI) * mag;
       vertices[i] = new THREE.Vector3(x, y, 0);
     }
     this.polyline.mark_as_changed();
@@ -53,8 +53,8 @@ class Line_Tweak {
   draw = () => {
     this.polyline.draw({
       // rot: this.rot,
-      cols: new AA.RGBA(100, 0, 0, 100),
-      blending: AA.Constants.BLEND.ADD,
+      cols: new aa.RGBA(100, 0, 0, 100),
+      blending: aa.Constants.BLEND.ADD,
     });
   };
 
