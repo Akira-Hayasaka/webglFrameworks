@@ -7,7 +7,7 @@ import Globals from "../Globals";
 import { Camera_Orho } from "./Camera";
 import ev from "../event/Event";
 import { debounce } from "../util/Util";
-import Disposable from "./Disposable";
+import { Disposable } from "./Mixins";
 
 class RBO extends Disposable(THREE.Object3D) {
   constructor(

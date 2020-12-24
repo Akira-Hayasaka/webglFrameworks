@@ -3,8 +3,7 @@ import Globals from "../Globals";
 import Constants from "../Constants";
 import { log } from "../util/Screen_Logger";
 import { map } from "../util/Util";
-import { draw_img } from "../graphic/Easy_Draw";
-import Disposable from "./Disposable";
+import { Disposable, Baseplane } from "./Mixins";
 
 const Ready_State = {
   0: "HAVE_NOTHING",
@@ -14,7 +13,7 @@ const Ready_State = {
   4: "HAVE_ENOUGH_DATA",
 };
 
-class Video_Player extends Disposable(THREE.Object3D) {
+class Video_Player extends Baseplane(Disposable(THREE.Object3D)) {
   load(
     path,
     width,
@@ -72,21 +71,6 @@ class Video_Player extends Disposable(THREE.Object3D) {
     });
   }
 
-  draw = (
-    x,
-    y,
-    z,
-    sx,
-    sy,
-    {
-      rot = new THREE.Euler(0, 0, 0, "XYZ"),
-      opacity = 1.0,
-      blending = THREE.NormalBlending,
-    } = {}
-  ) => {
-    draw_img(this, x, y, z, sx, sy, { rot, opacity, blending });
-  };
-
   debug_draw = () => {
     if (!this.video_elm) return;
 
@@ -129,20 +113,7 @@ class Video_Player extends Disposable(THREE.Object3D) {
     return this.tex;
   };
 
-  get_width = () => {
-    if (this.tex) return this.tex.image.width;
-  };
-
-  get_height = () => {
-    if (this.tex) return this.tex.image.height;
-  };
-
-  set_anchor = (x, y) => {
-    if (this.mesh) this.mesh.position.set(x, y);
-  };
-
   video_elm = null;
-  mesh = null;
 }
 
 export default Video_Player;

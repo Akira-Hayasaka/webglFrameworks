@@ -15,6 +15,7 @@ class General_Tweak {
     this.vid = new aa.Video_Player();
     this.vid.load(test_vid, 640, 360).then((vid) => {
       // vid.play();
+      // vid.resize(100, 500);
       vid.set_anchor(0, 0);
     });
 
