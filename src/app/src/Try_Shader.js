@@ -2,8 +2,6 @@ import * as aa from "../lib/Includer";
 import defaultvert from "../data/shader/default/default.vert";
 import blendfrag from "../data/shader/blend.frag";
 
-// https://64.media.tumblr.com/2050dd64e4f68a2492fdddfa62b7f29d/tumblr_mhio55gjis1qeffsuo1_1280.jpg
-// https://64.media.tumblr.com/tumblr_lzz742vlLn1qeffsuo1_1280.jpg
 class Try_Shader {
   constructor() {
     this.shaderplane = new aa.Shaderplane(500, 300, defaultvert, blendfrag, {
@@ -23,6 +21,7 @@ class Try_Shader {
           base_tex: { value: img.get_tex() },
         });
       });
+
     this.img2 = new aa.Image();
     this.img2
       .load(
@@ -42,11 +41,12 @@ class Try_Shader {
       this.blendMode++;
       if (this.blendMode > 24) this.blendMode = 0;
     }, 200);
+
     setInterval(() => {
       aa.log.push(Math.random());
     }, 250);
   }
-  blendMode = 0;
+
   update = () => {};
 
   draw = () => {
@@ -60,6 +60,8 @@ class Try_Shader {
   shaderplane = null;
   img1;
   img2;
+
+  blendMode = 0;
 }
 
 export default Try_Shader;
