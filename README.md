@@ -1,4 +1,5 @@
 # webglFrameworks #
-![webglFrameworks](https://github.com/Akira-Hayasaka/webglFrameworks/raw/master/src/app/data/img/acrn.gif)
+
+<img src="src/app/data/img/scrn.gif">
 
 three.js based webgl frameworks for openFrameworks users.
