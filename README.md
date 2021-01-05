@@ -4,7 +4,7 @@
 
 three.js based webgl frameworks for openFrameworks users. WIP.
 
-## Usage ##
+## usage ##
 npm start
 
 ## features ##
