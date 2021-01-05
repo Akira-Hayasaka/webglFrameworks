@@ -9,6 +9,9 @@ npm start
 
 ## features ##
 * top left origin camera
+* responsiveness
+* screen logger
+* event system
 * draw_circle
 * draw_rect
 * draw_image
@@ -19,3 +22,4 @@ npm start
 * simple shader plane
 * simplex noise
 * polyline
+* render buffer object like ofFbo
